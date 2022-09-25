@@ -1,0 +1,40 @@
+
+.best-seller-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: auto;
+}
+
+.best-seller-section .slide-container {
+    width: 100%;
+}
+
+.best-seller-section .slide-content {
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.best-seller-section .heading,
+.best-seller-section .slide-container > .paragraph {
+    text-align: center;
+}
+
+.best-seller-section .custom-card {
+    /* padding: 30px; */
+    /* margin: 30px; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.best-seller-section .custom-card img {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 15px;
+
+    object-fit: cover;
+}
