@@ -1,5 +1,5 @@
 <?php
-include "./api/connect.php";
+include "./php/connect.php";
 
 $id = 1;
 $sql = "SELECT * from home WHERE login_id = '$id'";
