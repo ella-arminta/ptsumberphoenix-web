@@ -1,48 +1,8 @@
 <?php
-include "./php/connect.php";
-
-// $id = 1;
-// $sql = "SELECT * from home WHERE login_id = '$id'";
-// $home = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM about WHERE login_id = '$id'";
-// $about = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM business_fields WHERE login_id = '$id'";
-// $business_fields = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM business_fields_information WHERE login_id = '$id'";
-// $business_fields_info = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM why_us WHERE login_id = '$id'";
-// $why_us = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM why_us_content WHERE login_id = '$id'";
-// $why_us_content = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM statistics WHERE login_id = '$id'";
-// $statistics = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM team WHERE login_id = '$id'";
-// $team = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM team_info WHERE login_id = '$id'";
-// $team_info = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM testimonial WHERE login_id = '$id' AND display = '1'";
-// $testimonial = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM testimonial_info WHERE login_id = '$id'";
-// $testimonial_info = mysqli_query($conn, $sql);
-
-// if (isset($home) && isset($about) && isset($business_fields_info) && isset($why_us) && isset($team_info) && isset($testimonial_info)) {
-//     $row_home = mysqli_fetch_array($home);
-//     $row_about = mysqli_fetch_array($about);
-//     $row_business_fields_info = mysqli_fetch_array($business_fields_info);
-//     $row_why_us = mysqli_fetch_array($why_us);
-//     $row_team_info = mysqli_fetch_array($team_info);
-//     $row_testimonial_info = mysqli_fetch_array($testimonial_info);
-// }
+include "api/connect.php";
+if(!isset($_SESSION['admin_id'])){
+    header('Location: ../');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,23 +16,23 @@ include "./php/connect.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./style/nav.css">
-    <link rel="stylesheet" href="./style/footer.css">
-    <link rel="stylesheet" href="./style/copyright.css">
-    <link rel="stylesheet" href="./style/arrow.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style/nav.css">
+    <link rel="stylesheet" href="../style/footer.css">
+    <link rel="stylesheet" href="../style/copyright.css">
+    <link rel="stylesheet" href="../style/arrow.css">
 
-    <link rel="stylesheet" href="./style/home/home.css">
-    <link rel="stylesheet" href="./style/home/client.css">
-    <link rel="stylesheet" href="./style/home/about.css">
-    <link rel="stylesheet" href="./style/home/field.css">
-    <link rel="stylesheet" href="./style/home/why.css">
-    <link rel="stylesheet" href="./style/home/update.css">
-    <link rel="stylesheet" href="./style/home/team.css">
-    <link rel="stylesheet" href="./style/home/blog.css">
-    <link rel="stylesheet" href="./style/home/testimonials.css">
-    <link rel="stylesheet" href="./style/home/faq.css">
-    <link rel="stylesheet" href="./style/home/modal.css">
+    <link rel="stylesheet" href="../style/home/home.css">
+    <link rel="stylesheet" href="../style/home/client.css">
+    <link rel="stylesheet" href="../style/home/about.css">
+    <link rel="stylesheet" href="../style/home/field.css">
+    <link rel="stylesheet" href="../style/home/why.css">
+    <link rel="stylesheet" href="../style/home/update.css">
+    <link rel="stylesheet" href="../style/home/team.css">
+    <link rel="stylesheet" href="../style/home/blog.css">
+    <link rel="stylesheet" href="../style/home/testimonials.css">
+    <link rel="stylesheet" href="../style/home/faq.css">
+    <link rel="stylesheet" href="../style/home/modal.css">
 
     <!-- Library -->
     <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
@@ -85,7 +45,8 @@ include "./php/connect.php";
 <body>
     
     <!-- Navbar -->
-    <?php include 'includes/navbar.php' ?>
+     <?php include 'includes/nav.php' ?>
+    
     <!-- Home Section Page -->
     <?php
     if (isset($row_home)) {
@@ -848,17 +809,17 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     
-    <script src="./script.js"></script>
-    <script src="./script/scroll.js"></script>
-    <script src="./script/nav.js"></script>
-    <script src="./script/number.js"></script>
-    <script src="./script/modal.js"></script>
+    <script src="../script.js"></script>
+    <script src="../script/scroll.js"></script>
+    <script src="../script/nav.js"></script>
+    <script src="../script/number.js"></script>
+    <script src="../script/modal.js"></script>
 
-    <script src="./script/homepage/contact.js"></script>
-    <script src="./script/homepage/product.js"></script>
-    <script src="./script/homepage/client.js"></script>
-    <script src="./script/homepage/update.js"></script>
-    <script src="./script/homepage/blog.js"></script>
-    <script src="./script/homepage/testimonials.js"></script>
+    <script src="../script/homepage/contact.js"></script>
+    <script src="../script/homepage/product.js"></script>
+    <script src="../script/homepage/client.js"></script>
+    <script src="../script/homepage/update.js"></script>
+    <script src="../script/homepage/blog.js"></script>
+    <script src="../script/homepage/testimonials.js"></script>
 </body>
 </html>
