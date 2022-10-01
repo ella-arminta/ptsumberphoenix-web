@@ -3,6 +3,22 @@ include "api/connect.php";
 if(!isset($_SESSION['admin_id'])){
     header('Location: ../');
 }
+function getData($fiturNama,$conn){
+    $stmt = $conn->prepare('SELECT * FROM company_profile where fitur_name =? ');
+    $stmt->execute([$fiturNama]);
+    $temp = $stmt->fetch();
+    $data = $temp['fitur_data'];
+    return $data;
+}
+function setData($fiturNama,$newData,$conn){
+    $stmt = $conn->prepare('UPDATE company_profile SET fitur_data = ? where fitur_name =? ');
+    $berhasil = $stmt->execute([$newData,$fiturNama]);
+    if($berhasil){
+        return true;
+    }else{
+        return false;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,13 +48,16 @@ if(!isset($_SESSION['admin_id'])){
     <link rel="stylesheet" href="../style/home/blog.css">
     <link rel="stylesheet" href="../style/home/testimonials.css">
     <link rel="stylesheet" href="../style/home/faq.css">
-    <link rel="stylesheet" href="../style/home/modal.css">
+    <!-- <link rel="stylesheet" href="../style/home/modal.css"> -->
 
     <!-- Library -->
     <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
     <script src="https://kit.fontawesome.com/0e9fafd61c.js" crossorigin="anonymous"></script>
+
+    <!-- Sweet Alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <title>PT Sumber Phoenix Makmur | Chemicals Specialty</title>
 </head>
@@ -48,46 +67,28 @@ if(!isset($_SESSION['admin_id'])){
      <?php include 'includes/nav.php' ?>
     
     <!-- Home Section Page -->
-    <?php
-    if (isset($row_home)) {
-        echo '
-            <section class="home-section" style="background-image: url(./'.$row_home['home_image'].')">
-                <div class="container-fluid">
-                    <div class="home-wrapper">
-                        <h1 class="title">'.$row_home['title'].'</h1>
-                        <p class="paragraph">'.$row_home['sub_title'].'</p>
-                        <button class="custom-button btn product" type="button">Our Products</button>
-                    </div> 
-                </div>
-            </section>
-        ';
-    } else {
-        echo '
-            <section class="home-section" style="background-image: url(./src/background.jpg)">
-                <div class="container-fluid">
-                    <div class="home-wrapper">
-                        <h1 class="title">Are You Looking For A Great Product And Solution ?</h1>
-                        <p class="paragraph">We provide products to suit your needs to support your business. To find out more, click the button below</p>
-                        <button class="custom-button btn product" type="button">Our Products</button>
-                    </div>
-                </div>
-            </section>
-        ';
-    }
-    ?>
+    <section class="home-section" style="background-image: url(../<?php echo getData('home_image',$conn) ?>)">
+        <div class="container-fluid">
+            <div class="home-wrapper">
+                <h1 class="title" col="home_title"><?php echo getData('home_title',$conn) ?>  <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h1>
+                <p class="paragraph" col="home_desc"><?php echo getData('home_desc',$conn) ?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p> 
+                <button class="custom-button btn product" type="button">Our Products</button>
+            </div> 
+        </div>
+    </section>
 
     <!-- Clients -->
     <section class="client-section">
         <div class="container-fluid">
             <div class="client-wrapper slider">
-                <div class="slide"><img src="./src/client/agres.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/AHM.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/buhler.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/ct-logistic.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/frigel.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/namsiang-group.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/rhm.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/toyota.png" alt="client"></div>
+                <div class="slide"><img src="../src/client/agres.png" alt="client"></div>
+                <div class="slide"><img src="../src/client/AHM.png" alt="client"></div>
+                <div class="slide"><img src="../src/client/buhler.png" alt="client"></div>
+                <div class="slide"><img src="../src/client/ct-logistic.png" alt="client"></div>
+                <div class="slide"><img src="../src/client/frigel.png" alt="client"></div>
+                <div class="slide"><img src="../src/client/namsiang-group.png" alt="client"></div>
+                <div class="slide"><img src="../src/client/rhm.png" alt="client"></div>
+                <div class="slide"><img src="../src/client/toyota.png" alt="client"></div>
             </div>
         </div>
     </section>
@@ -225,22 +226,22 @@ if(!isset($_SESSION['admin_id'])){
                     }
                 } else {
                     echo '
-                        <div class="field opacity-overlay" style="background-image: url(./src/fields/rubber.jpg)" >
+                        <div class="field opacity-overlay" style="background-image: url(../src/fields/rubber.jpg)" >
                             <div class="sub-heading">Rubber Industries</div>
                         </div>
-                        <div class="field opacity-overlay" style="background-image: url(./src/fields/plastic.jpg)">
+                        <div class="field opacity-overlay" style="background-image: url(../src/fields/plastic.jpg)">
                             <div class="sub-heading">Plastic Industries</div>
                         </div>
-                        <div class="field opacity-overlay" style="background-image: url(./src/fields/casting.jpg)">
+                        <div class="field opacity-overlay" style="background-image: url(../src/fields/casting.jpg)">
                             <div class="sub-heading">Die Casting</div>
                         </div>
-                        <div class="field opacity-overlay" style="background-image: url(./src/fields/ink.jpg)">
+                        <div class="field opacity-overlay" style="background-image: url(../src/fields/ink.jpg)">
                             <div class="sub-heading">coating and ink industries</div>
                         </div>
-                        <div class="field opacity-overlay" style="background-image: url(./src/fields/acrylic.jpg)">
+                        <div class="field opacity-overlay" style="background-image: url(../src/fields/acrylic.jpg)">
                             <div class="sub-heading">acrylic sheet</div>
                         </div>
-                        <div class="field opacity-overlay" style="background-image: url(./src/fields/industry.jpg)">
+                        <div class="field opacity-overlay" style="background-image: url(../src/fields/industry.jpg)">
                             <div class="sub-heading">other industries</div>
                         </div>
                     ';
@@ -358,7 +359,7 @@ PT. Rena Haniem Mulia has officially launched the new warehouse in Pergudangan B
                             </div>
                         </div>
                         <div class="content-image">
-                            <img src="./src/updates/warehouse.jpeg" alt="">
+                            <img src="../src/updates/warehouse.jpeg" alt="">
                         </div>
                     </div>
 
@@ -374,7 +375,7 @@ Since the outbreak of COVID-19,&nbsp;<a href="https://news.sky.com/story/coronav
                             </div>
                         </div>
                         <div class="content-image">
-                            <img src="./src/updates/covid.jpeg" alt="">
+                            <img src="../src/updates/covid.jpeg" alt="">
                         </div>
                     </div>
 
@@ -390,7 +391,7 @@ Dear Valued Customer, in anticipating of the forthcoming Idul Fitri 1443H, PT. R
                             </div>
                         </div>
                         <div class="content-image">
-                            <img src="./src/updates/holiday.jpeg" alt="">
+                            <img src="../src/updates/holiday.jpeg" alt="">
                         </div>
                     </div>
 
@@ -406,7 +407,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                             </div>
                         </div>
                         <div class="content-image">
-                            <img src="./src/updates/mask.jpeg" alt="">
+                            <img src="../src/updates/mask.jpeg" alt="">
                         </div>
                     </div>
                 </div>
@@ -480,7 +481,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     <!-- Slide -->
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
-                            <img src="./src/blog/1.jpg" alt="">
+                            <img src="../src/blog/1.jpg" alt="">
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
@@ -492,7 +493,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     <!-- Slide -->
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
-                            <img src="./src/blog/2.jpg" alt="">
+                            <img src="../src/blog/2.jpg" alt="">
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
@@ -504,7 +505,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     <!-- Slide -->
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
-                            <img src="./src/blog/3.jpg" alt="">
+                            <img src="../src/blog/3.jpg" alt="">
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
@@ -516,7 +517,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     <!-- Slide -->
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
-                            <img src="./src/blog/4.jpg" alt="">
+                            <img src="../src/blog/4.jpg" alt="">
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
@@ -527,7 +528,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     <!-- Slide -->
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
-                            <img src="./src/blog/5.jpg" alt="">
+                            <img src="../src/blog/5.jpg" alt="">
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
@@ -539,7 +540,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     <!-- Slide -->
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
-                            <img src="./src/blog/6.jpg" alt="">
+                            <img src="../src/blog/6.jpg" alt="">
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
@@ -690,7 +691,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
         <div class="container-fluid grid">
             <div class="company-information">
                 <div class="company-logo">
-                    <img src="./src/logo.png" alt="">
+                    <img src="../src/logo.png" alt="">
                 </div>
                 <div class="company-address">
                     <p class="paragraph">Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 15325</p>
@@ -809,8 +810,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     
-    <script src="../script.js"></script>
-    <script src="../script/scroll.js"></script>
+    <!-- <script src="../script/scroll.js"></script> -->
     <script src="../script/nav.js"></script>
     <script src="../script/number.js"></script>
     <script src="../script/modal.js"></script>
@@ -821,5 +821,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     <script src="../script/homepage/update.js"></script>
     <script src="../script/homepage/blog.js"></script>
     <script src="../script/homepage/testimonials.js"></script>
+    <!-- ajax -->
+    <script src="script/ajax.js">
+    </script>
 </body>
 </html>
