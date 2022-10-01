@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var inputField =  `<input type="text" class="inputEdit">
+    var inputField =  `<textarea type="text" class="inputEdit"></textarea>
     <button type="button" class="btn btn-primary yes">
         <i class="fa-solid fa-check"></i>
     </button>
@@ -12,13 +12,13 @@ $(document).ready(function(){
             var text = $(this).parent().text();
             if(lagiEdit == 0){
                 lagiEdit = 1;
-                var thisClass = $(this).parent().attr('class')
+                var thisCol = $(this).parent().attr('col')
                 
                 $(this).parent().html(inputField)
-                $('input.inputEdit').attr("value",text );
+                $('textarea.inputEdit').val(text);
         
                 $('button.yes').on('click',function(){
-                    var newData = $(this).siblings('input').val()
+                    var newData = $(this).siblings('textarea').val()
                     var column =  $(this).parent().attr('col');
                     $.ajax({
                         type: "POST",
@@ -35,7 +35,7 @@ $(document).ready(function(){
                                     title: 'Success!',
                                     text: 'Data Updated'
                                 })
-                                $('.'+thisClass).html(response[1]+'<button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button>')
+                                $('[col='+thisCol+']').html(response[1]+'<button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button>')
                                 $('button.edit').unbind('click');
                                 lagiEdit=0;
 
@@ -47,7 +47,7 @@ $(document).ready(function(){
                                     text: 'Please try again',
                                 })
                                 $('button.edit').unbind('click');
-                                $('.'+thisClass).html(response[1]+'<button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button>')
+                                $('[col='+thisCol+']').html(response[1]+'<button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button>')
                                 lagiEdit = 0;
 
                                 editButton()
@@ -68,5 +68,45 @@ $(document).ready(function(){
         })
     }
     editButton();
-    
+
+    // ganti home Image
+    $("#formHomeImage").on('submit',(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "api/updateImage.php",
+                type: "POST",
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(response){
+                    response = JSON.parse(response)
+                    if(response[0]=='success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Data Updated'
+                        })
+                        $('img.homeImageChange').attr('src','../'+response[1])
+                        $('section.homeImageChange').css('background-image',"url('../"+response[1]+"')")
+                        
+                    } else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed Uploading file',
+                            text: response,
+                        })
+                    }
+                },        
+                });
+    }));
+          
+        // $.ajax({
+        //     type:"POST",
+        //     url:"api/updateImage.php",
+        //     data: $('#formHomeImage').serialize(),
+        //     success: function(response){
+
+        //     }
+        // })    
 })

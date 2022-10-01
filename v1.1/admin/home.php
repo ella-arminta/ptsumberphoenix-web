@@ -10,15 +10,6 @@ function getData($fiturNama,$conn){
     $data = $temp['fitur_data'];
     return $data;
 }
-function setData($fiturNama,$newData,$conn){
-    $stmt = $conn->prepare('UPDATE company_profile SET fitur_data = ? where fitur_name =? ');
-    $berhasil = $stmt->execute([$newData,$fiturNama]);
-    if($berhasil){
-        return true;
-    }else{
-        return false;
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,6 +41,7 @@ function setData($fiturNama,$newData,$conn){
     <link rel="stylesheet" href="../style/home/faq.css">
     <!-- <link rel="stylesheet" href="../style/home/modal.css"> -->
 
+
     <!-- Library -->
     <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
@@ -59,6 +51,9 @@ function setData($fiturNama,$newData,$conn){
     <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+        <!-- css for admin -->
+        <link rel="stylesheet" href="style/style.css">
+
     <title>PT Sumber Phoenix Makmur | Chemicals Specialty</title>
 </head>
 <body>
@@ -67,7 +62,7 @@ function setData($fiturNama,$newData,$conn){
      <?php include 'includes/nav.php' ?>
     
     <!-- Home Section Page -->
-    <section class="home-section" style="background-image: url(../<?php echo getData('home_image',$conn) ?>)">
+    <section class="home-section homeImageChange" style="background-image: url('../<?php echo getData('home_image',$conn) ?>')">
         <div class="container-fluid">
             <div class="home-wrapper">
                 <h1 class="title" col="home_title"><?php echo getData('home_title',$conn) ?>  <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h1>
@@ -75,8 +70,29 @@ function setData($fiturNama,$newData,$conn){
                 <button class="custom-button btn product" type="button">Our Products</button>
             </div> 
         </div>
+        <button type="button" class="btn btn-danger editImage" style="position:absolute; left:5%;bottom:5%;" data-bs-toggle="modal" data-bs-target="#homeImage"><i class="fa-solid fa-pencil"></i></button>
     </section>
-
+    <!-- Modal Edit Home Section Image -->
+    <div class="modal fade" id="homeImage" tabindex="-1" aria-labelledby="homeImageLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="homeImageLabel">Change Home Picture</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" enctype="multipart/form-data" id="formHomeImage">
+                    <div class="modal-body">
+                        <img class="homeImageChange" src="../<?php echo getData('home_image',$conn)?>" alt="" style="width:100%">
+                        <input type='file' id="image" name="image"  id="inputHomeImage" accept="image/*" required>    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary saveImage">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- Clients -->
     <section class="client-section">
         <div class="container-fluid">
@@ -96,102 +112,46 @@ function setData($fiturNama,$newData,$conn){
     <!-- About Us -->
     <section class="about-section diagonal" id="about">
         <div class="container-fluid diagonal-content grid">
-            <?php
-            if (isset($row_about)) {
-                echo '
-                    <div class="about-information">
-                        <div class="about-information-wrapper">
-                            <h2 class="heading">'.$row_about['title'].'</h2>
-                            <p class="paragraph">'.$row_about['description'].'</p>
-                            <div class="button-container-wrapper">
-                                <button class="black-button btn contact" type="button">
-                                    Contact Us
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
+            <div class="about-information">
+                <div class="about-information-wrapper">
+                    <h2 class="heading" col="who_title"><?= getData('who_title',$conn) ?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h2>
+                    <p class="paragraph" col="who_desc"><?= getData('who_desc',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                    <div class="button-container-wrapper">
+                        <button class="black-button btn contact" type="button">
+                            Contact Us
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
                     </div>
-                    <div class="about-features 1">
-                        <div class="about-features-wrapper">
-                            <div class="features 1">
-                                <i class="fa-solid fa-book"></i>
-                                <h3 class="sub-heading">History</h3>
-                                <p class="paragraph">'.$row_about['history'].'</p>
-                            </div>
-                            <div class="features 2">
-                                <i class="fa-solid fa-clock"></i>
-                                <h3 class="sub-heading">Experience</h3>
-                                <p class="paragraph">'.$row_about['experience'].'</p>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="about-features 1">
+                <div class="about-features-wrapper">
+                    <div class="features 1">
+                        <i class="fa-solid fa-book"></i>
+                        <h3 class="sub-heading">History</h3>
+                        <p class="paragraph" col="history"><?=getData('history',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                     </div>
-                    <div class="about-features 2">
-                        <div class="about-features-wrapper">
-                            <div class="features 1">
-                                <i class="fa-solid fa-lightbulb"></i>
-                                <h3 class="sub-heading">Philosophy</h3>
-                                <p class="paragraph">'.$row_about['philosophy'].'</p>
-                            </div>
-                            <div class="features 2">
-                                <i class="fa-solid fa-bullseye"></i>
-                                <h3 class="sub-heading">Purpose</h3>
-                                <p class="paragraph">'.$row_about['purpose'].'</p>
-                            </div>
-                        </div>
+                    <div class="features 2">
+                        <i class="fa-solid fa-clock"></i>
+                        <h3 class="sub-heading">Experience</h3>
+                        <p class="paragraph" col="experience"><?=getData('experience',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                     </div>
-                ';
-            } else {
-                echo '
-                    <div class="about-information">
-                        <div class="about-information-wrapper">
-                            <h2 class="heading">Who Are We ?</h2>
-                            <p class="paragraph">
-                                We are one of the major players in the field of specialty 
-                                chemicals for rubber, coating, cable, die casting and other 
-                                industrial chemicals. We serve the needs of speciality 
-                                chemicals from industrial users, to create additional value 
-                                for the output product. We would like to provide our customers 
-                                high quality products and satisfied service.
-                            </p>
-                            <div class="button-container-wrapper">
-                                <button class="black-button btn contact" type="button">
-                                    Contact Us
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="about-features 2">
+                <div class="about-features-wrapper">
+                    <div class="features 1">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <h3 class="sub-heading">Philosophy</h3>
+                        <p class="paragraph" col="philosophy"><?=getData('philosophy',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                     </div>
-                    <div class="about-features 1">
-                        <div class="about-features-wrapper">
-                            <div class="features 1">
-                                <i class="fa-solid fa-book"></i>
-                                <h3 class="sub-heading">History</h3>
-                                <p class="paragraph">PT.SUMBER PHOENIX MAKMUR was established in 2003 as importer of chemical raw materials and specials additives.</p>
-                            </div>
-                            <div class="features 2">
-                                <i class="fa-solid fa-clock"></i>
-                                <h3 class="sub-heading">Experience</h3>
-                                <p class="paragraph">Years of international partnership combined with knowledge of the Indonesian market give the company a competitive advantage in providing comprehensive specialty chemical supply programs and service.</p>
-                            </div>
-                        </div>
+                    <div class="features 2">
+                        <i class="fa-solid fa-bullseye"></i>
+                        <h3 class="sub-heading">Purpose</h3>
+                        <p class="paragraph" col="purpose"><?=getData('purpose',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                     </div>
-                    <div class="about-features 2">
-                        <div class="about-features-wrapper">
-                            <div class="features 1">
-                                <i class="fa-solid fa-lightbulb"></i>
-                                <h3 class="sub-heading">Philosophy</h3>
-                                <p class="paragraph">The company\'s business philosophy is Customer Satisfaction is Our Priority, and Creating Value for the Customer.</p>
-                            </div>
-                            <div class="features 2">
-                                <i class="fa-solid fa-bullseye"></i>
-                                <h3 class="sub-heading">Purpose</h3>
-                                <p class="paragraph">PT.SUMBER PHOENIX MAKMUR will continuously strive to develope complete product lines, improves its service, and create more value for its customers and suppliers.</p>
-                            </div>
-                        </div>
-                    </div>
-                ';
-            }
-            ?>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -199,19 +159,8 @@ function setData($fiturNama,$newData,$conn){
     <section class="business-fields-section section-extra" id="fields">
         <div class="container-fluid">
             <div class="business-fields-information">
-                <?php
-                if (isset($row_business_fields_info)) {
-                    echo '
-                        <h1 class="heading underline">'.$row_business_fields_info['title'].'</h1>
-                        <p class="paragraph">'.$row_business_fields_info['description'].'</p>
-                    ';
-                } else {
-                    echo '
-                        <h1 class="heading underline">Business Fields</h1>
-                        <p class="paragraph">We Provide so much product to distributed</p>
-                    ';
-                }
-                ?>
+                <h1 class="heading underline" col="fields_title"><?=getData('fields_title',$conn)?><button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h1>
+                <p class="paragraph" col="fields_desc"><?=getData('fields_desc',$conn)?><button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
             </div>
 
             <div class="business-fields-content grid">
@@ -254,25 +203,11 @@ function setData($fiturNama,$newData,$conn){
     <!-- Why Us -->
     <section class="why-us-section diagonal" id="why">
         <div class="container-fluid diagonal-content">
-            <?php
-            if (isset($row_why_us)) {
-                echo '
-                    <div class="text-center info">
-                        <h2 style="color: white;">Why<span style="color: #FFA600;"><strong>&nbsp;Us ?</strong></span></h2>
-                        <p class="d-inline-block" style="width: 50%; color: white;"><strong>'.$row_why_us['description'].'</strong><br></p>
-                    </div>
-                ';
-            } else {
-                echo '
-                    <div class="text-center info">
-                        <h2 style="color: white;">Why<span style="color: #FFA600;"><strong>&nbsp;Us ?</strong></span></h2>
-                        <p class="d-inline-block" style="width: 50%; color: white;"><strong>Customer Satisfaction is Our Priority!</strong><br></p>
-                    </div>
-                ';
-            }
-            ?>
+            <div class="text-center info">
+                <h2 style="color: white;">Why<span style="color: #FFA600;"><strong>&nbsp;Us ?</strong></span></h2>
+                <p class="d-inline-block"col="why_desc" style="width: 50%; color: white;"><strong><?= getData('why_desc',$conn)?></strong><br> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+            </div>
             <div class="row">
-
                 <?php
                     $icon_list = array('fas fa-user-friends', 'fas fa-thumbs-up', 'fas fa-phone', 'fas fa-warehouse');
                     $index = 0;
@@ -423,19 +358,10 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     <!-- Team Section -->
     <section class="team-section diagonal" id="team">
         <div class="container-fluid diagonal-content">
-            <?php
-            if (isset($row_team_info)) {
-                echo '
-                    <h1 class="heading underline">'.$row_team_info['title'].'</h1>
-                    <p class="paragraph description">'.$row_team_info['sub_title'].'</p>
-                ';
-            } else {
-                echo '
-                    <h1 class="heading underline">Team</h1>
-                    <p class="paragraph description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur molestiae nisi laboriosam quia mollitia commodi eos quas harum asperiores id distinctio nostrum exercitationem in earum, dicta dolor sint aut odio.</p>
-                ';
-            }
-            ?>
+
+            <h1 class="heading underline" col="team_title"><?= getData('team_title',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h1>
+            <p class="paragraph description" col="team_sub_title"><?= getData('team_sub_title',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+        
             <div class="team-container grid">
                 <?php
                 if (isset($team)) {
@@ -559,22 +485,10 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     <!-- Testimonial Section -->
     <section class="testimonial-section diagonal">
         <div class="slide-container swiper container-fluid diagonal-content">
-            
-            <?php
-            if (isset($row_testimonial_info)) {
-                echo '
-                    <div class="intro heading underline">'.$row_testimonial_info['title'].'</div>
-                    <p class="intro paragraph">'.$row_testimonial_info['sub_title'].'</p>
-                    <div class="slide-content-1">
-                ';
-            } else {
-                echo '
-                    <div class="intro heading underline">Testimonials</div>
-                    <p class="intro paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta, deserunt dolore. Placeat corporis eos in veritatis modi nesciunt nihil earum minima a itaque commodi eligendi maxime, consequatur culpa cum nulla.</p>
-                    <div class="slide-content-1">
-                ';
-            }
-            ?>
+    
+                <div class="intro heading underline" col="testi_title"><?=getData('testi_title',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></div>
+                <p class="intro paragraph" col="testi_sub_title"><?=getData('testi_sub_title',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                <div class="slide-content-1">
 
                 <div class="custom-card-wrapper swiper-wrapper">
 
@@ -694,13 +608,13 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     <img src="../src/logo.png" alt="">
                 </div>
                 <div class="company-address">
-                    <p class="paragraph">Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 15325</p>
+                    <p class="paragraph" col="address"><?= getData('address',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                 </div>
                 <div class="company-phone">
-                    <p class="paragraph"><strong>Phone: </strong>+62 21 5398 318</p>
+                    <p class="paragraph" col="phone"><strong>Phone: </strong><?= getData('phone',$conn) ?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                 </div>
                 <div class="company-email">
-                    <p class="paragraph"><strong>Email: </strong>phoenix-spm@sumberphoenix.co.id</p>
+                    <p class="paragraph" col="email"><strong>Email: </strong><?= getData('email',$conn) ?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                 </div>
             </div>
             <div class="useful-links">
@@ -751,7 +665,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
             </div>
             <div class="newsletter">
                 <h2 class="sub-heading underline">Join Our Newsletter</h2>
-                <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                <p class="paragraph" col="newsletter_desc"><?= getData('newsletter_desc',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                 <div class="email-input">
                     <input type="email" placeholder="example@gmail.com">
                     <button class="custom-button btn" type="button">Subscribe</button>
@@ -784,11 +698,11 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     </footer>
 
     <!-- Modal -->
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="homeImageLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">${title}</h5>
+                    <h5 class="modal-title" id="homeImageLabel">${title}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
