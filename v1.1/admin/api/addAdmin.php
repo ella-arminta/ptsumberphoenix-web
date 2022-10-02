@@ -30,6 +30,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $stmt = $conn->prepare('INSERT INTO admin (adm_name,adm_email,adm_password) values (?,?,?)');
                 $stmt->execute([$name,$email,$password_hashed]);
                 $response = 'success';
+
+                // add admin log
+                $adm_id = $_SESSION['admin_id'];
+                $stmt = $conn->prepare('SELECT adm_name from admin where adm_id =?');
+                $stmt->execute([$adm_id]);
+                $row = $stmt->fetch();
+                $namaAdm = $row['adm_name'];
+
+                $stmt = $conn->prepare('INSERT INTO admin_log (action,log_desc,admin_id,prev_data) values (?,?,?,?)');
+                $stmt->execute(['addAdmin',$namaAdm.' added '.$name.' as an admin',$adm_id,'none']);
             }
         }
     } 
