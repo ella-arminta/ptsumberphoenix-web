@@ -13,14 +13,16 @@ function getData($fiturNama,$conn){
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Library Style -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="../style.css">
@@ -51,26 +53,31 @@ function getData($fiturNama,$conn){
     <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <!-- css for admin -->
-        <link rel="stylesheet" href="style/style.css">
+    <!-- css for admin -->
+    <link rel="stylesheet" href="style/style.css">
 
     <title>PT Sumber Phoenix Makmur | Chemicals Specialty</title>
 </head>
+
 <body>
-    
+
     <!-- Navbar -->
-     <?php include 'includes/nav.php' ?>
-    
+    <?php include 'includes/nav.php' ?>
+
     <!-- Home Section Page -->
-    <section class="home-section homeImageChange" style="background-image: url('../<?php echo getData('home_image',$conn) ?>')">
+    <section class="home-section homeImageChange"
+        style="background-image: url('../<?php echo getData('home_image',$conn) ?>')">
         <div class="container-fluid">
             <div class="home-wrapper">
-                <h1 class="title" col="home_title"><?php echo getData('home_title',$conn) ?>  <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h1>
-                <p class="paragraph" col="home_desc"><?php echo getData('home_desc',$conn) ?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p> 
+                <h1 class="title" col="home_title"><?php echo getData('home_title',$conn) ?> <button type="button"
+                        class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h1>
+                <p class="paragraph" col="home_desc"><?php echo getData('home_desc',$conn) ?> <button type="button"
+                        class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                 <button class="custom-button btn product" type="button">Our Products</button>
-            </div> 
+            </div>
         </div>
-        <button type="button" class="btn btn-danger editImage" style="position:absolute; left:5%;bottom:5%;" data-bs-toggle="modal" data-bs-target="#homeImage"><i class="fa-solid fa-pencil"></i></button>
+        <button type="button" class="btn btn-danger editImage" style="position:absolute; left:5%;bottom:5%;"
+            data-bs-toggle="modal" data-bs-target="#homeImage"><i class="fa-solid fa-pencil"></i></button>
     </section>
     <!-- Modal Edit Home Section Image -->
     <div class="modal fade" id="homeImage" tabindex="-1" aria-labelledby="homeImageLabel" aria-hidden="true">
@@ -82,8 +89,9 @@ function getData($fiturNama,$conn){
                 </div>
                 <form method="POST" enctype="multipart/form-data" id="formHomeImage">
                     <div class="modal-body">
-                        <img class="homeImageChange" src="../<?php echo getData('home_image',$conn)?>" alt="" style="width:100%">
-                        <input type='file' id="image" name="image"  id="inputHomeImage" accept="image/*" required>    
+                        <img class="homeImageChange" src="../<?php echo getData('home_image',$conn)?>" alt=""
+                            style="width:100%">
+                        <input type='file' id="image" name="image" id="inputHomeImage" accept="image/*" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -97,25 +105,68 @@ function getData($fiturNama,$conn){
     <section class="client-section">
         <div class="container-fluid">
             <div class="client-wrapper slider">
-                <div class="slide"><img src="../src/client/agres.png" alt="client"></div>
-                <div class="slide"><img src="../src/client/AHM.png" alt="client"></div>
-                <div class="slide"><img src="../src/client/buhler.png" alt="client"></div>
-                <div class="slide"><img src="../src/client/ct-logistic.png" alt="client"></div>
-                <div class="slide"><img src="../src/client/frigel.png" alt="client"></div>
-                <div class="slide"><img src="../src/client/namsiang-group.png" alt="client"></div>
-                <div class="slide"><img src="../src/client/rhm.png" alt="client"></div>
-                <div class="slide"><img src="../src/client/toyota.png" alt="client"></div>
+                <?php 
+                    $stmt = $conn->prepare('SELECT * from clients');
+                    $stmt->execute();
+                    while($client = $stmt->fetch()):
+                 ?>
+                <div class="slide" slide-index="<?= $client['client_id'] ?>"><img src="../src/<?= $client['client_logo'] ?>" alt="<?= $client['client_name'] ?>"></div>
+                <?php endwhile; ?>
             </div>
+            <button type="button" class="btn btn-danger editClients" style="margin-left:calc(50% - 21.3px);" data-bs-toggle="modal" data-bs-target="#clientsModal">
+                <i class="fa-solid fa-pencil"></i>
+            </button>
         </div>
     </section>
+    <!-- Modal Edit Clients -->
+    <div class="modal fade" id="clientsModal" tabindex="-1" aria-labelledby="clientsModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Client List</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body clients">
+                    <?php
+                        $stmt = $conn->prepare('SELECT * from clients');
+                        $stmt->execute();
+                        while($client = $stmt->fetch()):
+                    ?>
+                    <div class="row justify-content-center align-items-center  clientRow" row-index="<?= $client['client_id'] ?>" style="margin-left:30px">
+                        <div class="col-8"><img class="imgClient" src="../src/<?= $client['client_logo'] ?>" style="width:80%" alt="<?= $client['client_name']?>"></div>
+                        <div class="col-4"><button class="btn btn-danger delClient" del-target="<?= $client['client_id'] ?>"><i class="fa-solid fa-trash-can"></i></button></div>
+                    </div>
+                    <?php endwhile ?>
+                    <h5 style="text-align:center">Add Client :</h5>
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-10" style="background-color: #e4e4e4;padding: 10px 15px;border-radius: 5px;">
+                            <form method="POST" id="formAddClients" enctype="multipart/form-data">
+                                <label for="clientName">Client Name:</label>
+                                <input type="text" name="clientName" id="clientName" required>
+                                <label for="imageClient">Client Logo:</label>
+                                <input type="file" name="imageClient" id="imageClient" accept="image/*" required />
+                                <button type="submit" class="btn btn-primary addClient"><i class="fa-solid fa-plus"></i></button>
+                            </form>  
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- About Us -->
     <section class="about-section diagonal" id="about">
         <div class="container-fluid diagonal-content grid">
             <div class="about-information">
                 <div class="about-information-wrapper">
-                    <h2 class="heading" col="who_title"><?= getData('who_title',$conn) ?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h2>
-                    <p class="paragraph" col="who_desc"><?= getData('who_desc',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                    <h2 class="heading" col="who_title"><?= getData('who_title',$conn) ?> <button type="button"
+                            class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h2>
+                    <p class="paragraph" col="who_desc"><?= getData('who_desc',$conn)?> <button type="button"
+                            class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                     <div class="button-container-wrapper">
                         <button class="black-button btn contact" type="button">
                             Contact Us
@@ -129,12 +180,14 @@ function getData($fiturNama,$conn){
                     <div class="features 1">
                         <i class="fa-solid fa-book"></i>
                         <h3 class="sub-heading">History</h3>
-                        <p class="paragraph" col="history"><?=getData('history',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                        <p class="paragraph" col="history"><?=getData('history',$conn)?> <button type="button"
+                                class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                     </div>
                     <div class="features 2">
                         <i class="fa-solid fa-clock"></i>
                         <h3 class="sub-heading">Experience</h3>
-                        <p class="paragraph" col="experience"><?=getData('experience',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                        <p class="paragraph" col="experience"><?=getData('experience',$conn)?> <button type="button"
+                                class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                     </div>
                 </div>
             </div>
@@ -143,12 +196,14 @@ function getData($fiturNama,$conn){
                     <div class="features 1">
                         <i class="fa-solid fa-lightbulb"></i>
                         <h3 class="sub-heading">Philosophy</h3>
-                        <p class="paragraph" col="philosophy"><?=getData('philosophy',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                        <p class="paragraph" col="philosophy"><?=getData('philosophy',$conn)?> <button type="button"
+                                class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                     </div>
                     <div class="features 2">
                         <i class="fa-solid fa-bullseye"></i>
                         <h3 class="sub-heading">Purpose</h3>
-                        <p class="paragraph" col="purpose"><?=getData('purpose',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                        <p class="paragraph" col="purpose"><?=getData('purpose',$conn)?> <button type="button"
+                                class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                     </div>
                 </div>
             </div>
@@ -159,8 +214,10 @@ function getData($fiturNama,$conn){
     <section class="business-fields-section section-extra" id="fields">
         <div class="container-fluid">
             <div class="business-fields-information">
-                <h1 class="heading underline" col="fields_title"><?=getData('fields_title',$conn)?><button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h1>
-                <p class="paragraph" col="fields_desc"><?=getData('fields_desc',$conn)?><button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                <h1 class="heading underline" col="fields_title"><?=getData('fields_title',$conn)?><button type="button"
+                        class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h1>
+                <p class="paragraph" col="fields_desc"><?=getData('fields_desc',$conn)?><button type="button"
+                        class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
             </div>
 
             <div class="business-fields-content grid">
@@ -205,31 +262,63 @@ function getData($fiturNama,$conn){
         <div class="container-fluid diagonal-content">
             <div class="text-center info">
                 <h2 style="color: white;">Why<span style="color: #FFA600;"><strong>&nbsp;Us ?</strong></span></h2>
-                <p class="d-inline-block"col="why_desc" style="width: 50%; color: white;"><strong><?= getData('why_desc',$conn)?></strong><br> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                <p class="d-inline-block" col="why_desc" style="width: 50%; color: white;">
+                    <strong><?= getData('why_desc',$conn)?></strong><br> <button type="button"
+                        class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
             </div>
             <div class="row">
-                <?php
-                    $icon_list = array('fas fa-user-friends', 'fas fa-thumbs-up', 'fas fa-phone', 'fas fa-warehouse');
-                    $index = 0;
-                    if (isset($why_us_content)) {
-                        while ($row_why_us_content = mysqli_fetch_array($why_us_content)) {
-                            echo '
-                                <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                                    <div class="text-center icon-box">
-                                        <div class="icon">
-                                            <i class="'.$icon_list[$index].'" style="margin-bottom: 15px;"></i>
-                                            <h4 class="title">'.$row_why_us_content['title'].'</h4>
-                                            <p class="description">'.$row_why_us_content['description'].'<br></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ';
-
-                            $index++;
-                        }
-                    }
-                ?>
-
+                <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="text-center icon-box">
+                        <div class="icon">
+                            <i class="fas fa-user-friends" style="margin-bottom: 15px;"></i>
+                            <h4 class="title" col="why_us_title1"><?= getData('why_us_title1',$conn) ?> <button
+                                    type="button" class="btn btn-danger edit"><i
+                                        class="fa-solid fa-pencil"></i></button></h4>
+                            <p class="description" col="why_us_desc1"><?= getData('why_us_desc1',$conn) ?><br> <button
+                                    type="button" class="btn btn-danger edit"><i
+                                        class="fa-solid fa-pencil"></i></button></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="text-center icon-box">
+                        <div class="icon">
+                            <i class="fas fa-thumbs-up" style="margin-bottom: 15px;"></i>
+                            <h4 class="title" col="why_us_title2"><?= getData('why_us_title2',$conn) ?> <button
+                                    type="button" class="btn btn-danger edit"><i
+                                        class="fa-solid fa-pencil"></i></button></h4>
+                            <p class="description" col="why_us_desc2"><?= getData('why_us_desc2',$conn) ?><br> <button
+                                    type="button" class="btn btn-danger edit"><i
+                                        class="fa-solid fa-pencil"></i></button></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="text-center icon-box">
+                        <div class="icon">
+                            <i class="fas fa-phone" style="margin-bottom: 15px;"></i>
+                            <h4 class="title" col="why_us_title3"><?= getData('why_us_title3',$conn) ?> <button
+                                    type="button" class="btn btn-danger edit"><i
+                                        class="fa-solid fa-pencil"></i></button></h4>
+                            <p class="description" col="why_us_desc3"><?= getData('why_us_desc3',$conn) ?><br> <button
+                                    type="button" class="btn btn-danger edit"><i
+                                        class="fa-solid fa-pencil"></i></button></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="text-center icon-box">
+                        <div class="icon">
+                            <i class="fas fa-warehouse" style="margin-bottom: 15px;"></i>
+                            <h4 class="title" col="why_us_title4"><?= getData('why_us_title4',$conn) ?> <button
+                                    type="button" class="btn btn-danger edit"><i
+                                        class="fa-solid fa-pencil"></i></button></h4>
+                            <p class="description" col="why_us_desc4"><?= getData('why_us_desc4',$conn) ?><br> <button
+                                    type="button" class="btn btn-danger edit"><i
+                                        class="fa-solid fa-pencil"></i></button></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -238,28 +327,50 @@ function getData($fiturNama,$conn){
     <section class="update-section section-extra" id="update">
         <div class="container-fluid">
             <div class="company-statistic-data grid">
-                <?php
-                if (isset($statistics)) {
-                    $icon = array('fa-solid fa-face-smile', 'fa-solid fa-screwdriver-wrench', 'fa-solid fa-calendar-days', 'fa-solid fa-user-group');
-                    $index = 0;
-                    while($row_statistics = mysqli_fetch_array($statistics)) {
-                        echo '
-                            <div class="statistic-data '.$row_statistics['statistics_id'].'" data-bs-toggle="modal" data-bs-target="#modal">
-                                <div class="statistic-data-wrapper">
-                                    <div class="icon-container">
-                                        <i class="'.$icon[$index].'"></i>
-                                    </div>
-                                    <div class="statistic-data-number" data-target="'.$row_statistics['total'].'">0</div>
-                                    <p class="statistic-data-category paragraph">'.$row_statistics['title'].'</p>
-                                    <p class="statistic-data-content paragraph" hidden>'.$row_statistics['content'].'</p>
-                                </div>
-                            </div>
-                        ';
-
-                        $index++;
-                    }
-                }
-                ?>
+                <div class="statistic-data 1" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="statistic-data-wrapper">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-face-smile"></i>
+                        </div>
+                        <div class="statistic-data-number" data-target="<?= getData('statistics_total1',$conn) ?>">0
+                        </div>
+                        <p class="statistic-data-category paragraph"><?= getData('statistics_title1',$conn) ?></p>
+                        <p class="statistic-data-content paragraph" hidden><?= getData('statistics_desc1',$conn) ?></p>
+                    </div>
+                </div>
+                <div class="statistic-data 2" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="statistic-data-wrapper">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <div class="statistic-data-number" data-target="<?= getData('statistics_total2',$conn) ?>">0
+                        </div>
+                        <p class="statistic-data-category paragraph"><?= getData('statistics_title2',$conn) ?></p>
+                        <p class="statistic-data-content paragraph" hidden><?= getData('statistics_desc2',$conn) ?></p>
+                    </div>
+                </div>
+                <div class="statistic-data 3" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="statistic-data-wrapper">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <div class="statistic-data-number" data-target="<?= getData('statistics_total3',$conn) ?>">0
+                        </div>
+                        <p class="statistic-data-category paragraph"><?= getData('statistics_title3',$conn) ?></p>
+                        <p class="statistic-data-content paragraph" hidden><?= getData('statistics_desc3',$conn) ?></p>
+                    </div>
+                </div>
+                <div class="statistic-data 4" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="statistic-data-wrapper">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <div class="statistic-data-number" data-target="<?= getData('statistics_total4',$conn) ?>">0
+                        </div>
+                        <p class="statistic-data-category paragraph"><?= getData('statistics_title4',$conn) ?></p>
+                        <p class="statistic-data-content paragraph" hidden><?= getData('statistics_desc4',$conn) ?></p>
+                    </div>
+                </div>
             </div>
             <div class="company-updates">
                 <div class="company-updates-navigation">
@@ -359,9 +470,11 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     <section class="team-section diagonal" id="team">
         <div class="container-fluid diagonal-content">
 
-            <h1 class="heading underline" col="team_title"><?= getData('team_title',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h1>
-            <p class="paragraph description" col="team_sub_title"><?= getData('team_sub_title',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
-        
+            <h1 class="heading underline" col="team_title"><?= getData('team_title',$conn)?> <button type="button"
+                    class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h1>
+            <p class="paragraph description" col="team_sub_title"><?= getData('team_sub_title',$conn)?> <button
+                    type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+
             <div class="team-container grid">
                 <?php
                 if (isset($team)) {
@@ -411,7 +524,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -423,7 +537,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -435,7 +550,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -447,7 +563,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -458,7 +575,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -470,7 +588,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -485,10 +604,12 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     <!-- Testimonial Section -->
     <section class="testimonial-section diagonal">
         <div class="slide-container swiper container-fluid diagonal-content">
-    
-                <div class="intro heading underline" col="testi_title"><?=getData('testi_title',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></div>
-                <p class="intro paragraph" col="testi_sub_title"><?=getData('testi_sub_title',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
-                <div class="slide-content-1">
+
+            <div class="intro heading underline" col="testi_title"><?=getData('testi_title',$conn)?> <button
+                    type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></div>
+            <p class="intro paragraph" col="testi_sub_title"><?=getData('testi_sub_title',$conn)?> <button type="button"
+                    class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+            <div class="slide-content-1">
 
                 <div class="custom-card-wrapper swiper-wrapper">
 
@@ -535,64 +656,84 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             Lorem ipsum dolor sit ?
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione nemo velit! Molestiae, repellendus totam.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni
+                            mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione
+                            nemo velit! Molestiae, repellendus totam.
                         </div>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             Lorem ipsum dolor sit ?
                         </button>
                     </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione nemo velit! Molestiae, repellendus totam.w.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni
+                            mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione
+                            nemo velit! Molestiae, repellendus totam.w.
                         </div>
                     </div>
                 </div>
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             Lorem ipsum dolor sit ?
                         </button>
                     </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione nemo velit! Molestiae, repellendus totam..
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni
+                            mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione
+                            nemo velit! Molestiae, repellendus totam..
                         </div>
                     </div>
                 </div>
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingFour">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                             Lorem ipsum dolor sit ?
                         </button>
                     </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione nemo velit! Molestiae, repellendus totam..
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni
+                            mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione
+                            nemo velit! Molestiae, repellendus totam..
                         </div>
                     </div>
                 </div>
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingFive">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                             Lorem ipsum dolor sit ?
                         </button>
                     </h2>
-                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                        data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione nemo velit! Molestiae, repellendus totam..
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni
+                            mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione
+                            nemo velit! Molestiae, repellendus totam..
                         </div>
                     </div>
                 </div>
@@ -608,13 +749,16 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     <img src="../src/logo.png" alt="">
                 </div>
                 <div class="company-address">
-                    <p class="paragraph" col="address"><?= getData('address',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                    <p class="paragraph" col="address"><?= getData('address',$conn)?> <button type="button"
+                            class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                 </div>
                 <div class="company-phone">
-                    <p class="paragraph" col="phone"><strong>Phone: </strong><?= getData('phone',$conn) ?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                    <p class="paragraph" col="phone"><strong>Phone: </strong><?= getData('phone',$conn) ?> <button
+                            type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                 </div>
                 <div class="company-email">
-                    <p class="paragraph" col="email"><strong>Email: </strong><?= getData('email',$conn) ?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                    <p class="paragraph" col="email"><strong>Email: </strong><?= getData('email',$conn) ?> <button
+                            type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                 </div>
             </div>
             <div class="useful-links">
@@ -665,7 +809,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
             </div>
             <div class="newsletter">
                 <h2 class="sub-heading underline">Join Our Newsletter</h2>
-                <p class="paragraph" col="newsletter_desc"><?= getData('newsletter_desc',$conn)?> <button type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                <p class="paragraph" col="newsletter_desc"><?= getData('newsletter_desc',$conn)?> <button type="button"
+                        class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
                 <div class="email-input">
                     <input type="email" placeholder="example@gmail.com">
                     <button class="custom-button btn" type="button">Subscribe</button>
@@ -706,7 +851,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                ${content}
+                    ${content}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -722,8 +867,10 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
         </div>
     </a>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+
     <!-- <script src="../script/scroll.js"></script> -->
     <script src="../script/nav.js"></script>
     <script src="../script/number.js"></script>
@@ -739,4 +886,5 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     <script src="script/ajax.js">
     </script>
 </body>
+
 </html>

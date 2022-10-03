@@ -1,8 +1,8 @@
 <?php
-include 'connect.php';
+include '../connect.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-$target_dir = "../../data/home/";
+$target_dir = "../../../data/home/";
 $target_file = $target_dir . basename($_FILES["image"]["name"]);
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 $img_name = basename($_FILES["image"]["name"]);

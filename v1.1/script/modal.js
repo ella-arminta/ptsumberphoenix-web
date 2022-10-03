@@ -1,4 +1,3 @@
-
 let stats_data = document.querySelectorAll('.statistic-data')
 
 for (let stat of stats_data) {
@@ -12,11 +11,11 @@ for (let stat of stats_data) {
 
         modal.innerHTML = `
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">${title}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">`+title+`</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            ${content}
+            `+content+`
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

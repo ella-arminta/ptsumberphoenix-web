@@ -1,5 +1,5 @@
 <?php
-include 'connect.php';
+include '../connect.php';
 $response ="";
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $name = $_POST["name"];  
