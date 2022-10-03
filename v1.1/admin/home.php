@@ -327,6 +327,7 @@ function getData($fiturNama,$conn){
     <section class="update-section section-extra" id="update">
         <div class="container-fluid">
             <div class="company-statistic-data grid">
+                <!-- Update Statistics -->
                 <div class="statistic-data 1" data-bs-toggle="modal" data-bs-target="#modal">
                     <div class="statistic-data-wrapper">
                         <div class="icon-container">
@@ -338,6 +339,7 @@ function getData($fiturNama,$conn){
                         <p class="statistic-data-content paragraph" hidden><?= getData('statistics_desc1',$conn) ?></p>
                     </div>
                 </div>
+
                 <div class="statistic-data 2" data-bs-toggle="modal" data-bs-target="#modal">
                     <div class="statistic-data-wrapper">
                         <div class="icon-container">
@@ -371,7 +373,80 @@ function getData($fiturNama,$conn){
                         <p class="statistic-data-content paragraph" hidden><?= getData('statistics_desc4',$conn) ?></p>
                     </div>
                 </div>
+
+                <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#statsModal"><i class="fa-solid fa-pencil"></i></button>
             </div>
+            <!-- Modal Description Stats -->
+            <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="homeImageLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title statsTitle" id="homeImageLabel">${title}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body statsBody">
+                            ${content}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- STATISTICS EDIT MODAL -->
+            <div class="modal fade" id="statsModal" tabindex="-1" aria-labelledby="statsModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Stats List</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" id="formStatsEdit">
+                                <h6>-- Stats 1 --</h6>
+                                <label for="title1">Title : </label>
+                                <input type="text" id="title1" name="title1" value="<?= getData('statistics_title1',$conn) ?>"> <br>
+                                <label for="total1" >Total :</label>
+                                <input type="text" id="total1" name="total1" value="<?= getData('statistics_total1',$conn) ?>"> <br>
+                                <label for="desc1">Description :</label>
+                                <textarea style="width:100%;min-height:100px" type="text" id="desc1" name="desc1"><?= getData('statistics_desc1',$conn) ?></textarea><br><br>
+
+                                <h6>-- Stats 2 --</h6>
+                                <label for="title2">Title : </label>
+                                <input type="text" id="title2" name="title2" value="<?= getData('statistics_title2',$conn) ?>"> <br>
+                                <label for="total2" >Total :</label>
+                                <input type="text" id="total2" name="total2" value="<?= getData('statistics_total2',$conn) ?>"> <br>
+                                <label for="desc2">Description :</label>
+                                <textarea style="width:100%;min-height:100px" type="text" id="desc2" name="desc2"><?= getData('statistics_desc2',$conn) ?></textarea><br><br>
+
+                                <h6>-- Stats 3 --</h6>
+                                <label for="title3">Title : </label>
+                                <input type="text" id="title3" name="title3" value="<?= getData('statistics_title3',$conn) ?>"> <br>
+                                <label for="total3" >Total :</label>
+                                <input type="text" id="total3" name="total3" value="<?= getData('statistics_total3',$conn) ?>"> <br>
+                                <label for="desc3">Description :</label>
+                                <textarea style="width:100%;min-height:100px" type="text" id="desc3" name="desc3"><?= getData('statistics_desc3',$conn) ?></textarea><br><br>
+
+                                <h6>-- Stats 4 --</h6>
+                                <label for="title4">Title : </label>
+                                <input type="text" id="title4" name="title4" value="<?= getData('statistics_title4',$conn) ?>"> <br>
+                                <label for="total4" >Total :</label>
+                                <input type="text" id="total4" name="total4" value="<?= getData('statistics_total4',$conn) ?>"> <br>
+                                <label for="desc4">Description :</label>
+                                <textarea style="width:100%;min-height:100px" type="text" id="desc4" name="desc4"><?= getData('statistics_desc4',$conn) ?></textarea><br><br>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary editStats">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- COMPANY UPDATES -->
             <div class="company-updates">
                 <div class="company-updates-navigation">
                     <div class="navigation-item 0 active">
@@ -654,93 +729,92 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
         <div class="container-fluid">
             <h2 class="heading underline">FREQUENTLY ASKED QUESTIONS</h2>
             <div class="accordion" id="accordionExample">
+                <?php
+                    $stmt=$conn->prepare('SELECT * FROM faq');
+                    $stmt->execute();
+                    while($faq = $stmt->fetch()):
+                ?>
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
+                    <h2 class="accordion-header" id="heading-<?=$faq['faq_id']?>">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Lorem ipsum dolor sit ?
+                            data-bs-target="#collapse-<?= $faq['faq_id'] ?>" aria-expanded="false" aria-controls="collapse-<?= $faq['faq_id'] ?>">
+                            <?= $faq['faq_thumbnail'] ?>
                         </button>
+                        <!-- delete button faq -->
+                        <button class="btn btn-dark delFaq" style="width:40px;height:40px" target="<?= $faq['faq_id'] ?>"><i class="fa-solid fa-trash-can"></i></button>
+                        <!-- edit faq button  -->
+                        <button class="btn btn-danger editFaqButton"data-bs-toggle="modal" data-bs-target="#editFaqModal" style="width:40px;height:40px"  target="<?= $faq['faq_id'] ?>"><i class="fa-solid fa-pencil"></i></button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                    <div id="collapse-<?= $faq['faq_id'] ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?=$faq['faq_id']?>"
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni
-                            mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione
-                            nemo velit! Molestiae, repellendus totam.
+                            <?= $faq['faq_desc'] ?>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Lorem ipsum dolor sit ?
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni
-                            mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione
-                            nemo velit! Molestiae, repellendus totam.w.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Lorem ipsum dolor sit ?
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni
-                            mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione
-                            nemo velit! Molestiae, repellendus totam..
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingFour">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            Lorem ipsum dolor sit ?
-                        </button>
-                    </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni
-                            mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione
-                            nemo velit! Molestiae, repellendus totam..
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingFive">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                            Lorem ipsum dolor sit ?
-                        </button>
-                    </h2>
-                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni
-                            mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione
-                            nemo velit! Molestiae, repellendus totam..
-                        </div>
-                    </div>
-                </div>
-
+                <?php endwhile ?>
+            </div>
+            <!-- ADD FAQ -->
+            <div class="row justify-content-center align-items-center" style="margin-top:10px;">
+                <button class="btn btn-primary" style="width:40px;height:40px" data-bs-toggle="modal" data-bs-target="#addFaqModal"><i class="fa-solid fa-plus"></i></button>
             </div>
         </div>
     </section>
+    <!-- ADD FAQ MODAL -->
+    <div class="modal fade" id="addFaqModal" tabindex="-1" aria-labelledby="faqModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="faqModalLabel">Add Faq</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form id="formAddFaq">
+                    <div class="mb-3">
+                        <label for="faqTitle" class="form-label">Title :</label>
+                        <input type="text" class="form-control" name="faq_title" required id="faqTitle" aria-describedby="faqTitle">
+                    </div>
+                    <div class="mb-3">
+                        <label for="faq_desc" class="form-label">Content : </label>
+                        <textarea type="text" name="faq_desc" class="form-control" id="faq_desc" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add <i class="fa-solid fa-plus"></i></button>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL EDIT FAQ -->
+    <div class="modal fade" id="editFaqModal" tabindex="-1" aria-labelledby="editFaqLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editFaqLabel">Edit Faq</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form id="formEditFaq">
+                    <div class="mb-3">
+                        <label for="faqTitle" class="form-label">Title :</label>
+                        <input type="text" class="form-control" name="faq_title" required id="faqTitle" aria-describedby="faqTitle">
+                    </div>
+                    <div class="mb-3">
+                        <label for="faq_desc" class="form-label">Content : </label>
+                        <textarea type="text" name="faq_desc" class="form-control" id="faq_desc" required></textarea>
+                    </div> 
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary saveEditFaq">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <section class="footer-section">
         <div class="container-fluid grid">
@@ -842,24 +916,6 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="homeImageLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="homeImageLabel">${title}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ${content}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Arrow Up -->
     <a class="arrow-container" href="#">
         <div class="arrow">
@@ -883,8 +939,9 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     <script src="../script/homepage/blog.js"></script>
     <script src="../script/homepage/testimonials.js"></script>
     <!-- ajax -->
-    <script src="script/ajax.js">
-    </script>
+    <script src="script/ajax.js"></script>
+    <!-- modal Description Stats JS -->
+    <script src="../script/homepage/descStats.js"></script>
 </body>
 
 </html>

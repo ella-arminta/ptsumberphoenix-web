@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    // UPDATE FIELDS
     var inputField =  `<textarea type="text" class="inputEdit"></textarea>
     <button type="button" class="btn btn-primary yes">
         <i class="fa-solid fa-check"></i>
@@ -104,7 +105,7 @@ $(document).ready(function(){
     $('.delClient').on('click',function(){
         var imgIndex = $(this).attr('del-target');
         $.ajax({
-            type: "post",
+            type: "POST",
             url: "api/home/delClient.php",
             data: {
                 index:imgIndex
@@ -132,9 +133,6 @@ $(document).ready(function(){
         });
     })
     // ADD CLIENTS
-    // <!-- client/toyota.png -->
-    // <!-- client/AHM.png -->
-    // <!-- client/rhm.png -->
     function clientDiModal(index,logo,name){
         return `<div class="row justify-content-center align-items-center  clientRow" row-index="`+index+`" style="margin-left:30px">
                     <div class="col-8"><img class="imgClient" src="../src/`+logo+`" style="width:80%" alt="`+name+`"></div>
@@ -177,5 +175,144 @@ $(document).ready(function(){
             }
         })
     })
+
+    // EDIT STATS
+    $('.editStats').click(function(){
+        $.ajax({
+            type: "POST",
+            url: "api/home/editStats.php",
+            data: $('#formStatsEdit').serialize(),
+            success: function (response) {
+                if(response == 'success'){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Statistics Updated!'
+                    }).then(function() {
+                        location.reload();
+                    });
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to edit statistics',
+                        text: response,
+                    })
+                }
+            }
+        });
+    })
+    // == FAQ ==
+    // ADD FAQ
+    $('#formAddFaq').on('submit',function(e){
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "api/home/addFaq.php",
+            data: $(this).serialize(),
+            success: function (response) {
+                if(response == 'success'){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'New Faq Added!'
+                    }).then(function() {
+                        location.reload();
+                    });
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to add faq',
+                        text: response,
+                    })
+                }
+            }
+        });
+    })
+    // DELETE FAQ
+    $('.delFaq').on('click',function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "api/home/delFaq.php",
+                    data: {
+                        id: $(this).attr('target')
+                    },
+                    dataType: "dataType",
+                    success: function (response) {
+                    }
+                });
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Deleted!',
+                    text: 'The Faq has been deleted.'
+                }).then(function() {
+                    location.reload();
+                });
+                
+               
+            }
+          })
+    })
+    var idFaq=0;
+    // EDIT FAQ BUTTON
+    $('.editFaqButton').click(function(){
+        var id = $(this).attr('target')
+        idFaq = id
+        $.ajax({
+            type: "POST",
+            url: "api/home/getFaq.php",
+            data: {
+                faq_id:id
+            },
+            success: function (response) {
+                response = JSON.parse(response);
+                if(response[2] == 'success'){
+                    $('#editFaqModal #faqTitle').val(response[0])
+                    $('#editFaqModal #faq_desc').val(response[1])
+                }
+                
+            }
+        });
+    })
+      // SAVE EDIT FAQ
+      $('.saveEditFaq').click(function(){
+        $.ajax({
+            type: "POST",
+            url: "api/home/editFaq.php",
+            data: {
+                id : idFaq,
+                title: $('#editFaqModal #faqTitle').val(),
+                desc: $('#editFaqModal #faq_desc').val()
+            },
+            success: function (response) {
+                if(response == 'success'){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Faq Edited!'
+                    }).then(function() {
+                        location.reload();
+                    });
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to edit faq',
+                        text: response,
+                    })
+                }
+            }
+        });
+    })
+   
     
 })
