@@ -549,43 +549,93 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></h1>
             <p class="paragraph description" col="team_sub_title"><?= getData('team_sub_title',$conn)?> <button
                     type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
-
+            <!-- ADD EMPLOYEE BUTTON -->
+            <div class="row justify-content-center align-items-center" style="margin-top:10px;">
+                <button class="btn btn-primary" style="width:40px;height:40px" data-bs-toggle="modal" data-bs-target="#addEmpModal"><i class="fa-solid fa-plus"></i></button>
+            </div>
             <div class="team-container grid">
                 <?php
-                if (isset($team)) {
-                    while ($row_team = mysqli_fetch_array($team)) {
-                        echo '
-                            <div class="team-content">
-                                <img src="./'.$row_team['image'].'" alt="">
-                                <div class="team-content-social-media">
-                                    <div class="icon-container">
-                                        <a href="#" class="fa-brands fa-instagram"></a>
-                                    </div>
-                                    <div class="icon-container">
-                                        <a href="#" class="fa-brands fa-linkedin"></a>
-                                    </div>
-                                    <div class="icon-container">
-                                        <a href="#" class="fa-brands fa-facebook"></a>
-                                    </div>
-                                    <div class="icon-container">
-                                        <a href="#" class="fa-brands fa-twitter"></a>
-                                    </div>
-                                </div>
-                                <div class="team-content-information">
-                                    <div class="team-content-wrapper">
-                                        <div class="sub-headings team-name">'.$row_team['name'].'</div>
-                                        <div class="paragraph team-title">'.$row_team['position'].'</div>
-                                    </div>
-                                </div>
-                            </div>
-                        ';
-                    }
-                }
+                    $stmt = $conn->prepare('SELECT * FROM employees');
+                    $stmt->execute();
+                    while($emp = $stmt->fetch()):
                 ?>
+                <div class="team-content">
+                    <img src="../<?= $emp['emp_img'] ?>" alt="">
+                    <div class="team-content-social-media">
+                        <div class="icon-container">
+                            <a href="<?= $emp['emp_insta']?>" class="fa-brands fa-instagram"></a>
+                        </div>
+                        <div class="icon-container">
+                            <a href="<?= $emp['emp_linkedin']?>" class="fa-brands fa-linkedin"></a>
+                        </div>
+                        <div class="icon-container">
+                            <a href="<?= $emp['emp_facebook']?>" class="fa-brands fa-facebook"></a>
+                        </div>
+                        <div class="icon-container">
+                            <a href="<?= $emp['emp_twitter']?>" class="fa-brands fa-twitter"></a>
+                        </div>
+                    </div>
+                    <div class="team-content-information">
+                        <div class="team-content-wrapper">
+                            <div class="sub-headings team-name"><?= $emp['emp_name'] ?></div>
+                            <div class="paragraph team-title"><?= $emp['emp_position'] ?> <!-- delete button faq --></div>
+                            
+                        </div>
+                        <button class="btn btn-dark delEmp" style="width:40px;height:40px;margin-left:20%;" target="<?= $emp['emp_id'] ?>"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                </div>
+                <?php endwhile ?>
+                
             </div>
         </div>
     </section>
-
+    <!-- ADD EMP MODAL -->
+    <div class="modal fade" id="addEmpModal" tabindex="-1" aria-labelledby="empModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="empModalLabel">Add Employee</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form id="formAddEmp" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Employee Name :</label>
+                        <input type="text" class="form-control" name="emp-name" required id="emp-name" aria-describedby="employee-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Employee Photo :</label>
+                        <input type="file" accept="image/*" class="form-control" name="emp-img" required id="emp-img" aria-describedby="employee-photo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Employee Position : </label>
+                        <input type="text" class="form-control" name="emp-position" required id="emp-position" aria-describedby="emp-position">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Employee Insta : </label>
+                        <input type="text" class="form-control" name="emp-insta" required id="emp-insta" aria-describedby="emp-instagram">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Employee linkedin : </label>
+                        <input type="text" class="form-control" name="emp-linkedin" required id="emp-linkedin" aria-describedby="emp-linkedin">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Employee facebook : </label>
+                        <input type="text" class="form-control" name="emp-facebook" required id="emp-facebook" aria-describedby="emp-facebook">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Employee twitter : </label>
+                        <input type="text" class="form-control" name="emp-twitter" required id="emp-twitter" aria-describedby="emp-twitter">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add <i class="fa-solid fa-plus"></i></button>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Blog Section -->
     <section class="blog-section section-extra">
         <div class="slide-container swiper container-fluid">
@@ -815,13 +865,39 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
         </div>
     </div>
 
+    <!-- MODAL COMPANY LOGO -->
+    <div class="modal fade" id="logo" tabindex="-1" aria-labelledby="logoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:black" id="logoLabel">Edit Company Logo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" enctype="multipart/form-data" id="formlogo">
+                    <div class="modal-body">
+                        <img class="logoChange" src="../src/<?= getData('logo',$conn) ?>" alt=""
+                            style="width:100%">
+                        <input type='file' id="image" name="image" id="inputlogo" accept="image/*" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary saveImage">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <section class="footer-section">
         <div class="container-fluid grid">
             <div class="company-information">
                 <div class="company-logo">
-                    <img src="../src/logo.png" alt="">
+                    <img src="../src/<?= getData('logo',$conn) ?>" id="company-logo" alt="">
+                    <button class="btn btn-danger updateLogo" data-bs-toggle="modal" data-bs-target="#logo"><i class="fa-solid fa-pencil"></i></button>
                 </div>
+
+                
+
                 <div class="company-address">
                     <p class="paragraph" col="address"><?= getData('address',$conn)?> <button type="button"
                             class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>

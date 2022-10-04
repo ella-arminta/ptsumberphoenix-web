@@ -247,7 +247,6 @@ $(document).ready(function(){
                     data: {
                         id: $(this).attr('target')
                     },
-                    dataType: "dataType",
                     success: function (response) {
                     }
                 });
@@ -285,7 +284,7 @@ $(document).ready(function(){
         });
     })
       // SAVE EDIT FAQ
-      $('.saveEditFaq').click(function(){
+    $('.saveEditFaq').click(function(){
         $.ajax({
             type: "POST",
             url: "api/home/editFaq.php",
@@ -312,6 +311,106 @@ $(document).ready(function(){
                 }
             }
         });
+    })
+    // UPDATE LOGO
+    $("#formlogo").on('submit',function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: "api/home/updateLogo.php",
+            type: "POST",
+            data:  new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(response){
+                response = JSON.parse(response)
+                if(response[0]=='success'){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Logo Updated'
+                    })
+                    $('img.logoChange').attr('src','../src/'+response[1])
+                    $('#company-logo').attr('src',"../src/"+response[1])  
+                } else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed Uploading file',
+                        text: response,
+                    })
+                }
+            },        
+            });
+    });
+    // add employee
+    $('#formAddEmp').on('submit',function(e){
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "api/home/addEmp.php",
+            data:  new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function (response) {
+                if(response == 'success'){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Employee has been added to team'
+                    }).then(function() {
+                        location.reload();
+                    });
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed Uploading Team mate',
+                        text: response,
+                    })
+                }
+            }
+        });
+    })
+    // DELETE EMPLOYEE
+    $('.delEmp').click(function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "api/home/delEmp.php",
+                    data: {
+                        id: $(this).attr('target')
+                    },
+                    success: function (response) {
+                        if(response == 'success'){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Deleted!',
+                                text: 'The employee has been deleted.'
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Failed Uploading Team mate',
+                                text: response,
+                            })
+                        }
+                    }
+                });
+               
+            }
+          })
     })
    
     
