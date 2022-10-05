@@ -1,3 +1,8 @@
 <?php
-header('Location: ./login.php');
+if(!isset($_SESSION['admin_id'])){
+    header('Location: ./login.php');
+}else{
+    header('Location: ./home.php');
+}
+
 ?>

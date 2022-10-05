@@ -1,0 +1,22 @@
+.btn-primary[data-bs-toggle="modal"]{
+    width: 40px;
+    height: 40px;
+}
+.accordion-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.accordion-header .btn-danger{
+    margin-right: 10px;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+}
+.catButton,.subButton{
+    width:130px;
+}
+.modal-body{
+    padding-left:35px;
+    padding-right:35px;
+}

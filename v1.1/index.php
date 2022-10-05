@@ -1,53 +1,18 @@
 <?php
-include "./php/connect.php";
-
-// $id = 1;
-// $sql = "SELECT * from home WHERE login_id = '$id'";
-// $home = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM about WHERE login_id = '$id'";
-// $about = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM business_fields WHERE login_id = '$id'";
-// $business_fields = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM business_fields_information WHERE login_id = '$id'";
-// $business_fields_info = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM why_us WHERE login_id = '$id'";
-// $why_us = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM why_us_content WHERE login_id = '$id'";
-// $why_us_content = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM statistics WHERE login_id = '$id'";
-// $statistics = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM team WHERE login_id = '$id'";
-// $team = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM team_info WHERE login_id = '$id'";
-// $team_info = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM testimonial WHERE login_id = '$id' AND display = '1'";
-// $testimonial = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM testimonial_info WHERE login_id = '$id'";
-// $testimonial_info = mysqli_query($conn, $sql);
-
-// if (isset($home) && isset($about) && isset($business_fields_info) && isset($why_us) && isset($team_info) && isset($testimonial_info)) {
-//     $row_home = mysqli_fetch_array($home);
-//     $row_about = mysqli_fetch_array($about);
-//     $row_business_fields_info = mysqli_fetch_array($business_fields_info);
-//     $row_why_us = mysqli_fetch_array($why_us);
-//     $row_team_info = mysqli_fetch_array($team_info);
-//     $row_testimonial_info = mysqli_fetch_array($testimonial_info);
-// }
+include "admin/api/connect.php";
+function getData($fiturNama,$conn){
+    $stmt = $conn->prepare('SELECT * FROM company_profile where fitur_name =? ');
+    $stmt->execute([$fiturNama]);
+    $temp = $stmt->fetch();
+    $data = $temp['fitur_data'];
+    return $data;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -82,154 +47,80 @@ include "./php/connect.php";
 
     <title>PT Sumber Phoenix Makmur | Chemicals Specialty</title>
 </head>
+
 <body>
-    
+
     <!-- Navbar -->
     <?php include 'includes/navbar.php' ?>
-    <!-- Home Section Page -->
-    <?php
-    if (isset($row_home)) {
-        echo '
-            <section class="home-section" style="background-image: url(./'.$row_home['home_image'].')">
-                <div class="container-fluid">
-                    <div class="home-wrapper">
-                        <h1 class="title">'.$row_home['title'].'</h1>
-                        <p class="paragraph">'.$row_home['sub_title'].'</p>
-                        <button class="custom-button btn product" type="button">Our Products</button>
-                    </div> 
-                </div>
-            </section>
-        ';
-    } else {
-        echo '
-            <section class="home-section" style="background-image: url(./src/background.jpg)">
-                <div class="container-fluid">
-                    <div class="home-wrapper">
-                        <h1 class="title">Are You Looking For A Great Product And Solution ?</h1>
-                        <p class="paragraph">We provide products to suit your needs to support your business. To find out more, click the button below</p>
-                        <button class="custom-button btn product" type="button">Our Products</button>
-                    </div>
-                </div>
-            </section>
-        ';
-    }
-    ?>
 
+    <!-- Home Section Page -->
+    <section class="home-section homeImageChange"
+        style="background-image: url('<?php echo getData('home_image',$conn) ?>')">
+        <div class="container-fluid">
+            <div class="home-wrapper">
+                <h1 class="title"><?php echo getData('home_title',$conn) ?> </h1>
+                <p class="paragraph"><?php echo getData('home_desc',$conn) ?> </p>
+                <button class="custom-button btn product" type="button">Our Products</button>
+            </div>
+        </div>
+    </section>
     <!-- Clients -->
     <section class="client-section">
         <div class="container-fluid">
             <div class="client-wrapper slider">
-                <div class="slide"><img src="./src/client/agres.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/AHM.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/buhler.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/ct-logistic.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/frigel.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/namsiang-group.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/rhm.png" alt="client"></div>
-                <div class="slide"><img src="./src/client/toyota.png" alt="client"></div>
+                <?php 
+                    $stmt = $conn->prepare('SELECT * from clients');
+                    $stmt->execute();
+                    while($client = $stmt->fetch()):
+                 ?>
+                <div class="slide"><img src="src/<?= $client['client_logo'] ?>" alt="<?= $client['client_name'] ?>"></div>
+                <?php endwhile; ?>
             </div>
         </div>
     </section>
-
     <!-- About Us -->
     <section class="about-section diagonal" id="about">
         <div class="container-fluid diagonal-content grid">
-            <?php
-            if (isset($row_about)) {
-                echo '
-                    <div class="about-information">
-                        <div class="about-information-wrapper">
-                            <h2 class="heading">'.$row_about['title'].'</h2>
-                            <p class="paragraph">'.$row_about['description'].'</p>
-                            <div class="button-container-wrapper">
-                                <button class="black-button btn contact" type="button">
-                                    Contact Us
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
+            <div class="about-information">
+                <div class="about-information-wrapper">
+                    <h2 class="heading" ><?= getData('who_title',$conn) ?></h2>
+                    <p class="paragraph" ><?= getData('who_desc',$conn)?> </p>
+                    <div class="button-container-wrapper">
+                        <button class="black-button btn contact" type="button">
+                            Contact Us
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
                     </div>
-                    <div class="about-features 1">
-                        <div class="about-features-wrapper">
-                            <div class="features 1">
-                                <i class="fa-solid fa-book"></i>
-                                <h3 class="sub-heading">History</h3>
-                                <p class="paragraph">'.$row_about['history'].'</p>
-                            </div>
-                            <div class="features 2">
-                                <i class="fa-solid fa-clock"></i>
-                                <h3 class="sub-heading">Experience</h3>
-                                <p class="paragraph">'.$row_about['experience'].'</p>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="about-features 1">
+                <div class="about-features-wrapper">
+                    <div class="features 1">
+                        <i class="fa-solid fa-book"></i>
+                        <h3 class="sub-heading">History</h3>
+                        <p class="paragraph"><?=getData('history',$conn)?></p>
                     </div>
-                    <div class="about-features 2">
-                        <div class="about-features-wrapper">
-                            <div class="features 1">
-                                <i class="fa-solid fa-lightbulb"></i>
-                                <h3 class="sub-heading">Philosophy</h3>
-                                <p class="paragraph">'.$row_about['philosophy'].'</p>
-                            </div>
-                            <div class="features 2">
-                                <i class="fa-solid fa-bullseye"></i>
-                                <h3 class="sub-heading">Purpose</h3>
-                                <p class="paragraph">'.$row_about['purpose'].'</p>
-                            </div>
-                        </div>
+                    <div class="features 2">
+                        <i class="fa-solid fa-clock"></i>
+                        <h3 class="sub-heading">Experience</h3>
+                        <p class="paragraph"><?=getData('experience',$conn)?></p>
                     </div>
-                ';
-            } else {
-                echo '
-                    <div class="about-information">
-                        <div class="about-information-wrapper">
-                            <h2 class="heading">Who Are We ?</h2>
-                            <p class="paragraph">
-                                We are one of the major players in the field of specialty 
-                                chemicals for rubber, coating, cable, die casting and other 
-                                industrial chemicals. We serve the needs of speciality 
-                                chemicals from industrial users, to create additional value 
-                                for the output product. We would like to provide our customers 
-                                high quality products and satisfied service.
-                            </p>
-                            <div class="button-container-wrapper">
-                                <button class="black-button btn contact" type="button">
-                                    Contact Us
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="about-features 2">
+                <div class="about-features-wrapper">
+                    <div class="features 1">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <h3 class="sub-heading">Philosophy</h3>
+                        <p class="paragraph"><?=getData('philosophy',$conn)?></p>
                     </div>
-                    <div class="about-features 1">
-                        <div class="about-features-wrapper">
-                            <div class="features 1">
-                                <i class="fa-solid fa-book"></i>
-                                <h3 class="sub-heading">History</h3>
-                                <p class="paragraph">PT.SUMBER PHOENIX MAKMUR was established in 2003 as importer of chemical raw materials and specials additives.</p>
-                            </div>
-                            <div class="features 2">
-                                <i class="fa-solid fa-clock"></i>
-                                <h3 class="sub-heading">Experience</h3>
-                                <p class="paragraph">Years of international partnership combined with knowledge of the Indonesian market give the company a competitive advantage in providing comprehensive specialty chemical supply programs and service.</p>
-                            </div>
-                        </div>
+                    <div class="features 2">
+                        <i class="fa-solid fa-bullseye"></i>
+                        <h3 class="sub-heading">Purpose</h3>
+                        <p class="paragraph"><?=getData('purpose',$conn)?></p>
                     </div>
-                    <div class="about-features 2">
-                        <div class="about-features-wrapper">
-                            <div class="features 1">
-                                <i class="fa-solid fa-lightbulb"></i>
-                                <h3 class="sub-heading">Philosophy</h3>
-                                <p class="paragraph">The company\'s business philosophy is Customer Satisfaction is Our Priority, and Creating Value for the Customer.</p>
-                            </div>
-                            <div class="features 2">
-                                <i class="fa-solid fa-bullseye"></i>
-                                <h3 class="sub-heading">Purpose</h3>
-                                <p class="paragraph">PT.SUMBER PHOENIX MAKMUR will continuously strive to develope complete product lines, improves its service, and create more value for its customers and suppliers.</p>
-                            </div>
-                        </div>
-                    </div>
-                ';
-            }
-            ?>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -237,19 +128,8 @@ include "./php/connect.php";
     <section class="business-fields-section section-extra" id="fields">
         <div class="container-fluid">
             <div class="business-fields-information">
-                <?php
-                if (isset($row_business_fields_info)) {
-                    echo '
-                        <h1 class="heading underline">'.$row_business_fields_info['title'].'</h1>
-                        <p class="paragraph">'.$row_business_fields_info['description'].'</p>
-                    ';
-                } else {
-                    echo '
-                        <h1 class="heading underline">Business Fields</h1>
-                        <p class="paragraph">We Provide so much product to distributed</p>
-                    ';
-                }
-                ?>
+                <h1 class="heading underline" ><?=getData('fields_title',$conn)?></h1>
+                <p class="paragraph"><?=getData('fields_desc',$conn)?></p>
             </div>
 
             <div class="business-fields-content grid">
@@ -292,47 +172,49 @@ include "./php/connect.php";
     <!-- Why Us -->
     <section class="why-us-section diagonal" id="why">
         <div class="container-fluid diagonal-content">
-            <?php
-            if (isset($row_why_us)) {
-                echo '
-                    <div class="text-center info">
-                        <h2 style="color: white;">Why<span style="color: #FFA600;"><strong>&nbsp;Us ?</strong></span></h2>
-                        <p class="d-inline-block" style="width: 50%; color: white;"><strong>'.$row_why_us['description'].'</strong><br></p>
-                    </div>
-                ';
-            } else {
-                echo '
-                    <div class="text-center info">
-                        <h2 style="color: white;">Why<span style="color: #FFA600;"><strong>&nbsp;Us ?</strong></span></h2>
-                        <p class="d-inline-block" style="width: 50%; color: white;"><strong>Customer Satisfaction is Our Priority!</strong><br></p>
-                    </div>
-                ';
-            }
-            ?>
+            <div class="text-center info">
+                <h2 style="color: white;">Why<span style="color: #FFA600;"><strong>&nbsp;Us ?</strong></span></h2>
+                <p class="d-inline-block" style="width: 50%; color: white;">
+                    <strong><?= getData('why_desc',$conn)?></strong><br>
+                </p>
+            </div>
             <div class="row">
-
-                <?php
-                    $icon_list = array('fas fa-user-friends', 'fas fa-thumbs-up', 'fas fa-phone', 'fas fa-warehouse');
-                    $index = 0;
-                    if (isset($why_us_content)) {
-                        while ($row_why_us_content = mysqli_fetch_array($why_us_content)) {
-                            echo '
-                                <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                                    <div class="text-center icon-box">
-                                        <div class="icon">
-                                            <i class="'.$icon_list[$index].'" style="margin-bottom: 15px;"></i>
-                                            <h4 class="title">'.$row_why_us_content['title'].'</h4>
-                                            <p class="description">'.$row_why_us_content['description'].'<br></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ';
-
-                            $index++;
-                        }
-                    }
-                ?>
-
+                <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="text-center icon-box">
+                        <div class="icon">
+                            <i class="fas fa-user-friends" style="margin-bottom: 15px;"></i>
+                            <h4 class="title"><?= getData('why_us_title1',$conn) ?></h4>
+                            <p class="description"><?= getData('why_us_desc1',$conn) ?><br></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="text-center icon-box">
+                        <div class="icon">
+                            <i class="fas fa-thumbs-up" style="margin-bottom: 15px;"></i>
+                            <h4 class="title"><?= getData('why_us_title2',$conn) ?></h4>
+                            <p class="description"><?= getData('why_us_desc2',$conn) ?><br> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="text-center icon-box">
+                        <div class="icon">
+                            <i class="fas fa-phone" style="margin-bottom: 15px;"></i>
+                            <h4 class="title"><?= getData('why_us_title3',$conn) ?> </h4>
+                            <p class="description"><?= getData('why_us_desc3',$conn) ?><br></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="text-center icon-box">
+                        <div class="icon">
+                            <i class="fas fa-warehouse" style="margin-bottom: 15px;"></i>
+                            <h4 class="title" ><?= getData('why_us_title4',$conn) ?></h4>
+                            <p class="description"><?= getData('why_us_desc4',$conn) ?><br></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -341,29 +223,73 @@ include "./php/connect.php";
     <section class="update-section section-extra" id="update">
         <div class="container-fluid">
             <div class="company-statistic-data grid">
-                <?php
-                if (isset($statistics)) {
-                    $icon = array('fa-solid fa-face-smile', 'fa-solid fa-screwdriver-wrench', 'fa-solid fa-calendar-days', 'fa-solid fa-user-group');
-                    $index = 0;
-                    while($row_statistics = mysqli_fetch_array($statistics)) {
-                        echo '
-                            <div class="statistic-data '.$row_statistics['statistics_id'].'" data-bs-toggle="modal" data-bs-target="#modal">
-                                <div class="statistic-data-wrapper">
-                                    <div class="icon-container">
-                                        <i class="'.$icon[$index].'"></i>
-                                    </div>
-                                    <div class="statistic-data-number" data-target="'.$row_statistics['total'].'">0</div>
-                                    <p class="statistic-data-category paragraph">'.$row_statistics['title'].'</p>
-                                    <p class="statistic-data-content paragraph" hidden>'.$row_statistics['content'].'</p>
-                                </div>
-                            </div>
-                        ';
+                <!-- Update Statistics -->
+                <div class="statistic-data 1" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="statistic-data-wrapper">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-face-smile"></i>
+                        </div>
+                        <div class="statistic-data-number" data-target="<?= getData('statistics_total1',$conn) ?>">0
+                        </div>
+                        <p class="statistic-data-category paragraph"><?= getData('statistics_title1',$conn) ?></p>
+                        <p class="statistic-data-content paragraph" hidden><?= getData('statistics_desc1',$conn) ?></p>
+                    </div>
+                </div>
 
-                        $index++;
-                    }
-                }
-                ?>
+                <div class="statistic-data 2" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="statistic-data-wrapper">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <div class="statistic-data-number" data-target="<?= getData('statistics_total2',$conn) ?>">0
+                        </div>
+                        <p class="statistic-data-category paragraph"><?= getData('statistics_title2',$conn) ?></p>
+                        <p class="statistic-data-content paragraph" hidden><?= getData('statistics_desc2',$conn) ?></p>
+                    </div>
+                </div>
+                <div class="statistic-data 3" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="statistic-data-wrapper">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <div class="statistic-data-number" data-target="<?= getData('statistics_total3',$conn) ?>">0
+                        </div>
+                        <p class="statistic-data-category paragraph"><?= getData('statistics_title3',$conn) ?></p>
+                        <p class="statistic-data-content paragraph" hidden><?= getData('statistics_desc3',$conn) ?></p>
+                    </div>
+                </div>
+                <div class="statistic-data 4" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="statistic-data-wrapper">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <div class="statistic-data-number" data-target="<?= getData('statistics_total4',$conn) ?>">0
+                        </div>
+                        <p class="statistic-data-category paragraph"><?= getData('statistics_title4',$conn) ?></p>
+                        <p class="statistic-data-content paragraph" hidden><?= getData('statistics_desc4',$conn) ?></p>
+                    </div>
+                </div>
             </div>
+            <!-- Modal Description Stats -->
+            <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="homeImageLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title statsTitle" id="homeImageLabel">${title}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body statsBody">
+                            ${content}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- COMPANY UPDATES -->
             <div class="company-updates">
                 <div class="company-updates-navigation">
                     <div class="navigation-item 0 active">
@@ -461,51 +387,40 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     <!-- Team Section -->
     <section class="team-section diagonal" id="team">
         <div class="container-fluid diagonal-content">
-            <?php
-            if (isset($row_team_info)) {
-                echo '
-                    <h1 class="heading underline">'.$row_team_info['title'].'</h1>
-                    <p class="paragraph description">'.$row_team_info['sub_title'].'</p>
-                ';
-            } else {
-                echo '
-                    <h1 class="heading underline">Team</h1>
-                    <p class="paragraph description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur molestiae nisi laboriosam quia mollitia commodi eos quas harum asperiores id distinctio nostrum exercitationem in earum, dicta dolor sint aut odio.</p>
-                ';
-            }
-            ?>
+
+            <h1 class="heading underline"><?= getData('team_title',$conn)?> </h1>
+            <p class="paragraph description" ><?= getData('team_sub_title',$conn)?></p>
             <div class="team-container grid">
                 <?php
-                if (isset($team)) {
-                    while ($row_team = mysqli_fetch_array($team)) {
-                        echo '
-                            <div class="team-content">
-                                <img src="./'.$row_team['image'].'" alt="">
-                                <div class="team-content-social-media">
-                                    <div class="icon-container">
-                                        <a href="#" class="fa-brands fa-instagram"></a>
-                                    </div>
-                                    <div class="icon-container">
-                                        <a href="#" class="fa-brands fa-linkedin"></a>
-                                    </div>
-                                    <div class="icon-container">
-                                        <a href="#" class="fa-brands fa-facebook"></a>
-                                    </div>
-                                    <div class="icon-container">
-                                        <a href="#" class="fa-brands fa-twitter"></a>
-                                    </div>
-                                </div>
-                                <div class="team-content-information">
-                                    <div class="team-content-wrapper">
-                                        <div class="sub-headings team-name">'.$row_team['name'].'</div>
-                                        <div class="paragraph team-title">'.$row_team['position'].'</div>
-                                    </div>
-                                </div>
-                            </div>
-                        ';
-                    }
-                }
+                    $stmt = $conn->prepare('SELECT * FROM employees');
+                    $stmt->execute();
+                    while($emp = $stmt->fetch()):
                 ?>
+                <div class="team-content">
+                    <img src="./<?= $emp['emp_img'] ?>" alt="">
+                    <div class="team-content-social-media">
+                        <div class="icon-container">
+                            <a href="<?= $emp['emp_insta']?>" class="fa-brands fa-instagram"></a>
+                        </div>
+                        <div class="icon-container">
+                            <a href="<?= $emp['emp_linkedin']?>" class="fa-brands fa-linkedin"></a>
+                        </div>
+                        <div class="icon-container">
+                            <a href="<?= $emp['emp_facebook']?>" class="fa-brands fa-facebook"></a>
+                        </div>
+                        <div class="icon-container">
+                            <a href="<?= $emp['emp_twitter']?>" class="fa-brands fa-twitter"></a>
+                        </div>
+                    </div>
+                    <div class="team-content-information">
+                        <div class="team-content-wrapper">
+                            <div class="sub-headings team-name"><?= $emp['emp_name'] ?></div>
+                            <div class="paragraph team-title"><?= $emp['emp_position'] ?></div>      
+                        </div>
+                    </div>
+                </div>
+                <?php endwhile ?>
+                
             </div>
         </div>
     </section>
@@ -523,7 +438,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -535,7 +451,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -547,7 +464,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -559,7 +477,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -570,7 +489,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -582,7 +502,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         </div>
                         <div class="blog-title-content-container">
                             <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
+                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. </h1>
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
@@ -597,22 +518,10 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     <!-- Testimonial Section -->
     <section class="testimonial-section diagonal">
         <div class="slide-container swiper container-fluid diagonal-content">
-            
-            <?php
-            if (isset($row_testimonial_info)) {
-                echo '
-                    <div class="intro heading underline">'.$row_testimonial_info['title'].'</div>
-                    <p class="intro paragraph">'.$row_testimonial_info['sub_title'].'</p>
-                    <div class="slide-content-1">
-                ';
-            } else {
-                echo '
-                    <div class="intro heading underline">Testimonials</div>
-                    <p class="intro paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta, deserunt dolore. Placeat corporis eos in veritatis modi nesciunt nihil earum minima a itaque commodi eligendi maxime, consequatur culpa cum nulla.</p>
-                    <div class="slide-content-1">
-                ';
-            }
-            ?>
+
+            <div class="intro heading underline"><?=getData('testi_title',$conn)?></div>
+            <p class="intro paragraph"><?=getData('testi_sub_title',$conn)?></p>
+            <div class="slide-content-1">
 
                 <div class="custom-card-wrapper swiper-wrapper">
 
@@ -657,70 +566,26 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
         <div class="container-fluid">
             <h2 class="heading underline">FREQUENTLY ASKED QUESTIONS</h2>
             <div class="accordion" id="accordionExample">
+                <?php
+                    $stmt=$conn->prepare('SELECT * FROM faq');
+                    $stmt->execute();
+                    while($faq = $stmt->fetch()):
+                ?>
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Lorem ipsum dolor sit ?
+                    <h2 class="accordion-header" id="heading-<?=$faq['faq_id']?>">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse-<?= $faq['faq_id'] ?>" aria-expanded="false" aria-controls="collapse-<?= $faq['faq_id'] ?>">
+                            <?= $faq['faq_thumbnail'] ?>
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapse-<?= $faq['faq_id'] ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?=$faq['faq_id']?>"
+                        data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione nemo velit! Molestiae, repellendus totam.
+                            <?= $faq['faq_desc'] ?>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Lorem ipsum dolor sit ?
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione nemo velit! Molestiae, repellendus totam.w.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Lorem ipsum dolor sit ?
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione nemo velit! Molestiae, repellendus totam..
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingFour">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            Lorem ipsum dolor sit ?
-                        </button>
-                    </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione nemo velit! Molestiae, repellendus totam..
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingFive">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                            Lorem ipsum dolor sit ?
-                        </button>
-                    </h2>
-                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione nemo velit! Molestiae, repellendus totam..
-                        </div>
-                    </div>
-                </div>
-
+                <?php endwhile ?>
             </div>
         </div>
     </section>
@@ -729,16 +594,19 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
         <div class="container-fluid grid">
             <div class="company-information">
                 <div class="company-logo">
-                    <img src="./src/logo.png" alt="">
+                    <img src="./src/<?= getData('logo',$conn) ?>" id="company-logo" alt="">
                 </div>
+
+                
+
                 <div class="company-address">
-                    <p class="paragraph">Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 15325</p>
+                    <p class="paragraph"><?= getData('address',$conn)?></p>
                 </div>
                 <div class="company-phone">
-                    <p class="paragraph"><strong>Phone: </strong>+62 21 5398 318</p>
+                    <p class="paragraph" ><strong>Phone: </strong><?= getData('phone',$conn) ?></p>
                 </div>
                 <div class="company-email">
-                    <p class="paragraph"><strong>Email: </strong>phoenix-spm@sumberphoenix.co.id</p>
+                    <p class="paragraph" ><strong>Email: </strong><?= getData('email',$conn) ?> </p>
                 </div>
             </div>
             <div class="useful-links">
@@ -789,7 +657,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
             </div>
             <div class="newsletter">
                 <h2 class="sub-heading underline">Join Our Newsletter</h2>
-                <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                <p class="paragraph"><?= getData('newsletter_desc',$conn)?> </p>
                 <div class="email-input">
                     <input type="email" placeholder="example@gmail.com">
                     <button class="custom-button btn" type="button">Subscribe</button>
@@ -821,24 +689,6 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">${title}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                ${content}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Arrow Up -->
     <a class="arrow-container" href="#">
         <div class="arrow">
@@ -846,10 +696,11 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
         </div>
     </a>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    
-    <script src="./script.js"></script>
-    <script src="./script/scroll.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+
+    <!-- <script src="./script/scroll.js"></script> -->
     <script src="./script/nav.js"></script>
     <script src="./script/number.js"></script>
     <script src="./script/modal.js"></script>
@@ -860,5 +711,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     <script src="./script/homepage/update.js"></script>
     <script src="./script/homepage/blog.js"></script>
     <script src="./script/homepage/testimonials.js"></script>
+    <!-- modal Description Stats JS -->
+    <script src="./script/homepage/descStats.js"></script>
 </body>
+
 </html>
