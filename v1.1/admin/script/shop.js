@@ -3,6 +3,10 @@ $(document).ready(function(){
     $('input#catCode').keyup(function(){
         $(this).val($(this).val().toUpperCase());
     });
+    // buat inputan ke upperCase setiap mengetik
+    $('input#proCode').keyup(function(){
+        $(this).val($(this).val().toUpperCase());
+    });
             
 
             $('.catButton').click(function(e){
@@ -106,6 +110,7 @@ $(document).ready(function(){
                             $('input#subCode').keyup(function(){
                                 $(this).val($(this).val().toUpperCase());
                             });
+                            
                     }
                 });
             })
@@ -147,6 +152,9 @@ $(document).ready(function(){
                         $('#formAddCat input').val('');
                         $('.delCatBut').unbind('click');
                         delCatButton();
+
+                        $('.category-item').unbind('click')
+                        subcategoryClick()
                     }else{
                         Swal.fire({
                             icon: 'error',
@@ -183,6 +191,9 @@ $(document).ready(function(){
                             text: 'New Subcategory Added!'
                         })
                         $('#formAddSub input').val('');
+                        // onclick subcategory
+                        $('.category-item').unbind('click')
+                        subcategoryClick()
                     }else{
                         Swal.fire({
                             icon: 'error',
@@ -283,5 +294,119 @@ $(document).ready(function(){
         })
     }
     delCatButton();
+
+    hasil='';
+    // add subcategories to post product
+    $('.addProduct').click(function(){
+        
+        $.ajax({
+            type: "POST",
+            url: "api/shop/getSub.php",
+            data: "",
+            success: function (response) {
+                response = JSON.parse(response);
+                hasil ="";
+                tot =0;
+                for (j = 0;j<response[3].length;j++){
+                    hasil +=`
+                        <label for="custServ" class="form-label">`+response[2][j]+`</label>
+                        <div class="subcheck-group">
+                    `
+                    for(i =0;i<response[3][j];i++){
+                        hasil+= `
+                        <div class="form-check">
+                            <input class="form-check-input" name="subs[]" type="checkbox" value="`+response[0][tot]+`" id="check-`+response[0][tot]+`">
+                            <label class="form-check-label" for="check-`+response[0][tot]+`">
+                                `+response[1][tot]+`
+                            </label>
+                        </div>
+                        `;
+                        tot += 1;
+                    }
+                    hasil += `</div>`;
+                }
+                
+                // $('.subcheck-group').html(hasil);
+                $('.getCategories').html(hasil)
+            }
+        });
+    })
+    // POST PRODUCT / ADD PRODUCT
+    $('#formAddProduct').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "api/shop/addProduct.php",
+            data:  new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function (response) {
+                if(response == 'success'){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Product posted!'
+                    }).then(function() {
+                        location.reload();
+                    });
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: response
+                    })
+                }
+            }
+        });
+        // location reload
+    })
+
+
+    // function get products
+    function getProducts(catCode){
+        
+        $.ajax({
+            type: "GET",
+            url: "api/shop/getProducts.php",
+            data:  {
+                catCode : catCode
+            },
+            success: function (response) {
+                response = JSON.parse(response)
+                if(response[0] == 'success'){
+                    //   getData Random
+                    if(response[1].length <= 0){
+                        $('.products-inner').html("<h1>No Product Found in this category</h1>")
+                        $('.loadMore').css('display','none');
+                        $('.Loader').css('display','none');
+                    }else{
+                        $('.products-inner').html(response[1])
+                        if(response[2] >= 9){
+                            $('.loadMore').css('display','block');
+                        }else{
+                            $('.loadMore').css('display','none');
+                        }
+                        $('.Loader').css('display','none');
+                    }
+                    
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: response[1]
+                    })
+                }
+            }
+        });
+    }
+    function subcategoryClick(){
+        $('.category-item').click(function(){
+            var subCode = $(this).attr('id')
+            getProducts(subCode)
+        })
+    }
+    subcategoryClick()
+    getProducts('random');
 
 })

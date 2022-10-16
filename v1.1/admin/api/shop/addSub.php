@@ -13,9 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $catId = $stmt->fetch();
         $catId = $catId['cat_id'];
 
-        // cek apakah sub_name udah ada
-        $stmt =$conn->prepare("SELECT * from subcategories where UPPER(sub_name)=?");
-        $stmt->execute([strtoupper($subName)]);
+        // cek apakah sub_name udah ada di category itu 
+        $stmt =$conn->prepare("SELECT * from subcategories where UPPER(sub_name)=? and cat_id = (SELECT cat_id from categories where cat_code=?)");
+        $stmt->execute([strtoupper($subName),$catCode]);
         if($stmt->rowCount() > 0){ // jika sub name udah ada
             $response[0] = 'Subcategory name is already used';
         }else{

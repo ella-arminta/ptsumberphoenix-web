@@ -120,7 +120,7 @@ function getData($fiturNama,$conn){
     </section>
     <!-- Modal Edit Clients -->
     <div class="modal fade" id="clientsModal" tabindex="-1" aria-labelledby="clientsModal" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Client List</h5>
@@ -395,7 +395,7 @@ function getData($fiturNama,$conn){
             </div>
             <!-- STATISTICS EDIT MODAL -->
             <div class="modal fade" id="statsModal" tabindex="-1" aria-labelledby="statsModal" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Stats List</h5>
@@ -589,9 +589,9 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
             </div>
         </div>
     </section>
-    <!-- ADD EMP MODAL -->
+    <!-- ADD EMPLOYEE MODAL -->
     <div class="modal fade" id="addEmpModal" tabindex="-1" aria-labelledby="empModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="empModalLabel">Add Employee</h1>

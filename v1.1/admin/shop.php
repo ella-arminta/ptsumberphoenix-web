@@ -1,7 +1,7 @@
 <?php
 include 'api/connect.php';
 if(!isset($_SESSION['admin_id'])){
-    header('Location : ./login.php');
+    header("Location: login.php");
 }
 ?>
 <!DOCTYPE html>
@@ -30,6 +30,10 @@ if(!isset($_SESSION['admin_id'])){
     <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/0e9fafd61c.js" crossorigin="anonymous"></script>
+
+    <!-- CKEDITOR buat description product-->
+    <script src="script/ckeditor/ckeditor.js"></script>
+    <script src="script/sample.js"></script>
 
     <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -126,93 +130,89 @@ if(!isset($_SESSION['admin_id'])){
                 </div>
             </div>
 
-            <!-- Prodyct -->
-            <div class="product-container row">
-                <div class="product-category-title">Rubber Industries - Agent</div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card" onclick="window.location.href='./single/product.html'">
-                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
-                            <img src="../src/product/product-dummy-1.png" class="w-100" />
+            <!-- MODAL ADD PRODUCT -->
+            <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="addProductModalLabel">Add Product</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <!-- <hr> -->
-                        <div class="card-body">
-                            <div class="product-title">Lorem Ipsum</div>
-                        </div>
+                        <form id="formAddProduct" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="proName" class="form-label">Product Name</label>
+                                        <input type="text" class="form-control" id="proName" name="proName" aria-describedby="productName" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="proCode" class="form-label">Product Code</label>
+                                        <input type="text" class="form-control" id="proCode" name="proCode" aria-describedby="productCode" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="proImg" class="form-label">Product Image</label>
+                                        <input type="file" accept="image/*" name="proImg" class="form-control" id="proImg" aria-describedby="productImage" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Product Description</label>
+                                        <div class="col-md-12">
+                                            <div class="adjoined-bottom">
+                                                <div class="grid-container">
+                                                    <div class="grid-width-100">
+                                                        <textarea id="editor" name="isi" required>
+                                                            
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <textarea class="form-control" rows="10" id="isi" name="isi"></textarea> -->
+                                        </div>
+                                    </div>  
+                                    <div class="mb-3">
+                                        <label for="proDelv" class="form-label">Delivery</label>
+                                        <input type="text" class="form-control" id="proDelv" name="proDelv" aria-describedby="productDelivery" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="custServ" class="form-label">Customer Service</label>
+                                        <input type="text" class="form-control" id="custServ" name="custServ" aria-describedby="customerService" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="getCategories">
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Post Product</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>  
+                        </form>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card" onclick="window.location.href='./single/product.html'">
-                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
-                            <img src="../src/product/product-dummy-1.png" class="w-100" />
+            <!-- Products -->
+            <div class="product-container">
+                <!-- ADD PRODUCT BUTTON -->
+                <button class="btn btn-warning addProduct" data-bs-toggle="modal" data-bs-target="#addProductModal" style="width:100%;height:100px;display:flex;justify-content:center;align-items:center"> <h4 style="margin-right:30px">ADD PRODUCT</h4> <i class="fa-solid fa-bag-shopping fa-2xl"></i></button>
+                <div class="product-category-title">Our Products</div>
+                <div class="products-inner row">
+                    <!-- <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card" onclick="window.location.href='./single/product.html'">
+                            <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
+                                <img src="../src/product/product-dummy-1.png" class="w-100" />
+                            </div>
+                            <hr>
+                            <div class="card-body">
+                                <div class="product-title">Lorem Ipsum</div>
+                            </div>
                         </div>
-                        <!-- <hr> -->
-                        <div class="card-body">
-                            <div class="product-title">Lorem Ipsum</div>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card" onclick="window.location.href='./single/product.html'">
-                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
-                            <img src="../src/product/product-dummy-1.png" class="w-100" />
-                        </div>
-                        <!-- <hr> -->
-                        <div class="card-body">
-                            <div class="product-title">Lorem Ipsum</div>
-                        </div>
-                    </div>
+                <!-- Loading Icon -->
+                <div class="loaderSvg" style="width:100%;display:flex;justify-content:center;margin-top:-30px">
+                    <div class="Loader"></div>
                 </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card" onclick="window.location.href='./single/product.html'">
-                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
-                            <img src="../src/product/product-dummy-1.png" class="w-100" />
-                        </div>
-                        <!-- <hr> -->
-                        <div class="card-body">
-                            <div class="product-title">Lorem Ipsum</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card" onclick="window.location.href='./single/product.html'">
-                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
-                            <img src="../src/product/product-dummy-1.png" class="w-100" />
-                        </div>
-                        <!-- <hr> -->
-                        <div class="card-body">
-                            <div class="product-title">Lorem Ipsum</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card" onclick="window.location.href='./single/product.html'">
-                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
-                            <img src="../src/product/product-dummy-1.png" class="w-100" />
-                        </div>
-                        <!-- <hr> -->
-                        <div class="card-body">
-                            <div class="product-title">Lorem Ipsum</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card" onclick="window.location.href='./single/product.html'">
-                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
-                            <img src="../src/product/product-dummy-1.png" class="w-100" />
-                        </div>
-                        <!-- <hr> -->
-                        <div class="card-body">
-                            <div class="product-title">Lorem Ipsum</div>
-                        </div>
-                    </div>
-                </div>
-
+                <!-- Load More Products Button -->
+                <button class="loadMore" style="display:none;">Load More</button>
             </div>
         </div>
     </section>
@@ -353,5 +353,9 @@ if(!isset($_SESSION['admin_id'])){
 
     <!-- jquery admin shop -->
     <script src="script/shop.js"></script>
+    <!-- ckeditor -->
+    <script>
+        initSample();
+    </script>
 </body>
 </html>
