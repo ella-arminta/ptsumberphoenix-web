@@ -30,10 +30,10 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="../product/product.php">Product</a>
+                        <a class="nav-link" aria-current="page" href="product.php">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="../update/update.php">Update</a>
+                        <a class="nav-link" aria-current="page" href="update.php">Update</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="addAdmin.php">add Admin</a>

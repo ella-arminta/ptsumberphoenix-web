@@ -38,16 +38,68 @@ if(!isset($_SESSION['admin_id'])){
     <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/e52db3bf8a.js" crossorigin="anonymous"></script>
+
     <title>PT Sumber Phoenix Makmur | Products</title>
 </head>
+<!-- auto complete css -->
+<style>
+    .autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+.autocomplete input {
+  /* border: 1px solid transparent; */
+  /* background-color: #f1f1f1; */
+  padding: 10px;
+  font-size: 16px;
+}
+.autocomplete input[type=text] {
+  /* background-color: #f1f1f1;
+  width: 100%; */
+}
+.autocomplete input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+</style>
 <body>
     
     <!-- Navbar -->
     <nav class="navbar active fixed-top navbar-expand-lg">
         <div class="paragraph">
-            <a href="../index.php">Home </a>
+            <a href="index.php">Home </a>
             <span>/</span> 
-            <a href="./product.html">Features </a>
+            <a href="./product.php">Features </a>
             <span>/</span>
             <strong class="product">Shop</strong>
         </div>
@@ -66,15 +118,20 @@ if(!isset($_SESSION['admin_id'])){
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto w-100 justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link paragraph" href="./product.html">Features</a>
+                        <a class="nav-link paragraph" href="./product.php">Features</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link paragraph" href="#">Shop</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link paragraph">
-                            <input type="text" placeholder="Search Here" class="search-bar">
-                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <!--Make sure the form has the autocomplete function switched off:-->
+                            <form autocomplete="off" action="/action_page.php" style="display:flex;justify-content:center;align-items:center;border:none;">
+                                <div class="autocomplete">
+                                    <input id="searchbar" type="text" name="search" onkeyup="searchProduct()"  class="search-bar" placeholder="Search Here" >
+                                </div>
+                                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            </form>
                         </a>
                     </li>
                     <a href="./contact.html"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a>
@@ -99,7 +156,7 @@ if(!isset($_SESSION['admin_id'])){
                     <!-- page CODE CATEGORY NYA -->
                     <!-- Category -->
                     <?php
-                        $stmt =$conn->prepare("SELECT * FROM categories");
+                        $stmt =$conn->prepare("SELECT * FROM categories where status = 1");
                         $stmt->execute();
                         while($cat = $stmt->fetch()):
                     ?>
@@ -114,7 +171,7 @@ if(!isset($_SESSION['admin_id'])){
                         <div id="collapse-<?= $cat['cat_code'] ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?= $cat['cat_code'] ?>" data-bs-parent="#accordionExample">
                             <div class="accordion-body <?= $cat['cat_code'] ?>">
                                 <?php
-                                    $stmt2 = $conn->prepare('SELECT * FROM subcategories where cat_id =?');
+                                    $stmt2 = $conn->prepare('SELECT * FROM subcategories where cat_id =? and status = 1');
                                     $stmt2->execute([$cat['cat_id']]);
                                     while($subcat = $stmt2->fetch()):
                                 ?>
@@ -196,7 +253,7 @@ if(!isset($_SESSION['admin_id'])){
                 <div class="product-category-title">Our Products</div>
                 <div class="products-inner row">
                     <!-- <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card" onclick="window.location.href='./single/product.html'">
+                        <div class="card" onclick="window.location.href='./single/product.php'">
                             <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
                                 <img src="../src/product/product-dummy-1.png" class="w-100" />
                             </div>
@@ -207,85 +264,20 @@ if(!isset($_SESSION['admin_id'])){
                         </div>
                     </div> -->
                 </div>
-                <!-- Loading Icon -->
-                <div class="loaderSvg" style="width:100%;display:flex;justify-content:center;margin-top:-30px">
-                    <div class="Loader"></div>
+                <!-- Loader -->
+                <div class="loader">
+                    <span class="loader__element"></span>
+                    <span class="loader__element"></span>
+                    <span class="loader__element"></span>
                 </div>
                 <!-- Load More Products Button -->
-                <button class="loadMore" style="display:none;">Load More</button>
+                <button class="btn btn-primary loadMore" get="" style="display:none;">Load More</button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <section class="footer-section">
-        <div class="container-fluid grid">
-            <div class="company-information">
-                <div class="company-logo">
-                    <img src="../src/logo.png" alt="">
-                </div>
-                <div class="company-address">
-                    <p class="paragraph">Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 15325</p>
-                </div>
-                <div class="company-phone">
-                    <p class="paragraph"><strong>Phone: </strong>+62 21 5398 318</p>
-                </div>
-                <div class="company-email">
-                    <p class="paragraph"><strong>Email: </strong>phoenix-spm@sumberphoenix.co.id</p>
-                </div>
-            </div>
-            <div class="useful-links">
-                <h2 class="sub-heading underline">Useful Links</h2>
-                <a class="footer-item" href="../index.php">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Home
-                </a>
-                <a class="footer-item" href="../index.php#about">
-                    <i class="fa-solid fa-angle-right"></i>
-                    About
-                </a>
-                <a class="footer-item" href="./contact.html">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Contact
-                </a>
-            </div>
-            <div class="business-fields useful-links">
-                <h2 class="sub-heading underline">Business Fields</h2>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Rubber Industries
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Plastic Industries
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Die Casting
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Coating And Ink Industries
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Acrylic Sheet
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Other Industries
-                </a>
-            </div>
-            <div class="newsletter">
-                <h2 class="sub-heading underline">Join Our Newsletter</h2>
-                <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                <div class="email-input">
-                    <input type="email" placeholder="example@gmail.com">
-                    <button class="custom-button btn" type="button">Subscribe</button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php include 'bottombar.php'  ?>
 
     <footer class="copyright-footer">
         <div class="container-fluid">
@@ -336,6 +328,10 @@ if(!isset($_SESSION['admin_id'])){
                                 <input type="text" class="form-control" name="catCode" placeholder="example : RI" id="catCode" required>
                                 <div id="catCodeInfo" class="form-text">Example : Rubber Industries -> RI</div>
                             </div>
+                            <div class="mb-3">
+                                <label for="catImg" class="form-label">Category Image</label>
+                                <input type="file" accept="image/*" class="form-control" name="catImg" id="catImg" required>
+                            </div>
                             <div style="display:flex;justify-content:center;flex-direction:column;width:100%;align-items:center">
                                 <button type="submit" class="btn btn-success" style="width:100px">Add</button>
                             </div>
@@ -356,6 +352,28 @@ if(!isset($_SESSION['admin_id'])){
     <!-- ckeditor -->
     <script>
         initSample();
+    </script>
+    <script>
+        function searchProduct(){
+            thisValue = $('#searchbar').val();
+            $.ajax({
+                type: "POST",
+                url: "api/shop/searchProduct.php",
+                data: {
+                    for :'autocomplete',
+                    val: thisValue
+                },
+                success: function (response) {
+                    response = JSON.parse(response)
+                    if(response[0] == 'success'){
+                        similarProducts = response[1];
+                    }
+                }
+            });
+            autocomplete(document.getElementById("searchbar"), similarProducts);
+        }
+        var similarProducts = [];
+
     </script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     // buat inputan ke upperCase setiap mengetik
     $('input#catCode').keyup(function(){
@@ -139,7 +140,10 @@ $(document).ready(function(){
             $.ajax({
                 type: "POST",
                 url: "api/shop/addCat.php",
-                data: $(this).serialize(),
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
                 success: function (response) {
                     response = JSON.parse(response);
                     if(response[0] == 'success'){
@@ -154,6 +158,7 @@ $(document).ready(function(){
                         delCatButton();
 
                         $('.category-item').unbind('click')
+                        $('.loadMore').unbind('click')
                         subcategoryClick()
                     }else{
                         Swal.fire({
@@ -257,7 +262,7 @@ $(document).ready(function(){
             e.preventDefault();
             Swal.fire({
                 title: 'Are you sure?',
-                text: "This category and all its subcategory will be deleted and cannot be revert.",
+                text: "This category and all its subcategory will be deleted.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#dc3545',
@@ -362,51 +367,361 @@ $(document).ready(function(){
         // location reload
     })
 
-
+    var products_id = [];
     // function get products
     function getProducts(catCode){
-        
+        $('.loader').css('display','flex');
+        proName = '';
+        if(catCode == 'byName'){
+            proName = $('#searchbar').val();
+        }
         $.ajax({
             type: "GET",
             url: "api/shop/getProducts.php",
             data:  {
-                catCode : catCode
+                catCode : catCode,
+                shown : JSON.stringify(products_id),
+                proName : proName
             },
             success: function (response) {
                 response = JSON.parse(response)
                 if(response[0] == 'success'){
+                    // card ini isi nya product_code,product_img,product_name,product_id
                     //   getData Random
                     if(response[1].length <= 0){
-                        $('.products-inner').html("<h1>No Product Found in this category</h1>")
+                        if(catCode == 'byName'){
+                            $('.products-inner').html("<h1>No Product Found</h1>")
+                        }else{
+                            $('.products-inner').html("<h1>No Product Found in this category</h1>")
+                        }
                         $('.loadMore').css('display','none');
-                        $('.Loader').css('display','none');
+                        $('.loader').css('display','none');
                     }else{
-                        $('.products-inner').html(response[1])
-                        if(response[2] >= 9){
+                        var cards ='';           
+                        if(catCode != 'random' || catCode == 'byName'){
+                            products_id = []
+                        }     
+                        for (let index = 0; index < response[1].length; index++) {
+                            
+                            product = response[1][index];
+                            icon = ''
+                            if(product.featured == 1){
+                                icon+= `<i class="fa-solid fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(0,'`+product.product_code+`')"></i>`;
+                            }else{
+                                icon+=`<i class="fa-regular fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(1,'`+product.product_code+`')"></i>`
+                            }
+                            if(product.best_seller == 1){
+                                icon+=`<i class="fa-solid fa-heart fa-xl" style="color:red" onclick="bestSeller(0,'`+product.product_code+`')"></i>`
+                            }else{
+                                icon+=`<i class="fa-regular fa-heart fa-xl" style="color:red" onclick="bestSeller(1,'`+product.product_code+`')"></i>`
+                            }
+                            cards += `
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card">
+                                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`'">
+                                        <img src="../`+product.product_img+`" class="w-100" />
+                                    </div>
+                                    
+                                    <div class="card-body">
+                                        <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`'">`+product.product_name+`</div>
+                                        <!-- star : feautured, love :best seller -->
+                                        <div>
+                                            <div style="float:left">
+                                                `+icon+`
+                                            </div>
+                                            <button style="float:right" class="btn btn-danger delProductBut" onclick="delProduct('`+product.product_code+`')" proCode="`+product.product_code+`">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `   
+                            products_id.push(product);
+                           
+                        }
+                        $('.products-inner').html(cards)
+                        if(response[2] > 0){
                             $('.loadMore').css('display','block');
                         }else{
                             $('.loadMore').css('display','none');
                         }
-                        $('.Loader').css('display','none');
+                        $('.loader').css('display','none');
                     }
                     
                 }else{
                     Swal.fire({
                         icon: 'error',
                         title: 'Error!',
-                        text: response[1]
+                        text: 'Something went Wrong please come back later'
                     })
                 }
+            },
+            error: function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Terjadi kesalahan, silahkan coba lagi.'
+                })
             }
         });
+        // console.log(JSON.stringify(products_id))
     }
     function subcategoryClick(){
         $('.category-item').click(function(){
             var subCode = $(this).attr('id')
+            products_id = [];
             getProducts(subCode)
+            
+            $('.loadMore').attr('get',subCode);
+        })
+        $('.loadMore').click(function(){
+            getProducts($(this).attr('get'));
         })
     }
     subcategoryClick()
     getProducts('random');
+    $('.loadMore').attr('get','randKedua');
+    
+    // search icon on clicl
+    $('.search-icon').click(function(){
+        getProducts('byName')
+    })
 
 })
+function delProduct(proCode){
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "This product will be deleted.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: 'gray',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "api/shop/delProduct.php",
+                data: {
+                    code:proCode
+                },
+                success: function (response) {
+                    if(response == 'success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted!',
+                            text: 'This Product has been deleted.'
+                        })
+                        location.reload();
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed!',
+                            text: 'Something went wrong, please try again a few moments later'
+                        })
+                    }
+                    
+                }
+            });
+        }
+    })
+
+}
+
+
+// autocomplete search
+function autocomplete(inp, arr) {
+    /*the autocomplete function takes two arguments,
+    the text field element and an array of possible autocompleted values:*/
+    var currentFocus;
+    /*execute a function when someone writes in the text field:*/
+    inp.addEventListener("input", function(e) {
+        var a, b, i, val = this.value;
+        /*close any already open lists of autocompleted values*/
+        closeAllLists();
+        if (!val) { return false;}
+        currentFocus = -1;
+        /*create a DIV element that will contain the items (values):*/
+        a = document.createElement("DIV");
+        a.setAttribute("id", this.id + "autocomplete-list");
+        a.setAttribute("class", "autocomplete-items");
+        /*append the DIV element as a child of the autocomplete container:*/
+        this.parentNode.appendChild(a);
+        /*for each item in the array...*/
+        for (i = 0; i < arr.length; i++) {
+          /*check if the item starts with the same letters as the text field value:*/
+          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            /*create a DIV element for each matching element:*/
+            b = document.createElement("DIV");
+            /*make the matching letters bold:*/
+            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+            b.innerHTML += arr[i].substr(val.length);
+            /*insert a input field that will hold the current array item's value:*/
+            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            /*execute a function when someone clicks on the item value (DIV element):*/
+                b.addEventListener("click", function(e) {
+                /*insert the value for the autocomplete text field:*/
+                inp.value = this.getElementsByTagName("input")[0].value;
+                /*close the list of autocompleted values,
+                (or any other open lists of autocompleted values:*/
+                closeAllLists();
+            });
+            a.appendChild(b);
+          }
+        }
+    });
+    /*execute a function presses a key on the keyboard:*/
+    inp.addEventListener("keydown", function(e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+          /*If the arrow DOWN key is pressed,
+          increase the currentFocus variable:*/
+          currentFocus++;
+          /*and and make the current item more visible:*/
+          addActive(x);
+        } else if (e.keyCode == 38) { //up
+          /*If the arrow UP key is pressed,
+          decrease the currentFocus variable:*/
+          currentFocus--;
+          /*and and make the current item more visible:*/
+          addActive(x);
+        } else if (e.keyCode == 13) {
+          /*If the ENTER key is pressed, prevent the form from being submitted,*/
+          e.preventDefault();
+          if (currentFocus > -1) {
+            /*and simulate a click on the "active" item:*/
+            if (x) x[currentFocus].click();
+          }
+        }
+    });
+    function addActive(x) {
+      /*a function to classify an item as "active":*/
+      if (!x) return false;
+      /*start by removing the "active" class on all items:*/
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = (x.length - 1);
+      /*add class "autocomplete-active":*/
+      x[currentFocus].classList.add("autocomplete-active");
+    }
+    function removeActive(x) {
+      /*a function to remove the "active" class from all autocomplete items:*/
+      for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+      }
+    }
+    function closeAllLists(elmnt) {
+      /*close all autocomplete lists in the document,
+      except the one passed as an argument:*/
+      var x = document.getElementsByClassName("autocomplete-items");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+  }
+function featured(thebool,product_code){
+    console.log(thebool)
+    if(thebool == 0){
+         textA = 'This product will be removed from featured.'
+         textC = 'Yes, Remove Feature'
+         titleS = 'Product not Feautured!'
+         textS = 'Product removed from feature.'
+    }else{
+        textA = 'This product will be displayed in featured.'
+        textC = 'Yes, Feature'
+        titleS = 'Product is Feautured!'
+        textS = 'Product displayed as feature.'
+    }
+    Swal.fire({
+        title: 'Are you sure?',
+        text: textA,
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: 'gray',
+        confirmButtonText: textC
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "api/shop/setFeature.php",
+                data: {
+                    bool :thebool,
+                    code:product_code
+                },
+                success: function (response) {
+                    if(response == 'success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: titleS,
+                            text: textS
+                        })
+                        location.reload();
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed!',
+                            text: 'Something went wrong, please try again a few moments later'
+                        })
+                    }
+                    
+                }
+            });
+        }
+    })
+}
+function bestSeller(thebool,product_code){
+    console.log(thebool)
+    if(thebool == 0){
+        textA = 'This product will be removed from best seller.'
+        textC = 'Yes, Remove Best Seller'
+        titleS = 'Best Seller removed!'
+        textS = 'Product removed from best seller.'
+   }else{
+       textA = 'This product will be displayed in best seller.'
+       textC = 'Yes, make it best seller'
+       titleS = 'Success'
+       textS = 'Product displayed as best seller.'
+   }
+    Swal.fire({
+        title: 'Are you sure?',
+        text: textA,
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: 'gray',
+        confirmButtonText: textC
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "api/shop/setBestSeller.php",
+                data: {
+                    bool :thebool,
+                    code:product_code
+                },
+                success: function (response) {
+                    if(response == 'success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: titleS,
+                            text: textS
+                        })
+                        location.reload();
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed!',
+                            text: 'Something went wrong, please try again a few moments later'
+                        })
+                    }
+                    
+                }
+            });
+        }
+    })
+}

@@ -22,7 +22,7 @@
                         <a class="nav-link paragraph" href="#fields">Business Fields</a>
                     </li>
                     <li class="nav-item" id='product-nav'>
-                        <a class="nav-link paragraph" href="./templates/product.html">Products</a>
+                        <a class="nav-link paragraph" href="product.php">Products</a>
                     </li>
                     <li class="nav-item" id='why-nav'>
                         <a class="nav-link paragraph" href="#why">Why Us ?</a>

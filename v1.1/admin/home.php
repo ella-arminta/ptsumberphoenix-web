@@ -222,37 +222,14 @@ function getData($fiturNama,$conn){
 
             <div class="business-fields-content grid">
                 <?php
-                if (isset($business_fields)) {
-                    while($row_business_fields = mysqli_fetch_array($business_fields)) {
-                        echo '
-                            <div class="field opacity-overlay" style="background-image: url(./'.$row_business_fields['image'].')" >
-                                <div class="sub-heading">'.$row_business_fields['title'].'</div>
-                            </div>
-                        ';
-                    }
-                } else {
-                    echo '
-                        <div class="field opacity-overlay" style="background-image: url(../src/fields/rubber.jpg)" >
-                            <div class="sub-heading">Rubber Industries</div>
-                        </div>
-                        <div class="field opacity-overlay" style="background-image: url(../src/fields/plastic.jpg)">
-                            <div class="sub-heading">Plastic Industries</div>
-                        </div>
-                        <div class="field opacity-overlay" style="background-image: url(../src/fields/casting.jpg)">
-                            <div class="sub-heading">Die Casting</div>
-                        </div>
-                        <div class="field opacity-overlay" style="background-image: url(../src/fields/ink.jpg)">
-                            <div class="sub-heading">coating and ink industries</div>
-                        </div>
-                        <div class="field opacity-overlay" style="background-image: url(../src/fields/acrylic.jpg)">
-                            <div class="sub-heading">acrylic sheet</div>
-                        </div>
-                        <div class="field opacity-overlay" style="background-image: url(../src/fields/industry.jpg)">
-                            <div class="sub-heading">other industries</div>
-                        </div>
-                    ';
-                }
+                    $stmt = $conn->prepare("SELECT * FROM categories");
+                    $stmt->execute();
+                    while($row = $stmt->fetch()):
                 ?>
+                <div class="field opacity-overlay" style="background-image: url(../<?= $row['cat_img'] ?>)" >
+                    <div class="sub-heading"><?= $row['cat_name'] ?></div>
+                </div>
+                <?php endwhile ?>
             </div>
         </div>
     </section>
@@ -921,41 +898,27 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     <i class="fa-solid fa-angle-right"></i>
                     About
                 </a>
-                <a class="footer-item" href="./templates/product.html">
+                <a class="footer-item" href="product.php">
                     <i class="fa-solid fa-angle-right"></i>
                     Products
                 </a>
-                <a class="footer-item" href="./templates/contact.html">
+                <a class="footer-item" href="contact.php">
                     <i class="fa-solid fa-angle-right"></i>
                     Contact
                 </a>
             </div>
             <div class="business-fields useful-links">
                 <h2 class="sub-heading underline">Business Fields</h2>
+                <?php
+                    $stmt=$conn->prepare("SELECT * FROM categories");
+                    $stmt->execute();
+                    while($cat = $stmt->fetch()):
+                ?>
                 <a class="footer-item">
                     <i class="fa-solid fa-angle-right"></i>
-                    Rubber Industries
+                    <?= $cat['cat_name'] ?>
                 </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Plastic Industries
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Die Casting
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Coating And Ink Industries
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Acrylic Sheet
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Other Industries
-                </a>
+                <?php endwhile; ?>
             </div>
             <div class="newsletter">
                 <h2 class="sub-heading underline">Join Our Newsletter</h2>

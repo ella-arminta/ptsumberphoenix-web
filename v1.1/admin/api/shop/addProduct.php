@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $response='lanjut';
 
     // cek proCode udah dipakai belum?
-    $stmt = $conn->prepare("SELECT product_id FROM products where UPPER(product_code) =?");
+    $stmt = $conn->prepare("SELECT product_id FROM products where UPPER(product_code) =? and status =1");
     $stmt->execute([$proCode]);
     if($stmt->rowCount() > 0 ){
         $response = 'Failed to post product. Product code already used, please pick another code for the product.';
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(isset($subcats)){
         // cek ada gk sub nya?
         foreach($subcats as $sub){
-            $stmt = $conn->prepare('SELECT * FROM subcategories where sub_code =?');
+            $stmt = $conn->prepare('SELECT * FROM subcategories where sub_code =? and status = 1');
             $stmt->execute([$sub]);
             if($stmt->rowCount() <= 0){
                 $response = 'Failed. Subcategory that checked is not valid';

@@ -1,7 +1,7 @@
 <?php
 include '../connect.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $stmt = $conn->prepare("SELECT * FROM categories");
+    $stmt = $conn->prepare("SELECT * FROM categories where status = 1");
     $stmt->execute();
     $i = 0;
     while($cat = $stmt->fetch()){

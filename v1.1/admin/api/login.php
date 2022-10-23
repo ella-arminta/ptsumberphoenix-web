@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 
                 if (password_verify($password, $row['adm_password'])) {
                     $_SESSION['admin_id'] = $row['adm_id'];
-                    header("Location: ../home.php");
+                    header("Location: ../index.php");
                     exit();
                 } else {
                     header("Location: ../login.php?error=Incorect password");
