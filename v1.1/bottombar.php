@@ -37,7 +37,7 @@ function getData1($fiturNama,$conn){
                     <i class="fa-solid fa-angle-right"></i>
                     About
                 </a>
-                <a class="footer-item" href="./templates/product.html">
+                <a class="footer-item" href="./product.php">
                     <i class="fa-solid fa-angle-right"></i>
                     Products
                 </a>

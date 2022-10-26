@@ -32,8 +32,9 @@ if(!isset($_SESSION['admin_id'])){
     <script src="https://kit.fontawesome.com/0e9fafd61c.js" crossorigin="anonymous"></script>
 
     <!-- CKEDITOR buat description product-->
-    <script src="script/ckeditor/ckeditor.js"></script>
-    <script src="script/sample.js"></script>
+    <!-- <script src="script/ckeditor/ckeditor.js"></script>
+    <script src="script/sample.js"></script> -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/classic/ckeditor.js"></script>
 
     <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -184,6 +185,13 @@ if(!isset($_SESSION['admin_id'])){
                         </div>
                     </div>
                     <?php endwhile; ?>
+                    <div class="category accordion-item All ?>">
+                        <p class="accordion-header" id="heading-All ?>">
+                            <div class="category-item" id="random">
+                                <?= 'All' ?>
+                            </div>
+                                    </p>
+                    </div>
                 </div>
             </div>
 
@@ -351,8 +359,16 @@ if(!isset($_SESSION['admin_id'])){
     <script src="script/shop.js"></script>
     <!-- ckeditor -->
     <script>
-        initSample();
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
     </script>
+    <!-- <script>
+        initSample();
+        
+    </script> -->
     <script>
         function searchProduct(){
             thisValue = $('#searchbar').val();

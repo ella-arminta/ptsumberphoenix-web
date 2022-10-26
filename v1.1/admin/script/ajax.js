@@ -412,6 +412,161 @@ $(document).ready(function(){
             }
           })
     })
-   
     
 })
+
+function delTestiAction(testi_table){
+    //    DELETE TESTIMONY
+$('.delTesti').click(function(e){
+    e.preventDefault();
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "This testimony will be deleted",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'red',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "api/testimony/delTesti.php",
+                data: {
+                    id: $(this).attr('target')
+                },
+                success: function (response) {
+                    if(response == 'success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted!',
+                            text: 'The testimony has been deleted.'
+                        }).then(function() {
+                            testi_table.ajax.reload(function(){
+                                testiPPImage()
+                                delTestiAction(testi_table)
+                            });
+                        });
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed delete testimony',
+                            text: 'Something went wrong please try again a few moments later.',
+                        })
+                    }
+                }
+            });
+           
+        }
+      })
+})
+// button edit modal pop up
+$('.butTestiModal').click(function(e){
+    e.preventDefault()
+    $.ajax({
+        type: "POST",
+        url: "api/testimony/getTesti.php",
+        data: {
+            id:$(this).attr('target')
+        },
+        success: function (response) {
+            response = JSON.parse(response)
+            if(response[0] == 'success'){
+                $('#testiEditModal #fullname').val(response[1])
+                $('#testiEditModal #about').val(response[2])
+                $('#testiEditModal #testi').val(response[3])
+                $('#testiEditModal .editTesti').attr('target',response[4])
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed delete testimony',
+                    text: 'Something went wrong please try again a few moments later.',
+                })
+            }
+        }
+    });
+})
+$('.editTesti').click(function(){
+    formData = new FormData(document.getElementById("formEditTestimony"))
+    formData.append('id',$(this).attr('target'))
+    $.ajax({
+        type: "POST",
+        url: "api/testimony/editTesti.php",
+        data: formData,
+        contentType: false,
+        cache: false,
+        processData:false,
+        success: function (response) {
+            if(response == 'success'){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Edited!',
+                    text: 'The testimony has been edited.'
+                }).then(function() {
+                    testi_table.ajax.reload(function(){
+                        testiPPImage()
+                        delTestiAction(testi_table)
+                    });
+                });
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed delete testimony',
+                    text: 'Something went wrong please try again a few moments later.',
+                })
+            }
+        }
+    });
+})
+$('.pubButtonTesti').click(function(){
+    var testi_id = $(this).attr('target')
+    var thebool = $(this).attr('thebool')
+    if(thebool == 1){
+        textA = 'This testimony will be published'
+        confirmA = 'Yes, publish it online'
+        titleA = 'Testimony is published'
+    }else{
+        textA = 'This testimony will be private'
+        confirmA = 'Yes, make it private'
+        titleA = 'Testimony is unpublished'
+    }
+    Swal.fire({
+        title: 'Are you sure?',
+        text: textA,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: confirmA
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "api/testimony/pubTesti.php",
+                data: {
+                    id_testi: testi_id,
+                    bool : thebool
+                },
+                success: function (response) {
+                    if(response == 'success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: titleA
+                        }).then(function() {
+                            testi_table.ajax.reload(function(){
+                                testiPPImage()
+                                delTestiAction(testi_table)
+                            });
+                        });
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed to make changes',
+                            text: 'Something went wrong please try again a few moments later.',
+                        })
+                    }
+                }
+            });
+        
+        }
+    })
+})
+}

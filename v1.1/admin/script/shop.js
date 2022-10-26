@@ -309,7 +309,11 @@ $(document).ready(function(){
             url: "api/shop/getSub.php",
             data: "",
             success: function (response) {
-                response = JSON.parse(response);
+                if(response != ''){
+                    response = JSON.parse(response);
+                }else{
+                    response = []
+                }
                 hasil ="";
                 tot =0;
                 for (j = 0;j<response[3].length;j++){

@@ -3,7 +3,7 @@ include '../connect.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $title = $_POST['title'];
     $desc = $_POST['desc'];
-    $id = (int)$_POST['id'];
+    $id = (int) $_POST['id'];
 
     // ambil data sebelumnya
     $stmt =$conn->prepare('SELECT * FROM faq where faq_id=?');

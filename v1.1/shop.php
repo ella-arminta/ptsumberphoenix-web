@@ -174,6 +174,13 @@ if(!isset($_SESSION['admin_id'])){
                         </div>
                     </div>
                     <?php endwhile; ?>
+                    <div class="category accordion-item All ?>">
+                        <p class="accordion-header" id="heading-All ?>">
+                            <div class="category-item" id="random">
+                                <?= 'All' ?>
+                            </div>
+                                    </p>
+                    </div>
                 </div>
             </div>
 

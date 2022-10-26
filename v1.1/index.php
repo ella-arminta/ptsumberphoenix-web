@@ -501,36 +501,32 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
             <div class="slide-content-1">
 
                 <div class="custom-card-wrapper swiper-wrapper">
-
                     <?php
-                    if (isset($testimonial)) {
-                        while($row_testimonial = mysqli_fetch_array($testimonial)) {
-                            echo '
-                                <div class="custom-card swiper-slide">
-                                    <div class="testimonial-writter">
-                                        <img src="./'.$row_testimonial['image'].'" alt="">
-                                        <div class="writter-information">
-                                            <h2 class="sub-headings">'.$row_testimonial['name'].'</h2>
-                                            <div class="paragraph">'.$row_testimonial['about'].'</div>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-quote">
-                                        <p class="paragraph">
-                                            <i class="fa-solid fa-quote-left quote"></i>
-                                            '.$row_testimonial['testimonial'].'
-                                            <i class="fa-solid fa-quote-right quote1"></i>
-                                        </p>
-                                    </div>
-                                </div>
-                            ';
-                        }
-                    }
+                        $stmt = $conn->prepare('SELECT * FROM testimonials where status = 2');
+                        $stmt->execute();
+                        while($testi = $stmt->fetch()):
                     ?>
-
+                        <div class="custom-card swiper-slide">
+                            <div class="testimonial-writter">
+                                <img src="./<?= htmlspecialchars($testi['testi_pp']) ?>" alt="">
+                                <div class="writter-information">
+                                    <h2 class="sub-headings"><?= htmlspecialchars($testi['testi_name']) ?></h2>
+                                    <div class="paragraph"><?= htmlspecialchars($testi['testi_intro'])  ?></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-quote">
+                                <p class="paragraph">
+                                    <i class="fa-solid fa-quote-left quote"></i>
+                                    <?= htmlspecialchars($testi['testi_isi']) ?>
+                                    <i class="fa-solid fa-quote-right quote1"></i>
+                                </p>
+                            </div>
+                        </div>
+                    <?php endwhile ?>
                 </div>
             </div>
 
-            <div class="feedbacks" onclick="window.location.href='./templates/testimonial.php'">
+            <div class="feedbacks" onclick="window.location.href='testimonial.php'">
                 <i class="fa-solid fa-arrow-up-from-bracket"></i>
                 <p class="paragraph">Send Us Feedbacks</p>
             </div>

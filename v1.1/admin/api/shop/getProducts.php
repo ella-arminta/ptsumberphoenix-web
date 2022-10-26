@@ -29,21 +29,24 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             $stmt->execute();
             $totCard = $stmt->rowCount();
             $newest = $stmt->fetch();
-            $card = array(
-                "product_id" => $newest['product_id'],
-                "product_code" => $newest['product_code'],
-                "product_name" =>$newest['product_name'],
-                "product_img" => $newest['product_img'],
-                "best_seller" => $newest['best_seller'],
-                "featured" => $newest['featured']
-            );
-            // json_encode($card);
-            array_push($shown,$card); 
+            if($totCard > 0){
+                $card = array(
+                    "product_id" => $newest['product_id'],
+                    "product_code" => $newest['product_code'],
+                    "product_name" =>$newest['product_name'],
+                    "product_img" => $newest['product_img'],
+                    "best_seller" => $newest['best_seller'],
+                    "featured" => $newest['featured']
+                );
+                // json_encode($card);
+                array_push($shown,$card); 
+            }
         }
         $ids = [];
         for ($i=0; $i < count($shown); $i++) { 
             array_push($ids,$shown[$i]['product_id']);
         }
+        if($totCard > 0){
         // Create an array of ? characters the same length as the number of IDs and join
         // it together with commas, so it can be used in the query string
         $placeHolders = implode(', ', array_fill(0, count($ids), '?'));
@@ -73,7 +76,11 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $jumCard = intval($totCard)  - count($shown);
         // $response = ['success',$cards, sisa card
         $response = ['success',$shown,$jumCard];
+    
         echo json_encode($response);    
+        }else{
+            echo json_encode('');
+        }
     }else if($catCode == 'randKedua'){
         $ids = [];
         for ($i=0; $i < count($shown); $i++) { 

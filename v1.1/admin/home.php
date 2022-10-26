@@ -10,6 +10,7 @@ function getData($fiturNama,$conn){
     $data = $temp['fitur_data'];
     return $data;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +26,7 @@ function getData($fiturNama,$conn){
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="../style.css">
+    
     <link rel="stylesheet" href="../style/nav.css">
     <link rel="stylesheet" href="../style/footer.css">
     <link rel="stylesheet" href="../style/copyright.css">
@@ -56,9 +57,25 @@ function getData($fiturNama,$conn){
     <!-- css for admin -->
     <link rel="stylesheet" href="style/style.css">
 
+    <!-- Data Table -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="../style.css">
+
     <title>PT Sumber Phoenix Makmur | Chemicals Specialty</title>
 </head>
-
+<style>
+    .testi_table_tr{
+        max-height:200px;
+        overflow-Y:auto;
+        max-width:300px;
+        word-wrap: break-word;
+    }
+</style>
 <body>
 
     <!-- Navbar -->
@@ -711,46 +728,82 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></div>
             <p class="intro paragraph" col="testi_sub_title"><?=getData('testi_sub_title',$conn)?> <button type="button"
                     class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
-            <div class="slide-content-1">
-
-                <div class="custom-card-wrapper swiper-wrapper">
-
-                    <?php
-                    if (isset($testimonial)) {
-                        while($row_testimonial = mysqli_fetch_array($testimonial)) {
-                            echo '
-                                <div class="custom-card swiper-slide">
-                                    <div class="testimonial-writter">
-                                        <img src="./'.$row_testimonial['image'].'" alt="">
-                                        <div class="writter-information">
-                                            <h2 class="sub-headings">'.$row_testimonial['name'].'</h2>
-                                            <div class="paragraph">'.$row_testimonial['about'].'</div>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-quote">
-                                        <p class="paragraph">
-                                            <i class="fa-solid fa-quote-left quote"></i>
-                                            '.$row_testimonial['testimonial'].'
-                                            <i class="fa-solid fa-quote-right quote1"></i>
-                                        </p>
-                                    </div>
-                                </div>
-                            ';
-                        }
-                    }
-                    ?>
-
-                </div>
+            
+            <!-- form crud testimonies -->
+            <div class="container">
+            <table id="testi_table" class="table text-center table-striped bg-white m-0 p-0 table-hover" style="width:100% !important;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Full Name</th>
+                        <th>About</th>
+                        <th>Testimony</th>
+                        <th>Profile Picture</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
             </div>
-
-            <div class="feedbacks" onclick="window.location.href='./templates/testimonial.php'">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                <p class="paragraph">Send Us Feedbacks</p>
-            </div>
-
+           
+            
         </div>
     </section>
-
+    <!-- TESTIMONIES PROFILE PICTURE MODAL -->
+    <div class="modal fade" id="profilePictureModal" tabindex="-1" aria-labelledby="profilePictureModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="profilePictureModalLabel">Profile Picture</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="" alt="" width="100%">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL TESTIMONIES EDIT -->
+    <div class="modal fade" id="testiEditModal" tabindex="-1" aria-labelledby="testiEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="testiEditModalLabel">Testimony Edit</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditTestimony" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="fullname" class="form-label">Fullname</label>
+                            <input name="name" id="fullname" type="text" placeholder="Full Name" class="input-fields" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="about" class="form-label">About</label>
+                            <input name="about" type="text" id="about" placeholder="Brief Introduction About Yourself" class="input-fields" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="testi" class="form-label">Testimonial</label>
+                            <textarea name="testimonial" placeholder="Testimonial" id="testi" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pp" class="form-label">Profile Picture change</label>
+                            <input name="image" type="file" id="pp" class="file-input" accept="images/*" placeholder="hi" required>
+                        </div>
+                            
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary editTesti" data-bs-dismiss="modal" target="">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- FAQ Section -->
     <section class="faq-section section-extra">
         <div class="container-fluid">
@@ -981,6 +1034,60 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     <script src="script/ajax.js"></script>
     <!-- modal Description Stats JS -->
     <script src="../script/homepage/descStats.js"></script>
+    <script>
+        $(document).ready(function(){
+            var testi_table = $('#testi_table').DataTable({
+                'ajax': {
+                    'url': `api/testimony/dataTesti.php`,
+                    type: 'POST'
+                },
+                'columns': [
+                    {
+                        'data':'count'
+                    },
+                    {
+                        'data': 'fullname'
+                    },
+                    {
+                        'data': 'about'
+                    },
+                    {
+                        'data': 'testimony'
+                    },
+                    {
+                        'data': 'pp'
+                    },{
+                        'data':'action'
+                    }
+                ],
+                columnDefs: [{
+                    target: 5,
+                    visible: false,
+                }, ],
+                "initComplete": function( settings, json ) {
+                    testiPPImage()
+                    delTestiAction(testi_table)
+                }
+            })
+                // view profile picture
+            
+            
+            setInterval(function () {
+                testi_table.ajax.reload(function(){
+                    testiPPImage()
+                    delTestiAction(testi_table)
+                });
+            }, 40000);
+        })
+        function testiPPImage(){
+                $(".viewPPTesti").click(function(){
+                    var img = $(this).attr('for')
+                    $('#profilePictureModal .modal-body img').attr('src','../'+img)
+                    console.log('hai')
+                })
+            }
+    
+    </script>
 </body>
 
 </html>
