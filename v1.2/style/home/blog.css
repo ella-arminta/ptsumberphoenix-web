@@ -1,0 +1,78 @@
+.blog-section {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-section .slide-container {
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.blog-section .slide-content {
+    overflow: hidden;
+    /* margin: 0 40px; */
+    /* border-radius: 25px; */
+}
+
+.blog-section .custom-card {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.blog-section .custom-card .blog-title-content-container {
+    height: 150px;
+    width: 100%;
+
+    position: relative;
+    padding: 0;
+}
+
+.blog-section .custom-card .blog-content-category {
+    position: absolute;
+    top: 0;
+
+    text-transform: uppercase;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+}
+
+.blog-section .custom-card .blog-title-content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    text-transform: capitalize;
+
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.blog-section .custom-card .paragraph {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+
+    text-decoration: none;
+}
+
+.blog-section .custom-card img {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 25px;
+}
+
+.swiper-pagination-bullet{
+    background-color: var(--yellow);
+    opacity: 0.6;
+}
+.swiper-pagination-bullet-active{
+    background-color: var(--yellow);
+    opacity : 1
+}
