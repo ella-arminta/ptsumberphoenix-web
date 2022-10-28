@@ -134,7 +134,7 @@ function getData($fiturNama,$conn){
 
             <div class="business-fields-content grid">
                 <?php
-                    $stmt = $conn->prepare("SELECT * FROM categories");
+                    $stmt = $conn->prepare("SELECT * FROM categories where status = 1");
                     $stmt->execute();
                     while($row = $stmt->fetch()):
                 ?>

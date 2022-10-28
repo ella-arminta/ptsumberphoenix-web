@@ -239,7 +239,7 @@ function getData($fiturNama,$conn){
 
             <div class="business-fields-content grid">
                 <?php
-                    $stmt = $conn->prepare("SELECT * FROM categories");
+                    $stmt = $conn->prepare("SELECT * FROM categories where status = 1");
                     $stmt->execute();
                     while($row = $stmt->fetch()):
                 ?>
@@ -963,7 +963,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
             <div class="business-fields useful-links">
                 <h2 class="sub-heading underline">Business Fields</h2>
                 <?php
-                    $stmt=$conn->prepare("SELECT * FROM categories");
+                    $stmt=$conn->prepare("SELECT * FROM categories where status = 1");
                     $stmt->execute();
                     while($cat = $stmt->fetch()):
                 ?>
