@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $catCode = $_POST['code'];
 
     // hapus subcategories nya
-    $stmt = $conn->prepare("UPDATE subcategories set status = 0  where cat_id = (SELECT cat_id from categories where cat_code = ? ) and status = 1");
+    $stmt = $conn->prepare("UPDATE subcategories set status = 0  where cat_id = (SELECT cat_id from categories where cat_code = ? and status = 1)");
     $berhasil = $stmt->execute([$catCode]);
     if($berhasil){
         // hapus category
