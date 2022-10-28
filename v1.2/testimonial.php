@@ -117,74 +117,7 @@ function getData($fiturNama,$conn){
     </section>
 
     <!-- Footer -->
-    <section class="footer-section">
-        <div class="container-fluid grid">
-            <div class="company-information">
-                <div class="company-logo">
-                    <img src="src/logo.png" alt="">
-                </div>
-                <div class="company-address">
-                    <p class="paragraph">Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 15325</p>
-                </div>
-                <div class="company-phone">
-                    <p class="paragraph"><strong>Phone: </strong>+62 21 5398 318</p>
-                </div>
-                <div class="company-email">
-                    <p class="paragraph"><strong>Email: </strong>phoenix-spm@sumberphoenix.co.id</p>
-                </div>
-            </div>
-            <div class="useful-links">
-                <h2 class="sub-heading underline">Useful Links</h2>
-                <a class="footer-item" href="index.php">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Home
-                </a>
-                <a class="footer-item" href="index.php#about">
-                    <i class="fa-solid fa-angle-right"></i>
-                    About
-                </a>
-                <a class="footer-item" href="./product.html">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Products
-                </a>
-            </div>
-            <div class="business-fields useful-links">
-                <h2 class="sub-heading underline">Business Fields</h2>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Rubber Industries
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Plastic Industries
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Die Casting
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Coating And Ink Industries
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Acrylic Sheet
-                </a>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Other Industries
-                </a>
-            </div>
-            <div class="newsletter">
-                <h2 class="sub-heading underline">Join Our Newsletter</h2>
-                <p class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                <div class="email-input">
-                    <input type="email" placeholder="example@gmail.com">
-                    <button class="custom-button btn" type="button">Subscribe</button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php include 'bottombar.php' ?>
 
     <footer class="copyright-footer">
         <div class="container-fluid">
