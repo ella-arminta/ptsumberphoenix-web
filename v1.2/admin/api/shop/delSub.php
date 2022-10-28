@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $stmt = $conn->prepare('UPDATE product_subcategory  ps join subcategories s on (ps.subcategory_id = s.sub_id) set ps.subcategory_id =? where s.sub_code =?');
     $berhasil = $stmt->execute(['',$subCode]);
     if($berhasil){
-        $stmt = $conn->prepare('UPDATE subcategories set status=0 where sub_code=?');
+        $stmt = $conn->prepare('UPDATE subcategories set status=0 where sub_code=? and status = 1');
         $berhasil = $stmt->execute([$subCode]);
         if($berhasil){
             $response = 'success';

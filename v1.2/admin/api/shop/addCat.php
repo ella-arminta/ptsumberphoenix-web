@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 }else {
                         if (move_uploaded_file($_FILES["catImg"]["tmp_name"], $target_file)) {
                             // insert into categorys
-                            $stmt = $conn->prepare('UPDATE categories set cat_img=? where cat_code =?');
+                            $stmt = $conn->prepare('UPDATE categories set cat_img=? where cat_code =? and status = 1');
                             $berhasil= $stmt->execute([$img_name,$catCode]);
 
                             if($berhasil){ 

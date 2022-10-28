@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $proCode = $_POST['code'];
 
     // hapus product nya
-    $stmt = $conn->prepare("UPDATE products set status = 0  where product_code = ?");
+    $stmt = $conn->prepare("UPDATE products set status = 0  where product_code = ? and status = 1");
     $berhasil = $stmt->execute([$proCode]);
     if($berhasil){
             $response = 'success';
