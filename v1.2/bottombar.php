@@ -11,7 +11,7 @@ function getData1($fiturNama,$conn){
         <div class="container-fluid grid">
             <div class="company-information">
                 <div class="company-logo">
-                    <img src="../src/<?= getData1('logo',$conn) ?>" id="company-logo" alt="">
+                    <img src="src/<?= getData1('logo',$conn) ?>" id="company-logo" alt="">
                     
                 </div>
 

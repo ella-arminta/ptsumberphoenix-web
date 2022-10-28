@@ -15,19 +15,8 @@
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Home</a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="./home.php">Home</a></li>
-                            <li><a class="dropdown-item" href="./about.php">About</a></li>
-                            <li><a class="dropdown-item" href="./business_fields.php">Business Fields</a></li>
-                            <li><a class="dropdown-item" href="./why_us.php">Why Us</a></li>
-                            <li><a class="dropdown-item" href="./statistic.php">Statistics</a></li>
-                            <li><a class="dropdown-item" href="./team.php">Team</a></li>
-                            <li><a class="dropdown-item" href="./testimonials.php">Testimonials</a></li>
-                            <li><a class="dropdown-item" href="./faq.php">FAQ</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="home.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="product.php">Product</a>
