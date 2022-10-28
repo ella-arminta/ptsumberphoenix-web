@@ -150,7 +150,7 @@ function getData($fiturNama,$conn){
     <section class="why-us-section diagonal" id="why">
         <div class="container-fluid diagonal-content">
             <div class="text-center info">
-                <h2 style="color: white;">Why<span style="color: #FFA600;"><strong>&nbsp;Us ?</strong></span></h2>
+                <h2 style="color: white;">Why<span style="color: #a6060a;"><strong>&nbsp;Us ?</strong></span></h2>
                 <p class="d-inline-block" style="width: 50%; color: white;">
                     <strong><?= getData('why_desc',$conn)?></strong><br>
                 </p>
