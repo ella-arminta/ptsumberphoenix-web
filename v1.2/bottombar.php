@@ -49,7 +49,7 @@ function getData1($fiturNama,$conn){
             <div class="business-fields useful-links">
                 <h2 class="sub-heading underline">Business Fields</h2>
                 <?php
-                    $stmt=$conn->prepare("SELECT * FROM categories");
+                    $stmt=$conn->prepare("SELECT * FROM categories where status = 1");
                     $stmt->execute();
                     while($cat = $stmt->fetch()):
                 ?>
