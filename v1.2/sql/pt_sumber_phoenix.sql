@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2022 at 02:32 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Generation Time: Oct 28, 2022 at 03:58 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -102,7 +102,11 @@ INSERT INTO `admin_log` (`log_id`, `action`, `log_desc`, `time`, `admin_id`, `pr
 (35, 'add subcategory', 'Ella Arminta has added a subcategori named Glass Industry', '2022-10-26 20:20:07', 1, 'Glass Industry'),
 (36, 'add subcategory', 'Ella Arminta has added a subcategori named Building Materials Formulation', '2022-10-26 20:20:27', 1, 'Building Materials Formulation'),
 (37, 'add subcategory', 'Ella Arminta has added a subcategori named Oil and Gas Industries', '2022-10-26 20:20:45', 1, 'Oil and Gas Industries'),
-(38, 'delete product', 'Ella Arminta has delete a product with the code PPL', '2022-10-26 21:00:36', 1, 'PPL');
+(38, 'delete product', 'Ella Arminta has delete a product with the code PPL', '2022-10-26 21:00:36', 1, 'PPL'),
+(39, 'delete category', 'Ella Arminta has delete a category named H', '2022-10-28 08:48:56', 1, 'H'),
+(40, 'add category', 'Ella Arminta has added a category named HAI', '2022-10-28 08:49:21', 1, 'HAI'),
+(41, 'add category', 'Ella Arminta has added a category named Test', '2022-10-28 08:50:50', 1, 'Test'),
+(42, 'delete category', 'Ella Arminta has delete a category named TEST', '2022-10-28 08:50:57', 1, 'TEST');
 
 -- --------------------------------------------------------
 
@@ -128,7 +132,11 @@ INSERT INTO `categories` (`cat_id`, `cat_code`, `cat_name`, `cat_img`, `status`)
 (3, 'DC', 'Die Casting', 'data/category/casting.jpg', 1),
 (4, 'CII', 'Coating and Ink Industries', 'data/category/ink.jpg', 1),
 (5, 'AS', 'Acrylic Sheet', 'data/category/acrylic.jpg', 1),
-(6, 'OI', 'Other Industries', '', 1);
+(6, 'OI', 'Other Industries', '', 1),
+(7, 'TC', 'Testing Category', '', 1),
+(8, 'H', 'Hai', 'data/category/PETA depan x25 (1).png', 0),
+(9, 'H', 'HAI', 'data/category/PETA depan x25 (1).png', 1),
+(10, 'TEST', 'Test', 'data/category/PETA depan x25 (1).png', 0);
 
 -- --------------------------------------------------------
 
@@ -504,13 +512,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `admin_log`
 --
 ALTER TABLE `admin_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `clients`

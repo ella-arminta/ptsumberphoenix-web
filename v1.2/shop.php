@@ -172,11 +172,12 @@ include 'api/connect.php';
                     </div>
                     <?php endwhile; ?>
                     <div class="category accordion-item All ?>">
-                        <p class="accordion-header" id="heading-All ?>">
-                            <div class="category-item" id="random">
+                        <p class="accordion-header" id="heading-All ?>" style="margin: 0;">
+                        </p>
+                        <div class="category-item" id="random" style="padding-left: 0; height: auto;">
                                 <?= 'All' ?>
-                            </div>
-                                    </p>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -263,7 +264,9 @@ include 'api/connect.php';
                     <span class="loader__element"></span>
                 </div>
                 <!-- Load More Products Button -->
-                <button class="btn btn-primary loadMore" get="" style="display:none;">Load More</button>
+                <div class="button-container">
+                    <button class="btn loadMore" get="" style="display:none;">Load More</button>
+                </div>
             </div>
         </div>
     </section>
@@ -334,6 +337,7 @@ include 'api/connect.php';
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="script/nav.js"></script>
+    <script src="script/product/categories.js"></script>
 
     <!-- jquery admin shop -->
     <script src="script/shop.js"></script>

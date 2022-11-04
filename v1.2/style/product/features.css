@@ -60,8 +60,12 @@
 
 @media (max-width: 400px) {
     .carousel-item .carousel-caption {
-        top: 50%;
+        top: 53%;
         transform: translateY(-50%);
+    }
+
+    .carousel-item .carousel-caption .sub-heading {
+        font-size: 15px;
     }
 }
 
