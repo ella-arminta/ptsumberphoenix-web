@@ -138,9 +138,13 @@ function getData($fiturNama,$conn){
                     $stmt->execute();
                     while($row = $stmt->fetch()):
                 ?>
-                <div class="field opacity-overlay" style="background-image: url(./<?= $row['cat_img'] ?>)" >
-                    <div class="sub-heading"><?= $row['cat_name'] ?></div>
-                </div>
+                <a href="./shop.php?cateCode=<?= $row['cat_code'] ?>">
+                    <div class="field opacity-overlay" style="background-image: url(<?= $row['cat_img'] ?>)" >
+                        <div class="sub-heading"><?= $row['cat_name'] ?></div>
+                    </div>
+                </a>
+                    
+                
                 <?php endwhile ?>
             </div>
         </div>

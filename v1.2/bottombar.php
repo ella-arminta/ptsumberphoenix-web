@@ -53,7 +53,7 @@ function getData1($fiturNama,$conn){
                     $stmt->execute();
                     while($cat = $stmt->fetch()):
                 ?>
-                <a class="footer-item">
+                <a class="footer-item" href="./shop.php?cateCode=<?= $cat['cat_code'] ?>">
                     <i class="fa-solid fa-angle-right"></i>
                     <?= $cat['cat_name'] ?>
                 </a>

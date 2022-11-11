@@ -243,9 +243,12 @@ function getData($fiturNama,$conn){
                     $stmt->execute();
                     while($row = $stmt->fetch()):
                 ?>
-                <div class="field opacity-overlay" style="background-image: url(../<?= $row['cat_img'] ?>)" >
-                    <div class="sub-heading"><?= $row['cat_name'] ?></div>
-                </div>
+                <a href="shop.php?cateCode=<?= $row['cat_code'] ?>">
+                    <div class="field opacity-overlay" style="background-image: url(../<?= $row['cat_img'] ?>)" >
+                        <div class="sub-heading"><?= $row['cat_name'] ?></div>
+                    </div>
+                </a>
+                
                 <?php endwhile ?>
             </div>
         </div>
@@ -918,72 +921,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
         </div>
     </div>
 
-    <section class="footer-section">
-        <div class="container-fluid grid">
-            <div class="company-information">
-                <div class="company-logo">
-                    <img src="../src/<?= getData('logo',$conn) ?>" id="company-logo" alt="">
-                    <button class="btn btn-danger updateLogo" data-bs-toggle="modal" data-bs-target="#logo"><i class="fa-solid fa-pencil"></i></button>
-                </div>
-
-                
-
-                <div class="company-address">
-                    <p class="paragraph" col="address"><?= getData('address',$conn)?> <button type="button"
-                            class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
-                </div>
-                <div class="company-phone">
-                    <p class="paragraph" col="phone"><strong>Phone: </strong><?= getData('phone',$conn) ?> <button
-                            type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
-                </div>
-                <div class="company-email">
-                    <p class="paragraph" col="email"><strong>Email: </strong><?= getData('email',$conn) ?> <button
-                            type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
-                </div>
-            </div>
-            <div class="useful-links">
-                <h2 class="sub-heading underline">Useful Links</h2>
-                <a class="footer-item" href="#">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Home
-                </a>
-                <a class="footer-item" href="#about">
-                    <i class="fa-solid fa-angle-right"></i>
-                    About
-                </a>
-                <a class="footer-item" href="product.php">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Products
-                </a>
-                <a class="footer-item" href="contact.php">
-                    <i class="fa-solid fa-angle-right"></i>
-                    Contact
-                </a>
-            </div>
-            <div class="business-fields useful-links">
-                <h2 class="sub-heading underline">Business Fields</h2>
-                <?php
-                    $stmt=$conn->prepare("SELECT * FROM categories where status = 1");
-                    $stmt->execute();
-                    while($cat = $stmt->fetch()):
-                ?>
-                <a class="footer-item">
-                    <i class="fa-solid fa-angle-right"></i>
-                    <?= $cat['cat_name'] ?>
-                </a>
-                <?php endwhile; ?>
-            </div>
-            <div class="newsletter">
-                <h2 class="sub-heading underline">Join Our Newsletter</h2>
-                <p class="paragraph" col="newsletter_desc"><?= getData('newsletter_desc',$conn)?> <button type="button"
-                        class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
-                <div class="email-input">
-                    <input type="email" placeholder="example@gmail.com">
-                    <button class="custom-button btn" type="button">Subscribe</button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Footer section -->
+    <?php include 'bottombar.php'; ?>
 
     <footer class="copyright-footer">
         <div class="container-fluid">

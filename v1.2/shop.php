@@ -145,7 +145,9 @@ include 'api/connect.php';
                     <!-- page CODE CATEGORY NYA -->
                     <!-- Category -->
                     <?php
-                        $stmt =$conn->prepare("SELECT * FROM categories where status = 1");
+                        $stmt =$conn->prepare("SELECT c.cat_code as cat_code,c.cat_name as cat_name,c.cat_id as cat_id, count(s.sub_id) FROM categories c join subcategories s on c.cat_id = s.cat_id 
+                           join product_subcategory ps  on s.sub_id = ps.subcategory_id
+                        where c.status = 1 and s.status = 1 GROUP BY c.cat_id HAVING COUNT(ps.product_id) > 0");
                         $stmt->execute();
                         while($cat = $stmt->fetch()):
                     ?>
@@ -159,7 +161,13 @@ include 'api/connect.php';
                         <div id="collapse-<?= $cat['cat_code'] ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?= $cat['cat_code'] ?>" data-bs-parent="#accordionExample">
                             <div class="accordion-body <?= $cat['cat_code'] ?>">
                                 <?php
-                                    $stmt2 = $conn->prepare('SELECT * FROM subcategories where cat_id =? and status = 1');
+                                    $stmt2 = $conn->prepare("SELECT s.sub_id as sub_id, s.sub_code as sub_code, s.sub_name as sub_name, count(ps.product_id), c.cat_id  as cat_id
+                                        from subcategories s 
+                                        join product_subcategory ps  on s.sub_id = ps.subcategory_id
+                                        join categories c on s.cat_id = c.cat_id
+                                        where s.status = 1  and c.cat_id = ?
+                                        GROUP BY s.sub_id
+                                        HAVING COUNT(ps.product_id) > 0");
                                     $stmt2->execute([$cat['cat_id']]);
                                     while($subcat = $stmt2->fetch()):
                                 ?>
@@ -177,65 +185,6 @@ include 'api/connect.php';
                                 <?= 'All' ?>
                             </div>
                                     </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- MODAL ADD PRODUCT -->
-            <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg ">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="addProductModalLabel">Add Product</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form id="formAddProduct" enctype="multipart/form-data">
-                            <div class="modal-body">
-                                    <div class="mb-3">
-                                        <label for="proName" class="form-label">Product Name</label>
-                                        <input type="text" class="form-control" id="proName" name="proName" aria-describedby="productName" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="proCode" class="form-label">Product Code</label>
-                                        <input type="text" class="form-control" id="proCode" name="proCode" aria-describedby="productCode" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="proImg" class="form-label">Product Image</label>
-                                        <input type="file" accept="image/*" name="proImg" class="form-control" id="proImg" aria-describedby="productImage" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Product Description</label>
-                                        <div class="col-md-12">
-                                            <div class="adjoined-bottom">
-                                                <div class="grid-container">
-                                                    <div class="grid-width-100">
-                                                        <textarea id="editor" name="isi" required>
-                                                            
-                                                        </textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- <textarea class="form-control" rows="10" id="isi" name="isi"></textarea> -->
-                                        </div>
-                                    </div>  
-                                    <div class="mb-3">
-                                        <label for="proDelv" class="form-label">Delivery</label>
-                                        <input type="text" class="form-control" id="proDelv" name="proDelv" aria-describedby="productDelivery" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="custServ" class="form-label">Customer Service</label>
-                                        <input type="text" class="form-control" id="custServ" name="custServ" aria-describedby="customerService" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="getCategories">
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Post Product</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>  
-                        </form>
                     </div>
                 </div>
             </div>
@@ -294,49 +243,106 @@ include 'api/connect.php';
         </div>
     </footer>
 
-
-    <!-- MODAL ADD SUBCATEGORY/CATEGORIES -->
-    <div class="modal fade" id="addCatModal" tabindex="-1" aria-labelledby="addCatModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="addCatModalLabel">Add Category</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body ">
-                    <div class="row justify-content-center">
-                        <button type="button" class="btn btn-dark catButton">Category</button>
-                        <button type="button" class="btn btn-light subButton">Subcategory</button>
-                    </div>
-                    <br>
-                    <div class="containerFormAddCatSub">
-                        <form id="formAddCat">
-                            <div class="mb-3">
-                                <label for="catName" class="form-label">Category Name</label>
-                                <input type="text" name="catName" class="form-control" placeholder="Category Name" id="catName" aria-describedby="catName" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="catCode" class="form-label">Category Code</label>
-                                <input type="text" class="form-control" name="catCode" placeholder="example : RI" id="catCode" required>
-                                <div id="catCodeInfo" class="form-text">Example : Rubber Industries -> RI</div>
-                            </div>
-                            <div style="display:flex;justify-content:center;flex-direction:column;width:100%;align-items:center">
-                                <button type="submit" class="btn btn-success" style="width:100px">Add</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="script/nav.js"></script>
 
     <!-- jquery admin shop -->
+    <script>    var products_id = [];</script>
     <script src="script/shop.js"></script>
+    <script>
+        function getProducts(catCode){
+        $('.loader').css('display','flex');
+        proName = '';
+        if(catCode == 'byName'){
+            proName = $('#searchbar').val();
+        }
+        $.ajax({
+            type: "GET",
+            url: "api/shop/getProducts.php",
+            data:  {
+                catCode : catCode,
+                shown : JSON.stringify(products_id),
+                proName : proName
+            },
+            success: function (response) {
+                response = JSON.parse(response)
+                if(response[0] == 'success'){
+                    // card ini isi nya product_code,product_img,product_name,product_id
+                    //   getData Random
+                    if(response[1].length <= 0){
+                        if(catCode == 'byName'){
+                            $('.products-inner').html("<h1>No Product Found</h1>")
+                        }else{
+                            $('.products-inner').html("<h1>No Product Found in this category</h1>")
+                        }
+                        $('.loadMore').css('display','none');
+                        $('.loader').css('display','none');
+                    }else{
+                        var cards ='';           
+                        if(catCode != 'random' || catCode == 'byName'){
+                            products_id = []
+                        }     
+                        for (let index = 0; index < response[1].length; index++) {
+                            
+                            product = response[1][index];
+                            icon = ''
+                            if(product.featured == 1){
+                                icon+= `<i class="fa-solid fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(0,'`+product.product_code+`')"></i>`;
+                            }else{
+                                icon+=`<i class="fa-regular fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(1,'`+product.product_code+`')"></i>`
+                            }
+                            if(product.best_seller == 1){
+                                icon+=`<i class="fa-solid fa-heart fa-xl" style="color:red" onclick="bestSeller(0,'`+product.product_code+`')"></i>`
+                            }else{
+                                icon+=`<i class="fa-regular fa-heart fa-xl" style="color:red" onclick="bestSeller(1,'`+product.product_code+`')"></i>`
+                            }
+                            cards += `
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card">
+                                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">
+                                        <img src="`+product.product_img+`" class="w-100" />
+                                    </div>
+                                    
+                                    <div class="card-body">
+                                        <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`">`+product.product_name+`</div>
+                                    </div>
+                                </div>
+                            </div>
+                            `   
+                            products_id.push(product);
+                            
+                           
+                        }
+                        $('.products-inner').html(cards)
+                        console.log(response)
+                        $('.product-category-title').text(response[3])
+                        if(response[2] > 0){
+                            $('.loadMore').css('display','block');
+                        }else{
+                            $('.loadMore').css('display','none');
+                        }
+                        $('.loader').css('display','none');
+                    }
+                    
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Something went Wrong please come back later'
+                    })
+                }
+            },
+            error: function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Terjadi kesalahan, silahkan coba lagi.'
+                })
+            }
+        });
+        // console.log(JSON.stringify(products_id))
+    }
+    </script>
     <script>
         function searchProduct(){
             thisValue = $('#searchbar').val();
@@ -359,5 +365,104 @@ include 'api/connect.php';
         var similarProducts = [];
 
     </script>
+    <script>
+        function getProByCat(catCode){
+            $('.loader').css('display','flex');
+            $.ajax({
+                type: "GET",
+                url: "api/shop/getProByCat.php",
+                data:  {
+                    catCode : catCode,
+                    shown : JSON.stringify(products_id),
+                },
+                success: function (response) {
+                    response = JSON.parse(response)
+                    if(response[0] == 'success'){
+                        // card ini isi nya product_code,product_img,product_name,product_id
+                        //   getData Random
+                        if(response[1].length <= 0){
+                            if(catCode == 'byName'){
+                                $('.products-inner').html("<h1>No Product Found</h1>")
+                            }else{
+                                $('.products-inner').html("<h1>No Product Found in this category</h1>")
+                            }
+                            $('.loadMore').css('display','none');
+                            $('.loader').css('display','none');
+                        }else{
+                            var cards ='';           
+                            for (let index = 0; index < response[1].length; index++) {
+                                
+                                product = response[1][index];
+                                icon = ''
+                                if(product.featured == 1){
+                                    icon+= `<i class="fa-solid fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(0,'`+product.product_code+`')"></i>`;
+                                }else{
+                                    icon+=`<i class="fa-regular fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(1,'`+product.product_code+`')"></i>`
+                                }
+                                if(product.best_seller == 1){
+                                    icon+=`<i class="fa-solid fa-heart fa-xl" style="color:red" onclick="bestSeller(0,'`+product.product_code+`')"></i>`
+                                }else{
+                                    icon+=`<i class="fa-regular fa-heart fa-xl" style="color:red" onclick="bestSeller(1,'`+product.product_code+`')"></i>`
+                                }
+                                cards += `
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">
+                                            <img src="`+product.product_img+`" class="w-100" />
+                                        </div>
+                                        
+                                        <div class="card-body">
+                                            <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">`+product.product_name+`</div>
+                                            <!-- star : feautured, love :best seller -->
+                                            <div>
+                                                <div style="float:left">
+                                                    `+icon+`
+                                                </div>
+                                                <button style="float:right" class="btn btn-danger delProductBut" onclick="delProduct('`+product.product_code+`')" proCode="`+product.product_code+`">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `   
+                                products_id.push(product);
+                            
+                            }
+                            $('.products-inner').html(cards)
+                            $('.product-category-title').text(response[3]);
+                            if(response[2] > 0){
+                                $('.loadMore').css('display','block');
+                            }else{
+                                $('.loadMore').css('display','none');
+                            }
+                            $('.loader').css('display','none');
+                            $('.loadMore').attr('get','cat '+ catCode);
+                        }
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Something went Wrong please come back later'
+                        })
+                    }
+                },
+                error: function(){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan, silahkan coba lagi.'
+                    })
+                }
+            });
+        }
+    </script>
+    <?php if(isset($_GET['cateCode'])){
+        echo '<script>getProByCat("'.$_GET['cateCode'].'");';
+    }else if (isset($_GET['subCode'])){
+        echo '<script>getProducts("'.$_GET['subCode'].'")</script>';
+    }
+    else{
+        echo '<script>   getProducts("random");</script>';
+    } 
+    ?>
 </body>
 </html>

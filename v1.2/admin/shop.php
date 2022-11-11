@@ -185,13 +185,30 @@ if(!isset($_SESSION['admin_id'])){
                         </div>
                     </div>
                     <?php endwhile; ?>
-                    <div class="category accordion-item All ?>">
+                    <!-- featured -->
+                    <div class="category accordion-item featured">
+                        <p class="accordion-header" id="heading-featured ?>">
+                            <div class="category-item" id="featured">
+                               Featured
+                            </div>
+                        </p>
+                    </div>
+                    <!-- Best seller -->
+                    <div class="category accordion-item bestseller">
+                        <p class="accordion-header" id="heading-bestseller ?>">
+                            <div class="category-item" id="bestseller">
+                               Best Seller
+                            </div>
+                        </p>
+                    </div>
+                    <div class="category accordion-item All">
                         <p class="accordion-header" id="heading-All ?>">
                             <div class="category-item" id="random">
                                 <?= 'All' ?>
                             </div>
-                                    </p>
+                        </p>
                     </div>
+                    
                 </div>
             </div>
 
@@ -232,14 +249,6 @@ if(!isset($_SESSION['admin_id'])){
                                             <!-- <textarea class="form-control" rows="10" id="isi" name="isi"></textarea> -->
                                         </div>
                                     </div>  
-                                    <div class="mb-3">
-                                        <label for="proDelv" class="form-label">Delivery</label>
-                                        <input type="text" class="form-control" id="proDelv" name="proDelv" aria-describedby="productDelivery" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="custServ" class="form-label">Customer Service</label>
-                                        <input type="text" class="form-control" id="custServ" name="custServ" aria-describedby="customerService" required>
-                                    </div>
                                     <div class="mb-3">
                                         <div class="getCategories">
                                         </div>
@@ -356,7 +365,107 @@ if(!isset($_SESSION['admin_id'])){
     <script src="../script/nav.js"></script>
 
     <!-- jquery admin shop -->
+    <script>    var products_id = [];</script>
     <script src="script/shop.js"></script>
+    <script>
+        function getProducts(catCode){
+        $('.loader').css('display','flex');
+        proName = '';
+        if(catCode == 'byName'){
+            proName = $('#searchbar').val();
+        }
+        $.ajax({
+            type: "GET",
+            url: "api/shop/getProducts.php",
+            data:  {
+                catCode : catCode,
+                shown : JSON.stringify(products_id),
+                proName : proName
+            },
+            success: function (response) {
+                response = JSON.parse(response)
+                if(response[0] == 'success'){
+                    // card ini isi nya product_code,product_img,product_name,product_id
+                    //   getData Random
+                    if(response[1].length <= 0){
+                        if(catCode == 'byName'){
+                            $('.products-inner').html("<h1>No Product Found</h1>")
+                        }else{
+                            $('.products-inner').html("<h1>No Product Found in this category</h1>")
+                        }
+                        $('.loadMore').css('display','none');
+                        $('.loader').css('display','none');
+                    }else{
+                        var cards ='';           
+                        if(catCode != 'random' || catCode == 'byName'){
+                            products_id = []
+                        }     
+                        for (let index = 0; index < response[1].length; index++) {
+                            
+                            product = response[1][index];
+                            icon = ''
+                            if(product.featured == 1){
+                                icon+= `<i class="fa-solid fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(0,'`+product.product_code+`')"></i>`;
+                            }else{
+                                icon+=`<i class="fa-regular fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(1,'`+product.product_code+`')"></i>`
+                            }
+                            if(product.best_seller == 1){
+                                icon+=`<i class="fa-solid fa-heart fa-xl" style="color:red" onclick="bestSeller(0,'`+product.product_code+`')"></i>`
+                            }else{
+                                icon+=`<i class="fa-regular fa-heart fa-xl" style="color:red" onclick="bestSeller(1,'`+product.product_code+`')"></i>`
+                            }
+                            cards += `
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card">
+                                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">
+                                        <img src="../`+product.product_img+`" class="w-100" />
+                                    </div>
+                                    
+                                    <div class="card-body">
+                                        <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">`+product.product_name+`</div>
+                                        <!-- star : feautured, love :best seller -->
+                                        <div>
+                                            <div style="float:left">
+                                                `+icon+`
+                                            </div>
+                                            <button style="float:right" class="btn btn-danger delProductBut" onclick="delProduct('`+product.product_code+`')" proCode="`+product.product_code+`">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `   
+                            products_id.push(product);
+                           
+                        }
+                        $('.products-inner').html(cards)
+                        $('.product-category-title').text(response[3]);
+                        if(response[2] > 0){
+                            $('.loadMore').css('display','block');
+                        }else{
+                            $('.loadMore').css('display','none');
+                        }
+                        $('.loader').css('display','none');
+                    }
+                    
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Something went Wrong please come back later'
+                    })
+                }
+            },
+            error: function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Terjadi kesalahan, silahkan coba lagi.'
+                })
+            }
+        });
+        // console.log(JSON.stringify(products_id))
+    }
+    </script>
     <!-- ckeditor -->
     <script>
         ClassicEditor
@@ -391,5 +500,103 @@ if(!isset($_SESSION['admin_id'])){
         var similarProducts = [];
 
     </script>
+    <script>
+        function getProByCat(catCode){
+            $('.loader').css('display','flex');
+            $.ajax({
+                type: "GET",
+                url: "api/shop/getProByCat.php",
+                data:  {
+                    catCode : catCode,
+                    shown : JSON.stringify(products_id),
+                },
+                success: function (response) {
+                    response = JSON.parse(response)
+                    if(response[0] == 'success'){
+                        // card ini isi nya product_code,product_img,product_name,product_id
+                        //   getData Random
+                        if(response[1].length <= 0){
+                            if(catCode == 'byName'){
+                                $('.products-inner').html("<h1>No Product Found</h1>")
+                            }else{
+                                $('.products-inner').html("<h1>No Product Found in this category</h1>")
+                            }
+                            $('.loadMore').css('display','none');
+                            $('.loader').css('display','none');
+                        }else{
+                            var cards ='';           
+                            for (let index = 0; index < response[1].length; index++) {
+                                
+                                product = response[1][index];
+                                icon = ''
+                                if(product.featured == 1){
+                                    icon+= `<i class="fa-solid fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(0,'`+product.product_code+`')"></i>`;
+                                }else{
+                                    icon+=`<i class="fa-regular fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(1,'`+product.product_code+`')"></i>`
+                                }
+                                if(product.best_seller == 1){
+                                    icon+=`<i class="fa-solid fa-heart fa-xl" style="color:red" onclick="bestSeller(0,'`+product.product_code+`')"></i>`
+                                }else{
+                                    icon+=`<i class="fa-regular fa-heart fa-xl" style="color:red" onclick="bestSeller(1,'`+product.product_code+`')"></i>`
+                                }
+                                cards += `
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">
+                                            <img src="../`+product.product_img+`" class="w-100" />
+                                        </div>
+                                        
+                                        <div class="card-body">
+                                            <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`">`+product.product_name+`</div>
+                                            <!-- star : feautured, love :best seller -->
+                                            <div>
+                                                <div style="float:left">
+                                                    `+icon+`
+                                                </div>
+                                                <button style="float:right" class="btn btn-danger delProductBut" onclick="delProduct('`+product.product_code+`')" proCode="`+product.product_code+`">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `   
+                                products_id.push(product);
+                            
+                            }
+                            $('.products-inner').html(cards)
+                            $('.product-category-title').text(response[3]);
+                            if(response[2] > 0){
+                                $('.loadMore').css('display','block');
+                            }else{
+                                $('.loadMore').css('display','none');
+                            }
+                            $('.loader').css('display','none');
+                            $('.loadMore').attr('get','cat '+ catCode);
+                        }
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Something went Wrong please come back later'
+                        })
+                    }
+                },
+                error: function(){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan, silahkan coba lagi.'
+                    })
+                }
+            });
+        }
+    </script>
+     <?php if(isset($_GET['cateCode'])){
+        echo '<script>getProByCat("'.$_GET['cateCode'].'");';
+    }else if (isset($_GET['subCode'])){
+        echo '<script>getProducts("'.$_GET['subCode'].'")</script>';
+    }
+    else{
+        echo '<script>   getProducts("random");</script>';
+    } ?>
 </body>
 </html>

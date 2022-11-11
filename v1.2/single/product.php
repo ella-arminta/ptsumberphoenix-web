@@ -3,10 +3,10 @@ include '../api/connect.php';
 if (!isset($_GET['product_code'])){
     header('Location: ../shop.php');
 }
-$stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ?");
+$stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and status = 1");
     $stmt->execute([strtolower($_GET['product_code'])]);
     if($stmt->rowCount() <= 0){
-        header('Location: ../shop.php');
+        header('Location: ../shop.php?subCode='.$_GET['subCode']);
     }
     
     $product = $stmt->fetch();
@@ -50,7 +50,7 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ?");
             <span>/</span> 
             <a href="product.php">Features </a>
             <span>/</span>
-            <a href="../shop.php">Shop </a>
+            <a href="../shop.php<?= '?subCode='.$_GET['subCode']?>">Shop </a>
             <span>/</span>
             <strong class="product">Product</strong>
         </div>
@@ -72,7 +72,7 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ?");
                         <a class="nav-link paragraph" href="../product.php">Features</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link paragraph" href="../shop.php">Shop</a>
+                        <a class="nav-link paragraph" href="../shop.php<?= '?subCode='.$_GET['subCode']?>">Shop</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link paragraph">
