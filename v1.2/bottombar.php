@@ -41,7 +41,7 @@ function getData1($fiturNama,$conn){
                     <i class="fa-solid fa-angle-right"></i>
                     Products
                 </a>
-                <a class="footer-item" href="./templates/contact.html">
+                <a class="footer-item" href="./contact.php">
                     <i class="fa-solid fa-angle-right"></i>
                     Contact
                 </a>

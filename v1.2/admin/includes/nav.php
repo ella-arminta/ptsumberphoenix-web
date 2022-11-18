@@ -25,7 +25,7 @@
                         <a class="nav-link" aria-current="page" href="update.php">Update</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="api/logout.php">Logout</a>
+                        <a class="nav-link" aria-current="page" href="messages.php">Messages</a>
                     </li>
                     <?php
                         $stmt=$conn->prepare("SELECT * FROM admin where adm_id=? and master = 1");
@@ -39,6 +39,9 @@
                         <a class="nav-link" aria-current="page" href="addAdmin.php">add Admin</a>
                     </li>
                     <?php endif;?>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="api/logout.php">Logout</a>
+                    </li>
                 </ul>
             </div>
         </div>
