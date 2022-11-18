@@ -153,11 +153,15 @@ if(!isset($_SESSION['admin_id'])){
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatModal">
                             <i class="fa-solid fa-plus"></i>
                         </button>
+                        <!-- Button Reordering Category -->
+                        <button type="button" class="btn btn-primary" style="width:100%;margin-top:10px;height:60px;" data-bs-toggle="modal" data-bs-target="#reorderModal">
+                           Reorder Categories
+                        </button>
                     </div>
                     <!-- page CODE CATEGORY NYA -->
                     <!-- Category -->
                     <?php
-                        $stmt =$conn->prepare("SELECT * FROM categories where status = 1");
+                        $stmt =$conn->prepare("SELECT * FROM categories where status = 1 ORDER BY order_by asc");
                         $stmt->execute();
                         while($cat = $stmt->fetch()):
                     ?>
@@ -361,6 +365,129 @@ if(!isset($_SESSION['admin_id'])){
             </div>
         </div>
     </div>
+
+    <!-- MODAL REORDERING CATEGORY -->
+    <style>
+        .group:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        ul#piclist {
+            max-width: 200px;
+            list-style: none;
+            margin: 20px auto;
+        }
+
+        #piclist li {
+            background-color: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 2px;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+        }
+        #piclist li img {
+            display: block;
+            float: left;
+        }
+
+        .handle {
+            float: right;
+        }
+        .handle:after {
+            content: "≡";
+            font-size: 35px;
+            line-height: 50px;
+            color: gray;
+        }
+
+        .slip-reordering {
+            -webkit-box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+    <div class="modal fade" id="reorderModal" tabindex="-1" aria-labelledby="reorderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="reorderModalLabel">Reorder Categories</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id='piclist'>
+                        <?php
+                            $stmt = $conn->prepare("SELECT * FROM categories where status = 1 order by order_by ASC");
+                            $stmt->execute();
+                            while($row = $stmt->fetch()):
+                        ?>
+                        <li class='no-swipe group'>
+                            <div style="display:block;float:left;width:80%" catId="<?=$row['cat_id']?>"><?= $row['cat_name'] ?></div>
+                            <div class='handle instant'></div>
+                        </li> 
+                        <?php endwhile; ?>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveReorder">Save changes</button>
+                </div>
+            </div>
+        </div>  
+    </div>
+    <!-- script for reordering -->
+    <script src="script/slip.js"></script>
+    <script>
+        var ul = document.getElementById('piclist');
+        new Slip(ul);
+
+        ul.addEventListener('slip:beforereorder', function(e){
+        if (/demo-no-reorder/.test(e.target.className)) {
+            e.preventDefault();
+        }
+        }, false);
+
+        ul.addEventListener('slip:beforeswipe', function(e){
+        if (e.target.nodeName == 'INPUT' || /no-swipe/.test(e.target.className)) {
+            e.preventDefault();
+        }
+        }, false);
+
+        ul.addEventListener('slip:beforewait', function(e){
+        if (e.target.className.indexOf('instant') > -1) e.preventDefault();
+        }, false);
+
+        /*ul.addEventListener('slip:afterswipe', function(e){
+        e.target.parentNode.appendChild(e.target);
+        }, false);*/
+
+        ul.addEventListener('slip:reorder', function(e){
+        e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
+        return false;
+        }, false);
+
+        new Slip(ul);
+
+        var items = document.querySelectorAll(".handle");
+        for (var i=0; i < items.length; i++) {
+            var item = items[i]
+            item.addEventListener('mousedown', function(){
+                this.style.cursor = "-webkit-grabbing";
+                this.style.cursor = "-moz-grabbing";
+            });
+            item.addEventListener('mouseover', function(){
+                this.style.cursor = "-webkit-grab";
+                this.style.cursor = "-moz-grab";
+            });
+            item.addEventListener('mouseup', function(){
+                this.style.cursor = "-webkit-grab";
+                this.style.cursor = "-moz-grab";
+            });
+        }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="../script/nav.js"></script>
 
@@ -590,13 +717,48 @@ if(!isset($_SESSION['admin_id'])){
             });
         }
     </script>
-     <?php if(isset($_GET['cateCode'])){
-        echo '<script>getProByCat("'.$_GET['cateCode'].'");';
+    <?php 
+    if(isset($_GET['cateCode'])){
+        echo '<script>getProByCat("'.$_GET['cateCode'].'");</script>';
     }else if (isset($_GET['subCode'])){
         echo '<script>getProducts("'.$_GET['subCode'].'")</script>';
     }
     else{
         echo '<script>   getProducts("random");</script>';
-    } ?>
+    } 
+    ?>
+
+    <!-- REORDER SCRIPT  -->
+    <script>
+        $('#saveReorder').click(function(){
+            $(this).prop('disabled', true)
+            var items = $('#piclist li div:nth-child(1)').map(function () { return $(this).attr('catId'); }).get();
+            console.log(items);
+            $.ajax({
+                type: "POST",
+                url: "api/shop/reorderCat.php",
+                data: {
+                    cats : items
+                },
+                success: function (response) {
+                    if(response == 'success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Categories are reordered'
+                        }).then(function() {
+                            location.reload();
+                        });
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Terjadi kesalahan, silahkan coba lagi.'
+                        })
+                    }
+                }
+            });
+        })
+    </script>
 </body>
 </html>

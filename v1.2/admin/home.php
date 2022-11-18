@@ -239,7 +239,12 @@ function getData($fiturNama,$conn){
 
             <div class="business-fields-content grid">
                 <?php
-                    $stmt = $conn->prepare("SELECT * FROM categories where status = 1");
+                    $stmt = $conn->prepare("SELECT c.cat_code as cat_code,c.cat_name as cat_name,c.cat_id as cat_id,c.cat_img as cat_img, count(s.sub_id) 
+                    FROM categories c 
+                    join subcategories s on c.cat_id = s.cat_id 
+                    join product_subcategory ps  on s.sub_id = ps.subcategory_id
+                    join products p on ps.product_id = p.product_id
+                    where c.status = 1 and s.status = 1 and p.status = 1 GROUP BY c.cat_id HAVING COUNT(ps.product_id) > 0 order by c.order_by ASC");
                     $stmt->execute();
                     while($row = $stmt->fetch()):
                 ?>
@@ -1027,6 +1032,13 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
             }
     
     </script>
+    <?php 
+        if(isset($_GET['stat'])){
+            if($_GET['stat'] == 'noaccess'){
+                echo '<script>alert("Sorry, you have no access to this page.")</script>';
+            }
+        } 
+    ?>
 </body>
 
 </html>

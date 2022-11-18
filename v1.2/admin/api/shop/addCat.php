@@ -17,8 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         if($stmt->rowCount() > 0){
             $response[0] = 'Category code is already used';
         }else{
-            $stmt =$conn->prepare('INSERT INTO categories (cat_name,cat_code) values (?,?)');
-            $berhasil=$stmt->execute([$catName,$catCode]);
+            // cari order terbesar
+            $stmt = $conn->prepare('SELECT max(order_by) as myorder from categories where status = 1');
+            $stmt->execute();
+            $order = $stmt->fetch();
+            $order = $order['myorder']+1;
+
+            $stmt =$conn->prepare('INSERT INTO categories (cat_name,cat_code,order_by) values (?,?,?)');
+            $berhasil=$stmt->execute([$catName,$catCode,$order]);
             if($berhasil){
                 // add image cat
                 $target_dir = "../../../data/category/";

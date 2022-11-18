@@ -25,11 +25,20 @@
                         <a class="nav-link" aria-current="page" href="update.php">Update</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="addAdmin.php">add Admin</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="api/logout.php">Logout</a>
                     </li>
+                    <?php
+                        $stmt=$conn->prepare("SELECT * FROM admin where adm_id=? and master = 1");
+                        $stmt->execute([$_SESSION['admin_id']]);
+                        if($stmt->rowCount() > 0):
+                    ?>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="adminLog.php">Admin Log</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="addAdmin.php">add Admin</a>
+                    </li>
+                    <?php endif;?>
                 </ul>
             </div>
         </div>
