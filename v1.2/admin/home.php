@@ -535,7 +535,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     </div>
                 </div>
 
-                <div class="read-more" onClick="window.location.href='./templates/update.html'">
+                <div class="read-more" onClick="window.location.href='./update.php'">
                     See All Our Updates
                     <i class="fa-solid fa-arrow-right"></i>
                 </div>

@@ -1,11 +1,14 @@
 <?php
 include '../api/connect.php';
 if(!isset($_GET['id'])){
-    header('Location: ../');
+    header('Location: ../update.php');
 }
 $upd_id = $_GET['id'];
 $stmt = $conn->prepare("SELECT * FROM updates where upd_id =?");
-$stmt->execute([$upd_id]);
+$berhasil = $stmt->execute([$upd_id]);
+if(!$berhasil || $stmt->rowCount() <= 0){
+    header('Location: ../update.php');
+}
 $row = $stmt->fetch();
 ?>
 <!DOCTYPE html>
@@ -40,7 +43,7 @@ $row = $stmt->fetch();
             <div class="paragraph">
                 <a href="../index.php">Home </a>
                 <span>/</span> 
-                <a href="../templates/update.html">Updates </a>
+                <a href="../update.php">Updates </a>
                 <span>/</span> 
                 <strong class="contact">Update Page</strong></div>
             <div class="sub-heading">Update Page</div>

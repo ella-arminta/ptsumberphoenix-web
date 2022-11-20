@@ -329,7 +329,7 @@ function getData($fiturNama,$conn){
                         </div>
                     </div>
                     <?php endwhile; ?>
-                <div class="read-more" onClick="window.location.href='./templates/update.html'">
+                <div class="read-more" onClick="window.location.href='./update.php'">
                     See All Our Updates
                     <i class="fa-solid fa-arrow-right"></i>
                 </div>
