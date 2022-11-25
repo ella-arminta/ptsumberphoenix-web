@@ -29,21 +29,24 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             $stmt->execute();
             $totCard = $stmt->rowCount();
             $newest = $stmt->fetch();
-            $card = array(
-                "product_id" => $newest['product_id'],
-                "product_code" => $newest['product_code'],
-                "product_name" =>$newest['product_name'],
-                "product_img" => $newest['product_img'],
-                "best_seller" => $newest['best_seller'],
-                "featured" => $newest['featured']
-            );
-            // json_encode($card);
-            array_push($shown,$card); 
+            if($totCard > 0){
+                $card = array(
+                    "product_id" => $newest['product_id'],
+                    "product_code" => $newest['product_code'],
+                    "product_name" =>$newest['product_name'],
+                    "product_img" => $newest['product_img'],
+                    "best_seller" => $newest['best_seller'],
+                    "featured" => $newest['featured']
+                );
+                // json_encode($card);
+                array_push($shown,$card); 
+            }
         }
         $ids = [];
         for ($i=0; $i < count($shown); $i++) { 
             array_push($ids,$shown[$i]['product_id']);
         }
+        if($totCard > 0){
         // Create an array of ? characters the same length as the number of IDs and join
         // it together with commas, so it can be used in the query string
         $placeHolders = implode(', ', array_fill(0, count($ids), '?'));
@@ -73,7 +76,11 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $jumCard = intval($totCard)  - count($shown);
         // $response = ['success',$cards, sisa card
         $response = ['success',$shown,$jumCard];
+    
         echo json_encode($response);    
+        }else{
+            echo json_encode('');
+        }
     }else if($catCode == 'randKedua'){
         $ids = [];
         for ($i=0; $i < count($shown); $i++) { 
@@ -83,8 +90,12 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         // it together with commas, so it can be used in the query string
         $placeHolders = implode(', ', array_fill(0, count($ids), '?'));
         // Prepare the statement
-        $stmt = $conn->prepare("SELECT * FROM `products` where product_id NOT IN ($placeHolders) and status = 1 ORDER BY rand() LIMIT 10");
-
+        if(count($ids) > 0){
+            $stmt = $conn->prepare("SELECT * FROM `products` where product_id NOT IN ($placeHolders) and status = 1 ORDER BY rand() LIMIT 10");
+        }else{
+            $stmt = $conn->prepare("SELECT * FROM `products` where status = 1 ORDER BY rand() LIMIT 10");
+        }
+        
         // Iterate the IDs and bind them
         // Remember ? placeholders are 1-indexed!
         foreach ($ids as $index => $value) {
@@ -127,6 +138,36 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         //                     product terambil, jumlah sisa product
         $response = ['success',$shown,$jumCard];
         echo json_encode($response);
+    } else if($catCode == 'featured'){
+        $proName = $_GET['proName'];
+        $shown = [];
+        $stmt = $conn->prepare("SELECT * FROM products where featured = 1 and status = 1");
+        $stmt->execute();
+        while($row = $stmt->fetch()){
+            array_push($shown,$row);
+        }
+        $stmt2 = $conn->prepare('SELECT * FROM products where featured = 1 and status = 1');
+        $stmt2->execute();
+        $totCard = $stmt2->rowCount();
+        $jumCard = intval($totCard)  - count($shown);
+        //product terambil, jumlah sisa product
+        $response = ['success',$shown,$jumCard];
+        echo json_encode($response);
+    }else if ($catCode == 'bestseller'){
+        $proName = $_GET['proName'];
+        $shown = [];
+        $stmt = $conn->prepare("SELECT * FROM products where best_seller = 1 and status = 1");
+        $stmt->execute();
+        while($row = $stmt->fetch()){
+            array_push($shown,$row);
+        }
+        $stmt2 = $conn->prepare('SELECT * FROM products where best_seller = 1 and status = 1');
+        $stmt2->execute();
+        $totCard = $stmt2->rowCount();
+        $jumCard = intval($totCard)  - count($shown);
+        //product terambil, jumlah sisa product
+        $response = ['success',$shown,$jumCard];
+        echo json_encode($response);
     }
     else{
         // $cek subcategory ada gak di database
@@ -148,7 +189,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 // Create an array of ? characters the same length as the number of IDs and join
                 // it together with commas, so it can be used in the query string
                 $placeHolders = implode(', ', array_fill(0, count($ids), '?'));
-                $stmt = $conn->prepare("SELECT p.product_code,p.product_img,p.product_name,p.product_id,p.featured,p.best_seller FROM `product_subcategory` ps join products p on (ps.product_id = p.product_id) join subcategories s on (ps.subcategory_id = s.sub_id) where p.product_id NOT IN ($placeHolders) and s.sub_code = ? and p.status = 1 and s.status = 1  ORDER BY p.product_id DESC LIMIT 3");
+                $stmt = $conn->prepare("SELECT p.product_code,p.product_img,p.product_name,p.product_id,p.featured,p.best_seller FROM `product_subcategory` ps join products p on (ps.product_id = p.product_id) join subcategories s on (ps.subcategory_id = s.sub_id) where p.product_id NOT IN ($placeHolders) and s.sub_code = ? and p.status = 1 and s.status = 1  ORDER BY p.product_id DESC LIMIT 2");
 
                 // Iterate the IDs and bind them
                 // Remember ? placeholders are 1-indexed!
@@ -159,7 +200,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
                 $stmt->execute();
             }else{
-                $stmt = $conn->prepare("SELECT p.product_code,p.product_img,p.product_name,p.product_id,p.featured,p.best_seller FROM `product_subcategory` ps join products p on (ps.product_id = p.product_id) join subcategories s on (ps.subcategory_id = s.sub_id) where s.sub_code = ? and p.status = 1 and s.status = 1  ORDER BY p.product_id DESC LIMIT 3");
+                $stmt = $conn->prepare("SELECT p.product_code,p.product_img,p.product_name,p.product_id,p.featured,p.best_seller FROM `product_subcategory` ps join products p on (ps.product_id = p.product_id) join subcategories s on (ps.subcategory_id = s.sub_id) where s.sub_code = ? and p.status = 1 and s.status = 1  ORDER BY p.product_id DESC LIMIT 2");
                 $stmt->execute([$catCode]);
                 
             }
@@ -177,9 +218,14 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 // json_encode($card);
                 array_push($shown,$card); 
             }
-
+            $stmt = $conn->prepare("SELECT s.sub_name as subName FROM products p join product_subcategory ps on (p.product_id = ps.product_id) join subcategories s on (s.sub_id = ps.subcategory_id) where s.sub_code  = ? ");
+            $stmt->execute([$catCode]);
+            $subName =  $stmt->fetch();
+            if($stmt->rowCount() > 0){
+                $subName = $subName['subName'];
+            }
             $jumCard = $totCard - count($shown);
-            $response = ['success',$shown,$jumCard];
+            $response = ['success',$shown,$jumCard,$subName];
         }else{
             $response = ['fail','Subcategory not found'];
         }

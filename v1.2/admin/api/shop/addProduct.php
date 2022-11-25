@@ -3,8 +3,8 @@ include '../connect.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $proName = $_POST['proName'];
     $proDesc = $_POST['isi'];
-    $proDeli = $_POST['proDelv'];
-    $custServ = $_POST['custServ'];
+    $proDeli = 'The Fastest Delivery';
+    $custServ = 'Provide a 24 hour customer service';
     if(!isset($_POST['subs'])){
         $response = 'Choose 1 category minimal';
     }else{
@@ -36,9 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($response == 'lanjut'){
         // add image
         $target_dir = "../../../data/product/";
-        $target_file = $target_dir . basename($_FILES["proImg"]["name"]);
+        $rename = time().'-'.basename($_FILES["proImg"]["name"]);
+        $target_file = $target_dir . $rename;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        $img_name = 'data/product/'.basename($_FILES["proImg"]["name"]);
+        $img_name = 'data/product/'.$rename;
 
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
             $response = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
@@ -52,11 +53,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                     if($berhasil){ // tambahkan ke product_subcategories.
                         foreach($subcats as $sub){
-                            $stmt = $conn->prepare('INSERT INTO product_subcategory (product_id,subcategory_id) values ((select product_id from products where product_code=?),(select sub_id from subcategories where sub_code =?))');
+                            $stmt = $conn->prepare('INSERT INTO product_subcategory (product_id,subcategory_id) values ((select product_id from products where product_code=? and status = 1),(select sub_id from subcategories where sub_code =? and status = 1))');
                             $berhasil = $stmt->execute([$proCode,$sub]);
 
                             if($berhasil){
                                 $response = 'success';
+                                // add to admin log
+                                $adm_id = $_SESSION['admin_id'];
+                                $stmt = $conn->prepare('SELECT adm_name from admin where adm_id =?');
+                                $stmt->execute([$adm_id]);
+                                $name = $stmt->fetch();
+                                $namaAdm = $name['adm_name'];
+                        
+                                $desc = $namaAdm.' has added a product with the code '.$proCode;
+                                $action = 'add product';
+                                $prevData = $proCode;
+                                $stmt = $conn->prepare('INSERT INTO admin_log (action,log_desc,admin_id,prev_data) values (?,?,?,?)');
+                                $stmt->execute([$action,$desc,$adm_id,$prevData]);
+                                // end admin log
                             }else{
                                 $response = 'failed'; 
                             }

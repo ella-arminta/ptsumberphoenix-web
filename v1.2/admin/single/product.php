@@ -3,10 +3,15 @@ include '../api/connect.php';
 if (!isset($_GET['product_code'])){
     header('Location: ../shop.php');
 }
-$stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ?");
+$stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and status = 1");
     $stmt->execute([strtolower($_GET['product_code'])]);
     if($stmt->rowCount() <= 0){
-        header('Location: ../shop.php');
+        if(isset($_GET['subCode'])){
+            header('Location: ../shop.php?subCode='.$_GET['subCode']);
+        }else{
+            header('Location: ../shop.php');
+        }
+       
     }
     
     $product = $stmt->fetch();
@@ -48,9 +53,14 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ?");
         <div class="paragraph">
             <a href="index.php">Home </a>
             <span>/</span> 
-            <a href="product.php">Features </a>
+            <a href="../product.php">Features </a>
             <span>/</span>
-            <a href="../shop.php">Shop </a>
+            <a href="../shop.php<?php 
+                if(isset($_GET['subCode'])){
+                    echo  '?subCode='.$_GET['subCode'];
+                }
+             ?>
+             ">Shop </a>
             <span>/</span>
             <strong class="product">Product</strong>
         </div>
@@ -72,7 +82,13 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ?");
                         <a class="nav-link paragraph" href="../product.php">Features</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link paragraph" href="../shop.php">Shop</a>
+                        <a class="nav-link paragraph" href="../shop.php
+                        <?php 
+                        if(isset($_GET['subCode'])){
+                           echo  '?subCode='.$_GET['subCode'];
+                        }
+                       ?>
+                        ">Shop</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link paragraph">

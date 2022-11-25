@@ -41,12 +41,12 @@ $(document).ready(function(){
                             cards += `
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card">
-                                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`'">
+                                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">
                                         <img src="`+product.product_img+`" class="w-100" />
                                     </div>
                                     
                                     <div class="card-body">
-                                        <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`'">`+product.product_name+`</div>
+                                        <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`&subCode=`+catCode+`'">`+product.product_name+`</div>
                                         
                                     </div>
                                 </div>
@@ -56,6 +56,7 @@ $(document).ready(function(){
                            
                         }
                         $('.products-inner').html(cards)
+                        $('.product-category-title').text(response[3])
                         if(response[2] > 0){
                             $('.loadMore').css('display','block');
                         }else{
@@ -95,7 +96,6 @@ $(document).ready(function(){
         })
     }
     subcategoryClick()
-    getProducts('random');
     $('.loadMore').attr('get','randKedua');
     
     // search icon on clicl

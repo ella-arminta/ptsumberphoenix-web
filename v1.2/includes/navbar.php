@@ -33,7 +33,10 @@
                     <li class="nav-item" id='team-nav'>
                         <a class="nav-link paragraph" href="#team">Team</a>
                     </li>
-                    <button class="custom-button btn navbar-btn contact" type="button">Contact Us</button>
+                    <a href="contact.php" style="text-decoration:none">
+                        <button class="custom-button btn navbar-btn" type="button">Contact Us</button>
+                    </a>
+                    
                 </ul>
             </div>
         </div>
