@@ -592,3 +592,8 @@ function getData($fiturNama,$conn){
 </body>
 
 </html>
+<?php 
+    if(isset($_SESSION['cat'])){
+        unset($_SESSION['cat']);
+    } 
+?>

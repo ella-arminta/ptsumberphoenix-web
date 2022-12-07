@@ -1042,3 +1042,8 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
 </body>
 
 </html>
+<?php 
+    if(isset($_SESSION['cat'])){
+        unset($_SESSION['cat']);
+    } 
+?>

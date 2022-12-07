@@ -81,6 +81,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         }else{
             echo json_encode('');
         }
+        $_SESSION['cat'] = 'random';
     }else if($catCode == 'randKedua'){
         $ids = [];
         for ($i=0; $i < count($shown); $i++) { 
@@ -224,8 +225,20 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             if($stmt->rowCount() > 0){
                 $subName = $subName['subName'];
             }
+            // cari nama category
+            $masterCatName = '';
+            if(isset($_GET['masterCatId'])){
+                $stmt = $conn->prepare("SELECT cat_name from categories where cat_code = ? and status=1");
+                $stmt->execute([$_GET['masterCatId']]);
+                $masterCatName = $stmt->fetch();
+                $masterCatName = $masterCatName['cat_name'];
+            }
+           
             $jumCard = $totCard - count($shown);
-            $response = ['success',$shown,$jumCard,$subName];
+            $response = ['success',$shown,$jumCard,$subName,$masterCatName];
+            if (isset($_GET['masterCatId'])){
+                $_SESSION['cat'] = [$_GET['masterCatId'],$_GET['catCode']];
+            }
         }else{
             $response = ['fail','Subcategory not found'];
         }

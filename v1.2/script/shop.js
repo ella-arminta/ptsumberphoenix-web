@@ -3,7 +3,7 @@ $(document).ready(function(){
     // ===== AJAX ======
     var products_id = [];
     // function get products
-    function getProducts(catCode){
+    function getProducts(catCode,mCatId){
         $('.loader').css('display','flex');
         proName = '';
         if(catCode == 'byName'){
@@ -15,7 +15,8 @@ $(document).ready(function(){
             data:  {
                 catCode : catCode,
                 shown : JSON.stringify(products_id),
-                proName : proName
+                proName : proName,
+                masterCatId: mCatId
             },
             success: function (response) {
                 response = JSON.parse(response)
@@ -56,7 +57,11 @@ $(document).ready(function(){
                            
                         }
                         $('.products-inner').html(cards)
-                        $('.product-category-title').text(response[3])
+                        var proTitle = response[4] +' - '+response[3];
+                        $('.product-category-title').text(proTitle);
+                        if (response[3] == undefined){
+                            $('.product-category-title').text('Our Products');
+                        }
                         if(response[2] > 0){
                             $('.loadMore').css('display','block');
                         }else{
@@ -86,13 +91,22 @@ $(document).ready(function(){
     function subcategoryClick(){
         $('.category-item').click(function(){
             var subCode = $(this).attr('id')
+            var catId = $(this).parent().attr('class')
+            splited = catId.split(" ");
+            console.log(splited)
             products_id = [];
-            getProducts(subCode)
+            getProducts(subCode,splited[1])
             
             $('.loadMore').attr('get',subCode);
+            $('loadMore').attr('cat',splited[1]);
         })
         $('.loadMore').click(function(){
-            getProducts($(this).attr('get'));
+            // kalau ambil category
+            if($(this).attr('get').substring(0, $(this).attr('get').indexOf(' ')) == 'cat'){
+                getProByCat($(this).attr('get').indexOf(' ') + 1)
+            }else{
+                getProducts($(this).attr('get'),$(this).attr('cat'));
+            }
         })
     }
     subcategoryClick()
@@ -100,7 +114,7 @@ $(document).ready(function(){
     
     // search icon on clicl
     $('.search-icon').click(function(){
-        getProducts('byName')
+        getProducts('byName','')
     })
 
 })

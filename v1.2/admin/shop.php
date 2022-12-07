@@ -292,7 +292,7 @@ if(!isset($_SESSION['admin_id'])){
                     <span class="loader__element"></span>
                 </div>
                 <!-- Load More Products Button -->
-                <button class="btn btn-primary loadMore" get="" style="display:none;">Load More</button>
+                <button class="btn btn-primary loadMore" get="" cat="" style="display:none;">Load More</button>
             </div>
         </div>
     </section>
@@ -495,7 +495,7 @@ if(!isset($_SESSION['admin_id'])){
     <script>    var products_id = [];</script>
     <script src="script/shop.js"></script>
     <script>
-        function getProducts(catCode){
+        function getProducts(catCode,mCatId){
         $('.loader').css('display','flex');
         proName = '';
         if(catCode == 'byName'){
@@ -504,10 +504,11 @@ if(!isset($_SESSION['admin_id'])){
         $.ajax({
             type: "GET",
             url: "api/shop/getProducts.php",
-            data:  {
+            data:  { 
                 catCode : catCode,
                 shown : JSON.stringify(products_id),
-                proName : proName
+                proName : proName,
+                masterCatId : mCatId,
             },
             success: function (response) {
                 response = JSON.parse(response)
@@ -565,7 +566,11 @@ if(!isset($_SESSION['admin_id'])){
                            
                         }
                         $('.products-inner').html(cards)
-                        $('.product-category-title').text(response[3]);
+                        var proTitle = response[4] +' - '+response[3];
+                        $('.product-category-title').text(proTitle);
+                        if (response[3] == undefined){
+                            $('.product-category-title').text('Our Products');
+                        }
                         if(response[2] > 0){
                             $('.loadMore').css('display','block');
                         }else{
@@ -718,14 +723,25 @@ if(!isset($_SESSION['admin_id'])){
         }
     </script>
     <?php 
-    if(isset($_GET['cateCode'])){
-        echo '<script>getProByCat("'.$_GET['cateCode'].'");</script>';
-    }else if (isset($_GET['subCode'])){
-        echo '<script>getProducts("'.$_GET['subCode'].'")</script>';
+    // if(isset($_GET['cateCode'])){
+    //     echo '<script>getProByCat("'.$_GET['cateCode'].'");</script>';
+    // }else if (isset($_GET['subCode'])){
+    //     echo '<script>getProducts("'.$_GET['subCode'].'")</script>';
+    // }
+    // else{
+    //     echo '<script>   getProducts("random");</script>';
+    // } 
+    if (isset($_SESSION['cat'])){
+        if ($_SESSION['cat'] == 'random'){
+            echo '<script>getProducts("random","")</script>';
+        }else{
+            echo '<script>getProducts("'.$_SESSION['cat'][1].'","'.$_SESSION['cat'][0].'")</script>';
+        }
+        echo '<script>console.log("'.$_SESSION['cat'][0].$_SESSION['cat'][1].'")</script>';
+    }else{
+        echo '<script>   getProducts("random","");console.log("hai")</script>';
     }
-    else{
-        echo '<script>   getProducts("random");</script>';
-    } 
+    // unset($_SESSION['cat']);
     ?>
 
     <!-- REORDER SCRIPT  -->
