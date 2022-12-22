@@ -83,7 +83,7 @@
             <div class="carousel-item <?php if($i++ == 0){ echo 'active';}  ?> opacity-overlay" style="background-image: url('<?= $pro['product_img'] ?>')">
                 <div class="carousel-caption">
                     <h5 class="heading"><?= $pro['product_name'] ?></h5>
-                    <p class="sub-heading"><?= substr($pro['product_desc'],0,200) ?>...</p>
+                    <p class="sub-heading"><?= substr($pro['product_desc'],0,200) ?></p>
                     <div class="button-container">
                         <button class="custom-button btn" onclick="window.location.href='./single/product.php?product_code=<?= $pro['product_code'] ?>'" type="button">LEARN MORE</button>
                     </div>
