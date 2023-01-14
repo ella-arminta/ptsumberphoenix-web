@@ -51,7 +51,7 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and
     <!-- Navbar -->
     <nav class="navbar active fixed-top navbar-expand-lg">
         <div class="paragraph">
-            <a href="index.php">Home </a>
+        `   <a href="../index.php">Home </a>
             <span>/</span> 
             <a href="../product.php">Features </a>
             <span>/</span>
@@ -116,21 +116,25 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and
                 </div>
                 <div class="icons-place">
 
-                    <div class="delivery icon-place">
+                    <!-- <div class="delivery icon-place"> -->
                         <i class="fa-solid fa-truck"></i>
                         <div class="icon-content">
                             <div class="paragraph icon-content-heading">Delivery</div>
-                            <div class="paragraph icon-content-description"><?= htmlspecialchars($product['product_delivery']) ?></div>
+                            <!-- <div class="paragraph icon-content-description"> -->
+                                <?php //htmlspecialchars($product['product_delivery']) ?>
+                            <!-- </div> -->
                         </div>
-                    </div>
+                    <!-- </div> -->
 
-                    <div class="cs icon-place">
+                    <!-- <div class="cs icon-place"> -->
                         <i class="fa-solid fa-clock"></i>
                         <div class="icon-content">
                             <div class="paragraph icon-content-heading">Customer Service</div>
-                            <div class="paragraph icon-content-description"><?= htmlspecialchars($product['customer_service']) ?></div>
+                            <!-- <div class="paragraph icon-content-description"> -->
+                                <?php // htmlspecialchars($product['customer_service']) ?>
+                            <!-- </div> -->
                         </div>
-                    </div>
+                    <!-- </div> -->
 
                 </div>
                 <div class="contact-container">

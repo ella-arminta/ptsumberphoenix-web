@@ -149,5 +149,10 @@
     <script src="script/nav.js"></script>
     <script src="script/product/nav.js"></script>
     <script src="script/product/best.js"></script>
+    <?php 
+        if(isset($_SESSION['cat'])){
+            unset($_SESSION['cat']);
+        } 
+    ?>
 </body>
 </html>

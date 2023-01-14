@@ -582,6 +582,11 @@ function getData($fiturNama,$conn){
 
     <!-- modal Description Stats JS -->
     <script src="./script/homepage/descStats.js"></script>
+    <?php 
+        if(isset($_SESSION['cat'])){
+            unset($_SESSION['cat']);
+        } 
+    ?>
 </body>
 
 </html>
