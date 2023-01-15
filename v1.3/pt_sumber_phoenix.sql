@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2023 at 05:21 PM
+-- Generation Time: Jan 15, 2023 at 04:51 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -134,7 +134,17 @@ INSERT INTO `admin_log` (`log_id`, `action`, `log_desc`, `time`, `admin_id`, `pr
 (68, 'read message', 'Ella Arminta has read the message with subject of hai', '2022-11-18 17:05:51', 1, '2'),
 (69, 'read message', 'Ella Arminta has read the message with subject of hai', '2022-11-18 17:10:05', 1, '2'),
 (70, 'add product', 'Ella Arminta has added a product with the code PD11', '2022-11-19 17:28:50', 1, 'PD11'),
-(71, 'reorder category', 'Ella Arminta has reordered the category.', '2022-11-22 21:14:54', 1, '');
+(71, 'reorder category', 'Ella Arminta has reordered the category.', '2022-11-22 21:14:54', 1, ''),
+(72, 'add product', 'Ella Arminta has added a product with the code BJ', '2023-01-15 21:50:16', 1, 'BJ'),
+(73, 'add product', 'Ella Arminta has added a product with the code BJ', '2023-01-15 21:50:16', 1, 'BJ'),
+(74, 'delete product', 'Ella Arminta has delete a product with the code BJ', '2023-01-15 21:51:32', 1, 'BJ'),
+(75, 'update', 'Ella Arminta updated address', '2023-01-15 22:00:30', 1, 'Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 10000'),
+(76, 'update', 'Ella Arminta updated phone', '2023-01-15 22:00:45', 1, '+62 21 5398 318 '),
+(77, 'update', 'Ella Arminta updated phone', '2023-01-15 22:00:54', 1, 'Phone: +62 21 5398 318  3'),
+(78, 'update', 'Ella Arminta updated email', '2023-01-15 22:01:03', 1, 'phoenix-spm@sumberphoenix.co.id  '),
+(79, 'update', 'Ella Arminta updated email', '2023-01-15 22:01:11', 1, 'Email: phoenix-spm@sumberphoenix.co.id a'),
+(80, 'update', 'Ella Arminta updated phone', '2023-01-15 22:01:18', 1, 'Phone: +62 21 5398 318 '),
+(81, 'update', 'Ella Arminta updated address', '2023-01-15 22:01:26', 1, 'Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 1120 ');
 
 -- --------------------------------------------------------
 
@@ -231,9 +241,9 @@ INSERT INTO `company_profile` (`id_fitur`, `fitur_name`, `fitur_data`) VALUES
 (15, 'fields_title', 'Business Fields'),
 (16, 'fields_desc', 'We Provide so much product to distributed'),
 (17, 'newsletter_desc', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. '),
-(18, 'address', 'Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 10000'),
-(19, 'phone', '+62 21 5398 318 '),
-(20, 'email', 'phoenix-spm@sumberphoenix.co.id  '),
+(18, 'address', 'Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 100000'),
+(19, 'phone', 'Phone: +62 21 5398 318'),
+(20, 'email', 'Email: phoenix-spm@sumberphoenix.co.id'),
 (21, 'why_us_title1', 'Well Trained Marketing'),
 (22, 'why_us_desc1', 'We have professional experts to recommend which products are suitable for developing your business'),
 (23, 'why_us_title2', 'Trusted\n'),
@@ -243,18 +253,22 @@ INSERT INTO `company_profile` (`id_fitur`, `fitur_name`, `fitur_data`) VALUES
 (27, 'why_us_title4', 'Spacious Warehouse Facility'),
 (28, 'why_us_desc4', 'We have a warehouse that can contains a lot of goods and with supporting facilities'),
 (29, 'statistics_total1', '234'),
-(30, 'statistics_title1', 'Happy Clients'),
-(31, 'statistics_desc1', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt!'),
+(30, 'statistics_title1', 'Happy Clients 1'),
+(31, 'statistics_desc1', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt! 1'),
 (32, 'statistics_total2', '521'),
-(33, 'statistics_title2', 'Projects'),
-(34, 'statistics_desc2', '2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt!'),
+(33, 'statistics_title2', 'Projects 2'),
+(34, 'statistics_desc2', '2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt! 2'),
 (35, 'statistics_total3', '19'),
-(36, 'statistics_title3', 'Years Of Support'),
-(37, 'statistics_desc3', '3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt!'),
+(36, 'statistics_title3', 'Years Of Support 3'),
+(37, 'statistics_desc3', '3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt! 3'),
 (38, 'statistics_total4', '50'),
 (39, 'statistics_title4', 'Workers'),
 (40, 'statistics_desc4', '4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt!'),
-(42, 'logo', 'logo.png');
+(42, 'logo', 'logo.png'),
+(44, 'instagram', 'https://www.instagram.com/sumberphoenixmakmur.id/'),
+(45, 'linkedin', 'linklinkedin'),
+(46, 'facebook', 'linkfacebook'),
+(47, 'twitter', 'linktwitter');
 
 -- --------------------------------------------------------
 
@@ -278,10 +292,10 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`emp_id`, `emp_name`, `emp_img`, `emp_position`, `emp_insta`, `emp_linkedin`, `emp_facebook`, `emp_twitter`) VALUES
-(1, 'Agus Handoko', 'data/team/cb260c790c1708d0404462d00a1f2a63.png', 'Director', '#', '#', '#', '#'),
-(2, 'Mark Robert', 'data/team/8c3718db2ab00a5bfa5c54131b0514fb.jpg', 'CFO', '#', '#', '#', '#'),
-(3, 'Daniel Davidson', 'data/team/133ea652aca37c001130ff89da8fd9ae.jpg', 'CMO', '#', '#', '#', '#'),
-(4, 'Roger Hartono', 'data/team/d83b1e8bba94cb86f4f109ee2ab3b6bd.jpg', 'CTO', '#', '#', '#', '#');
+(1, 'Agus Handoko', 'data/team/cb260c790c1708d0404462d00a1f2a63.png', 'Director', 'https://www.instagram.com/ellaarminta/', 'https://www.linkedin.com/in/ella-arminta-601863222/', 'https://web.facebook.com/login.php?next=https%3A%2F%2Fweb.facebook.com%2Fsettings', 'https://twitter.com/genta_petra?lang=en'),
+(2, 'Mark Robert', 'data/team/8c3718db2ab00a5bfa5c54131b0514fb.jpg', 'CFO', 'https://www.instagram.com/ellaarminta/', 'https://www.linkedin.com/in/ella-arminta-601863222/', 'https://web.facebook.com/login.php?next=https%3A%2F%2Fweb.facebook.com%2Fsettings', 'https://twitter.com/genta_petra?lang=en'),
+(3, 'Daniel Davidson', 'data/team/133ea652aca37c001130ff89da8fd9ae.jpg', 'CMO', 'https://www.instagram.com/ellaarminta/', 'https://www.linkedin.com/in/ella-arminta-601863222/', 'https://web.facebook.com/login.php?next=https%3A%2F%2Fweb.facebook.com%2Fsettings', 'https://twitter.com/genta_petra?lang=en'),
+(4, 'Roger Hartono', 'data/team/d83b1e8bba94cb86f4f109ee2ab3b6bd.jpg', 'CTO', 'https://www.instagram.com/ellaarminta/', 'https://www.linkedin.com/in/ella-arminta-601863222/', 'https://web.facebook.com/login.php?next=https%3A%2F%2Fweb.facebook.com%2Fsettings', 'https://twitter.com/genta_petra?lang=en');
 
 -- --------------------------------------------------------
 
@@ -341,8 +355,6 @@ CREATE TABLE `products` (
   `product_code` varchar(100) NOT NULL,
   `product_img` text NOT NULL,
   `product_desc` text NOT NULL,
-  `product_delivery` varchar(100) NOT NULL,
-  `customer_service` varchar(100) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `featured` tinyint(1) NOT NULL DEFAULT 0,
   `best_seller` int(11) NOT NULL DEFAULT 0
@@ -352,26 +364,27 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_name`, `product_code`, `product_img`, `product_desc`, `product_delivery`, `customer_service`, `status`, `featured`, `best_seller`) VALUES
-(1, 'Silane Coupling Agent', 'SILANE', 'data/product/download.jpeg', 'Adhesion promoters, or coupling agents, are chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion ...', 'Any TIme', '5 Star', 1, 0, 1),
-(2, 'Synthetic Rubbers', 'SR', 'data/product/download (1).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum                                                      \n                                                        ', 'Free', '24 Hours a day', 1, 0, 1),
-(3, ' Natural Rubbers', 'NR', 'data/product/download (2).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'From Somewhere', '24 Hours', 1, 0, 0),
-(4, 'Pigment Dispersion', 'PD', 'data/product/download (3).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
-(5, 'Anti Scratch', 'AS', 'data/product/images.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
-(6, 'Slip Agent', 'SA', 'data/product/download (4).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 1, 0),
-(7, 'Plastic Additives', 'PLA', 'data/product/download (5).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 1),
-(8, 'Mould Release Agent', 'MRA', 'data/product/download (6).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
-(9, 'Resins', 'RS1', 'data/product/download (7).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 1, 1),
-(10, 'Plunger Pellet Lubricant', 'PPL', 'data/product/download (8).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 0, 0, 0),
-(11, 'Dosing Machine for Plunger Lubricant', 'DMPL', 'data/product/download (9).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
-(12, 'Mold Release', 'MR', 'data/product/images.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
-(13, ' Adhesion Promotors', 'AP', 'data/product/download (10).jpeg', '<p>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</p><p>&nbsp;</p><ol><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li></ol>', 'The Fastest Delivery', '24 Hours', 1, 0, 1),
-(14, 'Slipping Agents', 'SAS', 'data/product/download (11).jpeg', '<p>Additives, which enhance and reduce handling problems, are used extensively in the manufacture of polyolefin films. In their natural state, most polyolefins exhibit a degree of ‘tackiness,’ and therefore cannot be readily processed into packaging films without the presence of additives to ease their ability to “separate and slide.”</p><p>“Slip” additives are used to reduce a film’s resistance to sliding over itself or parts of converting equipment. Commercially important slips can be found in the chemical family known as amides, and are typically referred to as “fast bloom” (oleamide) and “slow bloom” (erucamide) additives. Other amides are used specifically for special processes (e.g. higher heat extrusion coating applications or customized mixtures where balancing slip and antiblock properties are critical.)</p><p>The effectiveness of slip additives are normally determined by the<strong> coefficient of friction (COF)</strong> it allows, which is measured using ASTM D-1894, “Standard Method of Test for Coefficient of Friction of Plastic Film.” COF is a ratio of the force required to slide one layer of film across another relative to the gravimetric force exerted on it. Loosely defined, films can be&nbsp;characterized as “low, medium, or high slip” as follows:</p>', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
-(15, 'Hello', 'HL', 'data/product/DSC_0238.JPG', '<p>hai</p><p>hai</p><p>hai</p><p>hai</p><p>huahah</p>', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
-(16, 'hello', 'HL', 'data/product/1668209558-DSC_0238.JPG', '<p>hai</p><p>hi</p>', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
-(17, 'hello', 'HL', 'data/product/1668210483-DSC_0238.JPG', '<p>hola</p><p>hola</p><p>hola</p>', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
-(18, 'hello', 'HL', 'data/product/1668210592-DSC_0238.JPG', '<p>hola</p><p>hola</p><p>hola</p>', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
-(19, 'product 11', 'PD11', 'data/product/1668853730-homepage.png', '<p>hai</p><p>hai</p><p>hai</p><p>&nbsp;</p><p>hai</p><p>hai</p><p>ahi</p>', 'The Fastest Delivery', 'Provide a 24 hour customer service', 1, 0, 0);
+INSERT INTO `products` (`product_id`, `product_name`, `product_code`, `product_img`, `product_desc`, `status`, `featured`, `best_seller`) VALUES
+(1, 'Silane Coupling Agent', 'SILANE', 'data/product/download.jpeg', 'Adhesion promoters, or coupling agents, are chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion ...', 1, 0, 1),
+(2, 'Synthetic Rubbers', 'SR', 'data/product/download (1).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum                                                      \n                                                        ', 1, 0, 1),
+(3, ' Natural Rubbers', 'NR', 'data/product/download (2).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
+(4, 'Pigment Dispersion', 'PD', 'data/product/download (3).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
+(5, 'Anti Scratch', 'AS', 'data/product/images.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
+(6, 'Slip Agent', 'SA', 'data/product/download (4).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 1, 0),
+(7, 'Plastic Additives', 'PLA', 'data/product/download (5).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 1),
+(8, 'Mould Release Agent', 'MRA', 'data/product/download (6).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
+(9, 'Resins', 'RS1', 'data/product/download (7).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 1, 1),
+(10, 'Plunger Pellet Lubricant', 'PPL', 'data/product/download (8).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 0, 0, 0),
+(11, 'Dosing Machine for Plunger Lubricant', 'DMPL', 'data/product/download (9).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
+(12, 'Mold Release', 'MR', 'data/product/images.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
+(13, ' Adhesion Promotors', 'AP', 'data/product/download (10).jpeg', '<p>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</p><p>&nbsp;</p><ol><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li></ol>', 1, 0, 1),
+(14, 'Slipping Agents', 'SAS', 'data/product/download (11).jpeg', '<p>Additives, which enhance and reduce handling problems, are used extensively in the manufacture of polyolefin films. In their natural state, most polyolefins exhibit a degree of ‘tackiness,’ and therefore cannot be readily processed into packaging films without the presence of additives to ease their ability to “separate and slide.”</p><p>“Slip” additives are used to reduce a film’s resistance to sliding over itself or parts of converting equipment. Commercially important slips can be found in the chemical family known as amides, and are typically referred to as “fast bloom” (oleamide) and “slow bloom” (erucamide) additives. Other amides are used specifically for special processes (e.g. higher heat extrusion coating applications or customized mixtures where balancing slip and antiblock properties are critical.)</p><p>The effectiveness of slip additives are normally determined by the<strong> coefficient of friction (COF)</strong> it allows, which is measured using ASTM D-1894, “Standard Method of Test for Coefficient of Friction of Plastic Film.” COF is a ratio of the force required to slide one layer of film across another relative to the gravimetric force exerted on it. Loosely defined, films can be&nbsp;characterized as “low, medium, or high slip” as follows:</p>', 1, 0, 0),
+(15, 'Hello', 'HL', 'data/product/DSC_0238.JPG', '<p>hai</p><p>hai</p><p>hai</p><p>hai</p><p>huahah</p>', 0, 0, 0),
+(16, 'hello', 'HL', 'data/product/1668209558-DSC_0238.JPG', '<p>hai</p><p>hi</p>', 0, 0, 0),
+(17, 'hello', 'HL', 'data/product/1668210483-DSC_0238.JPG', '<p>hola</p><p>hola</p><p>hola</p>', 0, 0, 0),
+(18, 'hello', 'HL', 'data/product/1668210592-DSC_0238.JPG', '<p>hola</p><p>hola</p><p>hola</p>', 0, 0, 0),
+(19, 'product 11', 'PD11', 'data/product/1668853730-homepage.png', '<p>hai</p><p>hai</p><p>hai</p><p>&nbsp;</p><p>hai</p><p>hai</p><p>ahi</p>', 1, 0, 0),
+(20, 'Baju', 'BJ', 'data/product/1673794216-seribu.jpg', '<p>ini baju yang keren banget</p>', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -416,7 +429,9 @@ INSERT INTO `product_subcategory` (`product_id`, `subcategory_id`) VALUES
 (15, 24),
 (18, 10),
 (18, 22),
-(19, 1);
+(19, 1),
+(20, 1),
+(20, 8);
 
 -- --------------------------------------------------------
 
@@ -490,7 +505,8 @@ INSERT INTO `testimonials` (`testi_id`, `testi_name`, `testi_intro`, `testi_pp`,
 (4, 'Lorem Ipsum', 'Lorem Ipsum', 'data/testimonials/Lorem IpsumLorem Ipsum799bad5a3b514f096e69bbc4a7896cd9.jpg', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '2022-10-26 14:22:41', 2),
 (5, 'Lorem Ipsum', 'Lorem Ipsum', 'data/testimonials/Lorem IpsumLorem Ipsum156005c5baf40ff51a327f1c34f2975b.jpg', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '2022-10-26 14:22:54', 2),
 (6, 'Lorem Ipsum', 'Lorem Ipsum', 'data/testimonials/Lorem IpsumLorem Ipsumd0096ec6c83575373e3a21d129ff8fef.jpg', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '2022-10-26 14:23:06', 2),
-(7, 'Lorem Ipsum', 'Lorem Ipsum', 'data/testimonials/Lorem IpsumLorem Ipsumcb260c790c1708d0404462d00a1f2a63.png', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '2022-10-26 14:23:24', 0);
+(7, 'Lorem Ipsum', 'Lorem Ipsum', 'data/testimonials/Lorem IpsumLorem Ipsumcb260c790c1708d0404462d00a1f2a63.png', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '2022-10-26 14:23:24', 0),
+(8, 'Ella', 'hai', 'data/testimonials/Ellahaimain-bg3.jpg', 'd d d d d d d d d d d d d d d d d d d d d dd d d d d d d d dd d d d d dd d d d d dd d d d d d d dd d d d d d d d d d d  d  d d d d d d d d d d d d d d d d d d d d d dd d d d d d d d dd d d d d dd d d d d dd d d d d d ', '2023-01-15 15:28:26', 1);
 
 -- --------------------------------------------------------
 
@@ -631,7 +647,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `admin_log`
 --
 ALTER TABLE `admin_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -649,7 +665,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `company_profile`
 --
 ALTER TABLE `company_profile`
-  MODIFY `id_fitur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_fitur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `employees`
@@ -673,7 +689,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
@@ -685,7 +701,7 @@ ALTER TABLE `subcategories`
 -- AUTO_INCREMENT for table `testimonials`
 --
 ALTER TABLE `testimonials`
-  MODIFY `testi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `testi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `updates`
