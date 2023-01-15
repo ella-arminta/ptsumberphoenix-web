@@ -538,23 +538,6 @@ function getData($fiturNama,$conn){
                                     <label for="desc3" class="form-label">Description</label>
                                     <textarea aria-describedby="employee-total" class="form-control" type="text" id="desc3" name="desc3"><?= getData('statistics_desc3',$conn) ?></textarea>
                                 </div>
-
-                                <!-- Stats 4 -->
-                                <h3 style="font-weight: bold">Stats 4</h3>
-                                <div class="mb-3">
-                                    <label for="title4" class="form-label">Title</label>
-                                    <input aria-describedby="employee-title" class="form-control" type="text" id="title4" name="title4" value="<?= getData('statistics_title4',$conn) ?>">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="total4" class="form-label">Total</label>
-                                    <input aria-describedby="employee-total" class="form-control" type="text" id="total4" name="total4" value="<?= getData('statistics_total4',$conn) ?>">
-                                </div>
-
-                                <div class="mb-5">
-                                    <label for="desc4" class="form-label">Description</label>
-                                    <textarea aria-describedby="employee-total" class="form-control" type="text" id="desc4" name="desc4"><?= getData('statistics_desc4',$conn) ?></textarea>
-                                </div>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -1080,9 +1063,101 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
     </div>
 
     <!-- Footer section -->
-    <?php include 'bottombar.php'; ?>
+    <section class="footer-section">
+        <div class="container-fluid grid">
+            <div class="company-information">
+                <div class="company-logo">
+                    <img src="../src/<?= getData('logo',$conn) ?>" id="company-logo" alt="">
+                    <button class="btn btn-danger updateLogo" data-bs-toggle="modal" data-bs-target="#logo"><i class="fa-solid fa-pencil"></i></button>
+                </div>
 
+                
+
+                <div class="company-address">
+                    <p class="paragraph" col="address"><?= getData('address',$conn)?> <button type="button"
+                            class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                </div>
+                <div class="company-phone">
+                    <p class="paragraph" col="phone"><strong>Phone: </strong><?= getData('phone',$conn) ?> <button
+                            type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                </div>
+                <div class="company-email">
+                    <p class="paragraph" col="email"><strong>Email: </strong><?= getData('email',$conn) ?> <button
+                            type="button" class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                </div>
+            </div>
+            <div class="useful-links">
+                <h2 class="sub-heading underline">Useful Links</h2>
+                <a class="footer-item" href="#">
+                    <i class="fa-solid fa-angle-right"></i>
+                    Home
+                </a>
+                <a class="footer-item" href="#about">
+                    <i class="fa-solid fa-angle-right"></i>
+                    About
+                </a>
+                <a class="footer-item" href="product.php">
+                    <i class="fa-solid fa-angle-right"></i>
+                    Products
+                </a>
+                <a class="footer-item" href="contact.php">
+                    <i class="fa-solid fa-angle-right"></i>
+                    Contact
+                </a>
+            </div>
+            <div class="business-fields useful-links">
+                <h2 class="sub-heading underline">Business Fields</h2>
+                <?php
+                    $stmt=$conn->prepare("SELECT c.cat_code as cat_code,c.cat_name as cat_name,c.cat_id as cat_id,c.cat_img as cat_img, count(s.sub_id) 
+                    FROM categories c 
+                    join subcategories s on c.cat_id = s.cat_id 
+                    join product_subcategory ps  on s.sub_id = ps.subcategory_id
+                    join products p on ps.product_id = p.product_id
+                    where c.status = 1 and s.status = 1 and p.status = 1 GROUP BY c.cat_id HAVING COUNT(ps.product_id) > 0 order by c.order_by ASC");
+                    $stmt->execute();
+                    while($cat = $stmt->fetch()):
+                ?>
+                <a class="footer-item">
+                    <i class="fa-solid fa-angle-right"></i>
+                    <?= $cat['cat_name'] ?>
+                </a>
+                <?php endwhile; ?>
+            </div>
+            <div class="newsletter">
+                <h2 class="sub-heading underline">Join Our Newsletter</h2>
+                <p class="paragraph" col="newsletter_desc"><?= getData('newsletter_desc',$conn)?> <button type="button"
+                        class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
+                <div class="email-input">
+                    <input type="email" placeholder="example@gmail.com">
+                    <button class="custom-button btn" type="button">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
     <footer class="copyright-footer">
+        <div class="container-fluid">
+            <div class="copyright paragraph">
+                <i class="fa-solid fa-copyright"></i>
+                Copyright <strong>PT Sumber Phoenix Makmur</strong>. All Rights Reserved
+            </div>
+            <div class="copyright-social-media">
+                <div class="icon-container-box">
+                    <a href="<?= getData('instagram',$conn) ?>" class="fa-brands fa-instagram"></a>
+                </div>
+                <div class="icon-container-box">
+                    <a href="<?= getData('linkedin',$conn) ?>" class="fa-brands fa-linkedin"></a>
+                </div>
+                <div class="icon-container-box">
+                    <a href="<?= getData('facebook',$conn) ?>" class="fa-brands fa-facebook"></a>
+                </div>
+                <div class="icon-container-box">
+                    <a href="<?= getData('twitter',$conn) ?>" class="fa-brands fa-twitter"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- <footer class="copyright-footer">
         <div class="container-fluid">
             <div class="copyright paragraph">
                 <i class="fa-solid fa-copyright"></i>
@@ -1103,8 +1178,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                 </div>
             </div>
         </div>
-    </footer>
-
+    </footer> -->
     <!-- Arrow Up -->
     <a class="arrow-container" href="#">
         <div class="arrow">
@@ -1186,6 +1260,76 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                 })
             }
     
+    </script>
+    <!-- modal edit changes instagram line dll -->
+    <div class="modal fade" id="kontakModal" tabindex="-1" aria-labelledby="kontakModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="kontakModalLabel">Kontak</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editKontakForm">
+                    <div class="mb-3">
+                        <label for="instagram" class="form-label">Instagram : </label>
+                        <input type="text" class="form-control" id="instagram" name="instagram" value="<?= getData('instagram',$conn) ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="linkedin" class="form-label">LinkedIn : </label>
+                        <input type="text" class="form-control" id="linkedin" name="linkedin" value="<?= getData('linkedin',$conn) ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="facebook" class="form-label">Facebook : </label>
+                        <input type="text" class="form-control" id="facebook" name="facebook" value="<?= getData('facebook',$conn) ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="twitter" class="form-label">Twitter : </label>
+                        <input type="text" class="form-control" id="twitter" name="twitter" value="<?= getData('twitter',$conn) ?>">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="saveChangeKontak()">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- script untuk modal instagram linkedin dkk -->
+    <script>
+        buttonKontak = `
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" id="editKontak" data-bs-target="#kontakModal">
+            <i class="fa-solid fa-pencil"></i>
+        </button>
+        `
+        $('.copyright-social-media').append(buttonKontak);
+        function saveChangeKontak(){
+            $.ajax({
+                type: "POST",
+                url: "api/home/editKontak.php",
+                data: $('#editKontakForm').serialize(),
+                success: function (response) {
+                    if(response == 'success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Contact updated'
+                        }).then(function() {
+                            location.reload();
+                        });
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Something went wrong.'
+                        }).then(function() {
+                            location.reload();
+                        });
+                    }
+                }
+            });
+        }
     </script>
     <?php 
         if(isset($_GET['stat'])){

@@ -2,7 +2,7 @@
 include '../connect.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $response = 'success';
-    for($i = 1;$i <= 4;$i++){
+    for($i = 1;$i <= 3;$i++){
         $stmt = $conn->prepare('UPDATE company_profile set fitur_data=? where fitur_name = ?');
         $berhasil = $stmt->execute([$_POST['title'.$i],'statistics_title'.$i]);
         if(!$berhasil){

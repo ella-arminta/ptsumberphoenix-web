@@ -51,7 +51,7 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and
     <!-- Navbar -->
     <nav class="navbar active fixed-top navbar-expand-lg">
         <div class="paragraph">
-            <a href="index.php">Home </a>
+            <a href="../index.php">Home </a>
             <span>/</span> 
             <a href="../product.php">Features </a>
             <span>/</span>
@@ -70,7 +70,7 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and
             </div>
 
             <div class="navbar-wrapper">
-                <a href="./contact.php"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a>
+                <!-- <a href="./contact.php"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a> -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars icon"></i>
                 </button>
@@ -96,7 +96,7 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and
                             <i class="fa-solid fa-magnifying-glass search-icon"></i>
                         </a>
                     </li>
-                    <a href="../contact.php"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a>
+                    <!-- <a href="../contact.php"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a> -->
                 </ul>
             </div>
 
@@ -110,35 +110,35 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and
             <div class="product-description">
                 <div class="product-title heading"><?= htmlspecialchars($product['product_name']) ?></div>
                 <div class="product-content paragraph">
-                    <pre>
+                    <!-- <pre> -->
                         <?= $product['product_desc'] ?>
-                    </pre>
+                    <!-- </pre> -->
                 </div>
-                <div class="icons-place">
+                <!-- <div class="icons-place"> -->
 
                     <!-- <div class="delivery icon-place"> -->
-                        <i class="fa-solid fa-truck"></i>
+                        <!-- <i class="fa-solid fa-truck"></i>
                         <div class="icon-content">
-                            <div class="paragraph icon-content-heading">Delivery</div>
+                            <div class="paragraph icon-content-heading">Delivery</div> -->
                             <!-- <div class="paragraph icon-content-description"> -->
                                 <?php //htmlspecialchars($product['product_delivery']) ?>
                             <!-- </div> -->
-                        </div>
+                        <!-- </div> -->
                     <!-- </div> -->
 
                     <!-- <div class="cs icon-place"> -->
-                        <i class="fa-solid fa-clock"></i>
+                        <!-- <i class="fa-solid fa-clock"></i>
                         <div class="icon-content">
-                            <div class="paragraph icon-content-heading">Customer Service</div>
+                            <div class="paragraph icon-content-heading">Customer Service</div> -->
                             <!-- <div class="paragraph icon-content-description"> -->
                                 <?php // htmlspecialchars($product['customer_service']) ?>
                             <!-- </div> -->
-                        </div>
+                        <!-- </div> -->
                     <!-- </div> -->
 
-                </div>
+                <!-- </div> -->
                 <div class="contact-container">
-                    <button class="custom-button" onclick="window.location.href='../contact.php'" type="button">Contact Us</button>
+                    <!-- <button class="custom-button" onclick="window.location.href='../contact.php'" type="button">Contact Us</button> -->
                 </div>
             </div>
         </div>

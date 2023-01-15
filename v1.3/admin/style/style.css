@@ -1,7 +1,7 @@
 
 button.edit, button.editImage, button.editClients, button.addClient,
 button.stats, button.team, button.delEmp, button.butTestiModal,
-button.editFaqButton, button.addFaq, button.delClient {
+button.editFaqButton, button.addFaq, button.delClient, button#editKontak {
     width: 30px;
     height: 30px;
     background-color: var(--yellow) !important;

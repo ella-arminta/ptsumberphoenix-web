@@ -97,7 +97,7 @@ function getData($fiturNama,$conn){
                             <input type="email" name="email" placeholder="Your Email" class="input-fields" required>
                         </div>
                         <input type="text" placeholder="Subject" name="subject" class="input-fields" required>
-                        <textarea placeholder="Message" name="msg" required></textarea>
+                        <textarea placeholder="Message" id="msgTextarea" name="msg" required></textarea>
                         <div class="button-container">
                             <input type="submit" class="custom-button btn navbar-btn submit" value="Send Message">
                         </div>
@@ -109,29 +109,6 @@ function getData($fiturNama,$conn){
 
     <!-- bottom section -->
     <?php include 'bottombar.php' ?>
-
-    <footer class="copyright-footer">
-        <div class="container-fluid">
-            <div class="copyright paragraph">
-                <i class="fa-solid fa-copyright"></i>
-                Copyright <strong>PT Sumber Phoenix Makmur</strong>. All Rights Reserved
-            </div>
-            <div class="copyright-social-media">
-                <div class="icon-container-box">
-                    <a href="#" class="fa-brands fa-instagram"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="#" class="fa-brands fa-linkedin"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="#" class="fa-brands fa-facebook"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="#" class="fa-brands fa-twitter"></a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="script/nav.js"></script>

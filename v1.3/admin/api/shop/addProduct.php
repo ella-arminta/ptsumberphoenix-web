@@ -3,8 +3,6 @@ include '../connect.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $proName = $_POST['proName'];
     $proDesc = $_POST['isi'];
-    $proDeli = 'The Fastest Delivery';
-    $custServ = 'Provide a 24 hour customer service';
     if(!isset($_POST['subs'])){
         $response = 'Choose 1 category minimal';
     }else{
@@ -43,13 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
             $response = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        }elseif (empty($proName) || empty($proDesc) || empty($proDeli) || empty($custServ) || empty($subcats) ||empty($proCode) ) {
+        }elseif (empty($proName) || empty($proDesc) || empty($subcats) ||empty($proCode) ) {
             $response ='Failed , please fill out all the data';
         }else {
                 if (move_uploaded_file($_FILES["proImg"]["tmp_name"], $target_file)) {
                     // insert into products
-                    $stmt = $conn->prepare('INSERT INTO products (product_name,product_code,product_img,product_desc,product_delivery,customer_service) values (?,?,?,?,?,?)');
-                    $berhasil= $stmt->execute([$proName,$proCode,$img_name,$proDesc,$proDeli,$custServ]);
+                    $stmt = $conn->prepare('INSERT INTO products (product_name,product_code,product_img,product_desc) values (?,?,?,?)');
+                    $berhasil= $stmt->execute([$proName,$proCode,$img_name,$proDesc]);
 
                     if($berhasil){ // tambahkan ke product_subcategories.
                         foreach($subcats as $sub){

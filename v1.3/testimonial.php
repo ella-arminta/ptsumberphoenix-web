@@ -106,7 +106,8 @@ function getData($fiturNama,$conn){
                             <span class="file-msg">or drag and drop your Profile Picture here</span>
                             <input name="image" type="file" class="file-input" accept="images/*" placeholder="hi" required>
                         </div>
-                        <textarea name="testimonial" placeholder="Testimonial" required></textarea>
+                        <textarea name="testimonial" id="testimonial" placeholder="Testimonial (Max 150 words)" onkeyup="cekPanjangKata()" required></textarea>
+                        <p class="text-danger" id="warningLong" style="display:none;">Message is not allowed longer than 150 words</p>
                         <div class="button-container">
                             <input name="submit" type="submit" class="custom-button btn navbar-btn submit" value="Send Feedbacks">
                         </div>
@@ -118,29 +119,6 @@ function getData($fiturNama,$conn){
 
     <!-- Footer -->
     <?php include 'bottombar.php' ?>
-
-    <footer class="copyright-footer">
-        <div class="container-fluid">
-            <div class="copyright paragraph">
-                <i class="fa-solid fa-copyright"></i>
-                Copyright <strong>PT Sumber Phoenix Makmur</strong>. All Rights Reserved
-            </div>
-            <div class="copyright-social-media">
-                <div class="icon-container-box">
-                    <a href="#" class="fa-brands fa-instagram"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="#" class="fa-brands fa-linkedin"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="#" class="fa-brands fa-facebook"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="#" class="fa-brands fa-twitter"></a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <!-- Jquery -->
@@ -179,6 +157,17 @@ function getData($fiturNama,$conn){
             
            
         })
+        function cekPanjangKata(){
+            var str = $('textarea#testimonial').val()
+            var len = str.split(' ').length;
+            if(len > 150){
+                $('#warningLong').css('display','block')
+                $('.submit').prop('disabled', true);
+            }else{
+                $('#warningLong').css('display','none')
+                $('.submit').prop('disabled', false);
+            }
+        }
     </script>
 </body>
 </html>

@@ -46,7 +46,7 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ?");
     <!-- Navbar -->
     <nav class="navbar active fixed-top navbar-expand-lg">
         <div class="paragraph">
-            <a href="index.php">Home </a>
+            <a href="../index.php">Home </a>
             <span>/</span> 
             <a href="product.php">Features </a>
             <span>/</span>

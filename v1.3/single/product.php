@@ -110,33 +110,33 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and
             <div class="product-description">
                 <div class="product-title heading"><?= htmlspecialchars($product['product_name']) ?></div>
                 <div class="product-content paragraph">
-                    <pre>
+                    <!-- <pre> -->
                         <?= $product['product_desc'] ?>
-                    </pre>
+                    <!-- </pre> -->
                 </div>
-                <div class="icons-place">
+                <!-- <div class="icons-place"> -->
 
                     <!-- <div class="delivery icon-place"> -->
-                        <i class="fa-solid fa-truck"></i>
-                        <div class="icon-content">
-                            <div class="paragraph icon-content-heading">Delivery</div>
+                        <!-- <i class="fa-solid fa-truck"></i>
+                        <div class="icon-content"> -->
+                            <!-- <div class="paragraph icon-content-heading">Delivery</div> -->
                             <!-- <div class="paragraph icon-content-description"> -->
                                 <?php //htmlspecialchars($product['product_delivery']) ?>
                             <!-- </div> -->
-                        </div>
+                        <!-- </div> -->
                     <!-- </div> -->
 
                     <!-- <div class="cs icon-place"> -->
-                        <i class="fa-solid fa-clock"></i>
-                        <div class="icon-content">
-                            <div class="paragraph icon-content-heading">Customer Service</div>
+                        <!-- <i class="fa-solid fa-clock"></i>
+                        <div class="icon-content"> -->
+                            <!-- <div class="paragraph icon-content-heading">Customer Service</div> -->
                             <!-- <div class="paragraph icon-content-description"> -->
                                 <?php // htmlspecialchars($product['customer_service']) ?>
                             <!-- </div> -->
-                        </div>
+                        <!-- </div> -->
                     <!-- </div> -->
 
-                </div>
+                <!-- </div> -->
                 <div class="contact-container">
                     <button class="custom-button" onclick="window.location.href='../contact.php'" type="button">Contact Us</button>
                 </div>
