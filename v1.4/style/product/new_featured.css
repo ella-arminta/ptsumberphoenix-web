@@ -79,3 +79,28 @@
     margin-right: 6px;
 }
 
+@media (max-width: 730px) {
+    .featured-section {
+        height: auto;
+    }
+
+    .featured-section .upper-featured {
+        display: block;
+        height: auto;
+    }
+
+    .featured-section .upper-featured .featured-container {
+        width: 100%;
+    }
+
+    .featured-container {
+        height: auto;
+        min-height: 300px;
+    }
+
+    .featured-container .custom-button {
+        position: static;
+        margin-top: 30px;
+    }
+}
+
