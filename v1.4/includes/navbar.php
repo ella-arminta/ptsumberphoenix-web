@@ -15,20 +15,20 @@
                     <li class="nav-item active" id='home-nav'>
                         <a class="nav-link paragraph" href="#">Home</a>
                     </li>
-                    <li class="nav-item" id='about-nav'>
-                        <a class="nav-link paragraph" href="#about">About</a>
+                    <li class="nav-item" id='product-nav'>
+                        <a class="nav-link paragraph" href="product.php">Products</a>
                     </li>
                     <li class="nav-item" id='field-nav'>
                         <a class="nav-link paragraph" href="#fields">Business Fields</a>
                     </li>
-                    <li class="nav-item" id='product-nav'>
-                        <a class="nav-link paragraph" href="product.php">Products</a>
+                    <li class="nav-item" id='about-nav'>
+                        <a class="nav-link paragraph" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item" id='update-nav'>
+                        <a class="nav-link paragraph" href="#update">News</a>
                     </li>
                     <li class="nav-item" id='why-nav'>
                         <a class="nav-link paragraph" href="#why">Why Us ?</a>
-                    </li>
-                    <li class="nav-item" id='update-nav'>
-                        <a class="nav-link paragraph" href="#update">Update</a>
                     </li>
                     <li class="nav-item" id='team-nav'>
                         <a class="nav-link paragraph" href="#team">Team</a>

@@ -15,23 +15,27 @@
 }
 
 .testimonial-section .intro.heading {
-    color: white;
+    color: black;
     text-align: center;
 }
 
 .testimonial-section .intro.paragraph {
-    color: white;
+    color: black;
     text-align: center;
 }
 
 .testimonial-section .custom-card {
-    background-color: var(--light-black);
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 5px;
     margin-bottom: 20px;
     padding: 30px;
     min-height: 250px;
     height: auto;
     padding-bottom: 40px;
+
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
 }
 
 .testimonial-section .custom-card .testimonial-writter {
@@ -39,7 +43,7 @@
     justify-content: flex-start;
     align-items: center;
 
-    color: white;
+    color: black;
 }
 
 .testimonial-section .custom-card .testimonial-writter img {
@@ -56,11 +60,14 @@
 }
 
 .writter-information .paragraph {
-    color: rgba(255, 255, 255, 0.6)
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .testimonial-section .custom-card .testimonial-quote .paragraph {
-    color: white !important;
+    color: black !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 127px;
 }
 
 .testimonial-section .custom-card .testimonial-quote .paragraph .quote {
@@ -83,7 +90,7 @@
     align-items: center;
 
     width: 100%;
-    color: white;
+    color: black;
     margin-top: 20px;
 
     cursor: pointer;

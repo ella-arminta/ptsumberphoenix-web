@@ -120,6 +120,10 @@
     cursor: pointer;
 }
 
+.content-panel .content-description {
+    margin-right: 40px;
+}
+
 .content-panel:hover .content-title {
     color: var(--yellow);
 }
@@ -206,6 +210,10 @@
     }
 
     .content-panel.active .paragraph {
+        margin-right: 0;
+    }
+
+    .content-panel .content-description {
         margin-right: 0;
     }
 }

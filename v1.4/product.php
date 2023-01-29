@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" href="style/product/nav.css">
     <link rel="stylesheet" href="style/product/features.css">
+    <link rel="stylesheet" href="style/product/new_featured.css">
     <link rel="stylesheet" href="style/product/best.css">
 
     <!-- Library -->
@@ -30,7 +31,7 @@
 <body>
     
     <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg">
+    <nav class="navbar active fixed-top navbar-expand-lg">
         <div class="paragraph"><a href="index.php">Home </a><span>/</span> <strong class="product">Features</strong></div>
         <div class="container-fluid">
             <div class="navbar-brand">
@@ -66,6 +67,41 @@
         $stmt->execute();
         $count = $stmt->rowCount();
     ?>
+
+    <section class="featured-section section-extra">
+        <div class="container-fluid">
+            <div class="upper-featured">
+                <div class="featured-container" style="background: url('./src/product/featured/pigment_paste.jpeg'); background-repeat: no-repeat; background-size: cover">
+                    <div class="heading">Pigment Paste</div>
+                    <div class="paragraph">Matapel pigment are basically grouped into three systems; water-based, water-solvent based and solvent-free for solvent based applications</div>
+                    <button class="custom-button btn" type="button">
+                        <i class="fa-solid fa-angle-right"></i>
+                        Show More
+                    </button>
+                </div>
+                <div class="featured-container" style="background: url('./src/product/featured/silicone.jpeg'); background-repeat: no-repeat; background-size: cover">
+                    <div class="heading">Silicone</div>
+                    <div class="paragraph">Silicone is very inert, non-toxic and special product with distinguished properties and can be used in plenty of applications</div>
+                    <button class="custom-button btn" type="button">
+                        <i class="fa-solid fa-angle-right"></i>
+                        Show More
+                    </button>
+                </div>
+            </div>
+            <div class="lower-featured">
+                <div class="featured-container" style="background: url('./src/product/featured/sole_agent.jpeg'); background-repeat: no-repeat; background-size: cover">
+                    <div class="heading">Sole Agent, Distributor & Stockist</div>
+                    <div class="paragraph">As a trading company, MATAPEL CHEMICALS excels in coating industries, fiberglass industries and silicone products for many industries especially textile industriess</div>
+                    <button class="custom-button btn" type="button">
+                        <i class="fa-solid fa-angle-right"></i>
+                        Show More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Del Later -->
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
         <div class="carousel-indicators">
             <?php
@@ -124,7 +160,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="script/nav.js"></script>
-    <script src="script/product/nav.js"></script>
+    <!-- <script src="script/product/nav.js"></script> -->
     <script src="script/product/best.js"></script>
     <?php 
         if(isset($_SESSION['cat'])){

@@ -102,7 +102,7 @@ include 'api/connect.php';
             </div>
 
             <div class="navbar-wrapper">
-                <a href="./contact.html"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a>
+                <a href="./contact.php"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars icon"></i>
                 </button>

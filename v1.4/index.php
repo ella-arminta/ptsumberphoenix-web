@@ -345,20 +345,6 @@ function getData($fiturNama,$conn){
                 ?>
                 <div class="team-content">
                     <img src="./<?= $emp['emp_img'] ?>" alt="">
-                    <div class="team-content-social-media">
-                        <div class="icon-container">
-                            <a href="<?= $emp['emp_insta']?>" class="fa-brands fa-instagram"></a>
-                        </div>
-                        <div class="icon-container">
-                            <a href="<?= $emp['emp_linkedin']?>" class="fa-brands fa-linkedin"></a>
-                        </div>
-                        <div class="icon-container">
-                            <a href="<?= $emp['emp_facebook']?>" class="fa-brands fa-facebook"></a>
-                        </div>
-                        <div class="icon-container">
-                            <a href="<?= $emp['emp_twitter']?>" class="fa-brands fa-twitter"></a>
-                        </div>
-                    </div>
                     <div class="team-content-information">
                         <div class="team-content-wrapper">
                             <div class="sub-headings team-name"><?= $emp['emp_name'] ?></div>
@@ -373,12 +359,11 @@ function getData($fiturNama,$conn){
     </section>
 
     <!-- Blog Section -->
-    <section class="blog-section section-extra">
+    <!-- <section class="blog-section section-extra">
         <div class="slide-container swiper container-fluid">
             <div class="slide-content">
                 <div class="custom-card-wrapper swiper-wrapper">
 
-                    <!-- Slide -->
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
                             <img src="./src/blog/1.jpg" alt="">
@@ -391,7 +376,6 @@ function getData($fiturNama,$conn){
                         </div>
                     </div>
 
-                    <!-- Slide -->
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
                             <img src="./src/blog/2.jpg" alt="">
@@ -404,7 +388,6 @@ function getData($fiturNama,$conn){
                         </div>
                     </div>
 
-                    <!-- Slide -->
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
                             <img src="./src/blog/3.jpg" alt="">
@@ -417,7 +400,6 @@ function getData($fiturNama,$conn){
                         </div>
                     </div>
 
-                    <!-- Slide -->
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
                             <img src="./src/blog/4.jpg" alt="">
@@ -429,7 +411,7 @@ function getData($fiturNama,$conn){
                             <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
                         </div>
                     </div>
-                    <!-- Slide -->
+
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
                             <img src="./src/blog/5.jpg" alt="">
@@ -442,7 +424,6 @@ function getData($fiturNama,$conn){
                         </div>
                     </div>
 
-                    <!-- Slide -->
                     <div class="custom-card swiper-slide">
                         <div class="blog-image-content">
                             <img src="./src/blog/6.jpg" alt="">
@@ -460,11 +441,11 @@ function getData($fiturNama,$conn){
 
             <div class="swiper-pagination"></div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Testimonial Section -->
-    <section class="testimonial-section diagonal">
-        <div class="slide-container swiper container-fluid diagonal-content">
+    <section class="testimonial-section section-extra">
+        <div class="slide-container swiper container-fluid">
 
             <div class="intro heading underline"><?=getData('testi_title',$conn)?></div>
             <p class="intro paragraph"><?=getData('testi_sub_title',$conn)?></p>
@@ -501,35 +482,6 @@ function getData($fiturNama,$conn){
                 <p class="paragraph">Send Us Feedbacks</p>
             </div>
 
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section section-extra">
-        <div class="container-fluid">
-            <h2 class="heading underline">FREQUENTLY ASKED QUESTIONS</h2>
-            <div class="accordion" id="accordionExample">
-                <?php
-                    $stmt=$conn->prepare('SELECT * FROM faq');
-                    $stmt->execute();
-                    while($faq = $stmt->fetch()):
-                ?>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading-<?=$faq['faq_id']?>">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse-<?= $faq['faq_id'] ?>" aria-expanded="false" aria-controls="collapse-<?= $faq['faq_id'] ?>">
-                            <?= $faq['faq_thumbnail'] ?>
-                        </button>
-                    </h2>
-                    <div id="collapse-<?= $faq['faq_id'] ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?=$faq['faq_id']?>"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <?= $faq['faq_desc'] ?>
-                        </div>
-                    </div>
-                </div>
-                <?php endwhile ?>
-            </div>
         </div>
     </section>
 

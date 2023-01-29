@@ -133,10 +133,26 @@ a {
     -o-transform: rotate(-3deg) skew(-3deg);
     -ms-transform: rotate(-3deg) skew(-3deg);
 
-    background-color: var(--black);
+    position: relative;
+    background: url('./src/diagonal-section.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
     padding-top: 90px;
     padding-bottom: 90px;
     width: 100vw;
+}
+
+.diagonal::before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    background-position: 50% 0;
 }
 
 .diagonal .diagonal-content {

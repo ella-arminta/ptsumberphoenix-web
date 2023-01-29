@@ -80,19 +80,5 @@ function getData1($fiturNama,$conn){
                 <i class="fa-solid fa-copyright"></i>
                 Copyright <strong>PT Sumber Phoenix Makmur</strong>. All Rights Reserved
             </div>
-            <div class="copyright-social-media">
-                <div class="icon-container-box">
-                    <a href="<?= getData1('instagram',$conn) ?>" class="fa-brands fa-instagram"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="<?= getData1('linkedin',$conn) ?>" class="fa-brands fa-linkedin"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="<?= getData1('facebook',$conn) ?>" class="fa-brands fa-facebook"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="<?= getData1('twitter',$conn) ?>" class="fa-brands fa-twitter"></a>
-                </div>
-            </div>
         </div>
     </footer>

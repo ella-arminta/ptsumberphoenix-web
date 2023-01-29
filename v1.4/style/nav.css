@@ -75,6 +75,10 @@
     color: var(--yellow);
 }
 
+.navbar .nav-link.paragraph {
+    font-size: 13px;
+}
+
 @media (max-width: 960px) {
     .nav-link {
         margin-left: 0;

@@ -16,6 +16,14 @@
     font-weight: bold;
 }
 
+.navbar .nav-item.active .nav-link {
+    color: white;
+}
+
+.navbar.active .nav-item.active .nav-link {
+    color: var(--yellow);
+}
+
 .navbar.active {
     background-color: white;
 }
@@ -91,6 +99,7 @@
     width: 100%;
 
     max-width: 1900px;
+    font-size: 13px;
 }
 
 .navbar .navbar-collapse {
