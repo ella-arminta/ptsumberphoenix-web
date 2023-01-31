@@ -444,9 +444,10 @@ include 'api/connect.php';
         }
     </script>
     <?php 
-    // if(isset($_GET['cateCode'])){
-    //     echo '<script>getProByCat("'.$_GET['cateCode'].'");</script>';
-    // }else if (isset($_GET['subCode'])){
+    if(isset($_GET['cateCode'])){
+        echo '<script>getProByCat("'.$_GET['cateCode'].'");</script>';
+    }else
+    // else if (isset($_GET['subCode'])){
     //     echo '<script>getProducts("'.$_GET['subCode'].'")</script>';
     // }
     // else{
