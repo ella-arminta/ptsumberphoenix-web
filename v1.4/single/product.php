@@ -90,12 +90,6 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and
                        ?>
                         ">Shop</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link paragraph">
-                            <input type="text" placeholder="Search Here" class="search-bar">
-                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                        </a>
-                    </li>
                     <a href="../contact.php"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a>
                 </ul>
             </div>

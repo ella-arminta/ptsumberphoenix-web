@@ -51,7 +51,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         // it together with commas, so it can be used in the query string
         $placeHolders = implode(', ', array_fill(0, count($ids), '?'));
 
-        $stmt = $conn->prepare("SELECT * FROM `products` where product_id NOT IN ($placeHolders) and status = 1 ORDER BY rand() LIMIT 8");
+        $stmt = $conn->prepare("SELECT * FROM `products` where product_id NOT IN ($placeHolders) and status = 1 ORDER BY rand() LIMIT 9");
 
         // Iterate the IDs and bind them
         // Remember ? placeholders are 1-indexed!
@@ -92,9 +92,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $placeHolders = implode(', ', array_fill(0, count($ids), '?'));
         // Prepare the statement
         if(count($ids) > 0){
-            $stmt = $conn->prepare("SELECT * FROM `products` where product_id NOT IN ($placeHolders) and status = 1 ORDER BY rand() LIMIT 10");
+            $stmt = $conn->prepare("SELECT * FROM `products` where product_id NOT IN ($placeHolders) and status = 1 ORDER BY rand() LIMIT 9");
         }else{
-            $stmt = $conn->prepare("SELECT * FROM `products` where status = 1 ORDER BY rand() LIMIT 10");
+            $stmt = $conn->prepare("SELECT * FROM `products` where status = 1 ORDER BY rand() LIMIT 9");
         }
         
         // Iterate the IDs and bind them
@@ -190,7 +190,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 // Create an array of ? characters the same length as the number of IDs and join
                 // it together with commas, so it can be used in the query string
                 $placeHolders = implode(', ', array_fill(0, count($ids), '?'));
-                $stmt = $conn->prepare("SELECT p.product_code,p.product_img,p.product_name,p.product_id,p.featured,p.best_seller FROM `product_subcategory` ps join products p on (ps.product_id = p.product_id) join subcategories s on (ps.subcategory_id = s.sub_id) where p.product_id NOT IN ($placeHolders) and s.sub_code = ? and p.status = 1 and s.status = 1  ORDER BY p.product_id DESC LIMIT 2");
+                $stmt = $conn->prepare("SELECT p.product_code,p.product_img,p.product_name,p.product_id,p.featured,p.best_seller FROM `product_subcategory` ps join products p on (ps.product_id = p.product_id) join subcategories s on (ps.subcategory_id = s.sub_id) where p.product_id NOT IN ($placeHolders) and s.sub_code = ? and p.status = 1 and s.status = 1  ORDER BY p.product_id DESC LIMIT 9");
 
                 // Iterate the IDs and bind them
                 // Remember ? placeholders are 1-indexed!
@@ -201,7 +201,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
                 $stmt->execute();
             }else{
-                $stmt = $conn->prepare("SELECT p.product_code,p.product_img,p.product_name,p.product_id,p.featured,p.best_seller FROM `product_subcategory` ps join products p on (ps.product_id = p.product_id) join subcategories s on (ps.subcategory_id = s.sub_id) where s.sub_code = ? and p.status = 1 and s.status = 1  ORDER BY p.product_id DESC LIMIT 2");
+                $stmt = $conn->prepare("SELECT p.product_code,p.product_img,p.product_name,p.product_id,p.featured,p.best_seller FROM `product_subcategory` ps join products p on (ps.product_id = p.product_id) join subcategories s on (ps.subcategory_id = s.sub_id) where s.sub_code = ? and p.status = 1 and s.status = 1  ORDER BY p.product_id DESC LIMIT 9");
                 $stmt->execute([$catCode]);
                 
             }
