@@ -127,7 +127,7 @@ include 'api/connect.php';
                             </form>
                         </a>
                     </li>
-                    <a href="./contact.html"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a>
+                    <a href="./contact.php"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a>
                 </ul>
             </div>
 
@@ -164,13 +164,14 @@ include 'api/connect.php';
                         <div id="collapse-<?= $cat['cat_code'] ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?= $cat['cat_code'] ?>" data-bs-parent="#accordionExample">
                             <div class="accordion-body <?= $cat['cat_code'] ?>">
                                 <?php
-                                    $stmt2 = $conn->prepare("SELECT s.sub_id as sub_id, s.sub_code as sub_code, s.sub_name as sub_name, count(ps.product_id), c.cat_id  as cat_id
-                                        from subcategories s 
-                                        join product_subcategory ps  on s.sub_id = ps.subcategory_id
-                                        join categories c on s.cat_id = c.cat_id
-                                        where s.status = 1  and c.cat_id = ?
-                                        GROUP BY s.sub_id
-                                        HAVING COUNT(ps.product_id) > 0");
+                                    $stmt2 = $conn->prepare("SELECT *,s.sub_id as sub_id, s.sub_code as sub_code, s.sub_name as sub_name, count(ps.product_id), c.cat_id  as cat_id
+                                    from subcategories s 
+                                    join product_subcategory ps  on s.sub_id = ps.subcategory_id
+                                    join categories c on s.cat_id = c.cat_id
+                                    join products p on p.product_id = ps.product_id
+                                    where s.status = 1  and c.cat_id = ? and p.status =1
+                                    GROUP BY s.sub_id
+                                    HAVING COUNT(ps.product_id) > 0;");
                                     $stmt2->execute([$cat['cat_id']]);
                                     while($subcat = $stmt2->fetch()):
                                 ?>
@@ -459,6 +460,7 @@ include 'api/connect.php';
         }
         echo '<script>console.log("'.$_SESSION['cat'][0].$_SESSION['cat'][1].'")</script>';
     }else{
+        $_SESSION['cat'] = 'random';
         echo '<script>getProducts("random","")</script>';
     }
     // unset($_SESSION['cat']);
