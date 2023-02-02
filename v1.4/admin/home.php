@@ -676,7 +676,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                 ?>
                 <div class="team-content">
                     <img src="../<?= $emp['emp_img'] ?>" alt="">
-                    <div class="team-content-social-media">
+                    <!-- <div class="team-content-social-media">
                         <div class="icon-container">
                             <a href="<?= $emp['emp_insta']?>" class="fa-brands fa-instagram"></a>
                         </div>
@@ -689,7 +689,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         <div class="icon-container">
                             <a href="<?= $emp['emp_twitter']?>" class="fa-brands fa-twitter"></a>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="team-content-information">
                         <div class="team-content-wrapper">
                             <div class="sub-headings team-name"><?= $emp['emp_name'] ?></div>
@@ -728,7 +728,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                         <label for="" class="form-label">Employee Position : </label>
                         <input type="text" class="form-control" name="emp-position" required id="emp-position" aria-describedby="emp-position">
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="" class="form-label">Employee Insta : </label>
                         <input type="text" class="form-control" name="emp-insta" required id="emp-insta" aria-describedby="emp-instagram">
                     </div>
@@ -743,7 +743,7 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                     <div class="mb-3">
                         <label for="" class="form-label">Employee twitter : </label>
                         <input type="text" class="form-control" name="emp-twitter" required id="emp-twitter" aria-describedby="emp-twitter">
-                    </div>
+                    </div> -->
                     <button type="submit" class="btn btn-primary">Add <i class="fa-solid fa-plus"></i></button>
                 </form>
                 </div>

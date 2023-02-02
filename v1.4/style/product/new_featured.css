@@ -1,6 +1,6 @@
 
 .featured-section {
-    height: 100vh;
+    /* height: 100vh; */
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
@@ -17,11 +17,11 @@
     justify-content: space-between;
     align-items: center;
 
-    height: 50%;
+    height: 50vh;
 }
 
 .featured-section .lower-featured {
-    height: 50%;
+    height: 50vh;
 }
 
 .featured-container {

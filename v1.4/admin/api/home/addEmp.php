@@ -3,10 +3,14 @@ include '../connect.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $name =$_POST['emp-name'];
     $position =$_POST['emp-position'];
-    $insta =$_POST['emp-insta'];
-    $linkedin =$_POST['emp-linkedin'];
-    $facebook =$_POST['emp-facebook'];
-    $twitter =$_POST['emp-twitter'];
+    // $insta =$_POST['emp-insta'];
+    // $linkedin =$_POST['emp-linkedin'];
+    // $facebook =$_POST['emp-facebook'];
+    // $twitter =$_POST['emp-twitter'];
+    $insta = '';
+    $linkedin = '';
+    $facebook = '';
+    $twitter = '';
 
     // add image
     $target_dir = "../../../data/team/";
