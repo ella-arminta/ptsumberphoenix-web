@@ -313,9 +313,7 @@ function getData($fiturNama,$conn){
                                 ?>
                             </p>
                             <div class="content-paragraph paragraph">
-                                <!-- <pre> -->
                                     <?= $row['upd_sub'] ?><br>
-                                <!-- </pre> -->
                             </div>
                         </div>
                         <div class="content-image">

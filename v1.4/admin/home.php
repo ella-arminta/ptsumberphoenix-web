@@ -552,90 +552,55 @@ function getData($fiturNama,$conn){
             <!-- COMPANY UPDATES -->
             <div class="company-updates">
                 <div class="company-updates-navigation">
-                    <div class="navigation-item 0 active">
-                        <i class="fa-solid fa-warehouse"></i>
-                        <h2 class="sub-heading">The RHM New Warehouse</h2>
-                    </div>
-                    <div class="navigation-item 1">
+                    <?php
+                        $i = 0;
+                        $stmt = $conn->prepare("SELECT * FROM updates where status = 'featured'");
+                        $stmt->execute();
+                        while($row = $stmt->fetch()):
+                            
+                    ?>
+                    <div class="navigation-item 
+                            <?php
+                                if($i == 0){
+                                    echo ' 0 active';
+                                }else{
+                                    echo $i;
+                                } 
+                            ?>
+                    ">
                         <i class="fa-solid fa-briefcase-medical"></i>
-                        <h2 class="sub-heading">Fight Covid - 19 together with us</h2>
+                        <h2 class="sub-heading"><?= $row['upd_title'] ?></h2>
                     </div>
-                    <div class="navigation-item 2">
-                        <i class="fa-solid fa-gifts"></i>
-                        <h2 class="sub-heading">Idul Fitri 1443H Holiday Shut Down</h2>
-                    </div>
-                    <div class="navigation-item 3">
-                        <i class="fa-solid fa-bookmark"></i>
-                        <h2 class="sub-heading">Stay Safe, Wear your Mask !</h2>
-                    </div>
+                    <?php $i++;endwhile; ?>
                 </div>
                 <div class="company-updates-content">
-
+                    <?php
+                          $j = 0;
+                          $stmt = $conn->prepare("SELECT * FROM updates where status = 'featured'");
+                          $stmt->execute();
+                          while($row = $stmt->fetch()):
+                            $j++;
+                    ?>
                     <!-- Content 1 -->
-                    <div class="content-panel active" onclick="window.location.href='./templates/single/update.html'">
+                    <div class="content-panel <?php if($j == 1){echo 'active';} ?>" onclick="window.location.href='../single/update.php?id=<?= $row['upd_id'] ?>'">
                         <div class="content-description">
-                            <h1 class="content-title heading">The RHM New Warehouse !</h1>
-                            <p class="date">December 10, 2021</p>
+                            <h1 class="content-title heading"><?= $row['upd_title'] ?></h1>
+                            <p class="date">
+                                <?php
+                                $timeStamp = $row['timestamp'];
+                                $timeStamp = date( "F d, Y", strtotime($timeStamp));
+                                echo $timeStamp;
+                                ?>
+                            </p>
                             <div class="content-paragraph paragraph">
-                                <pre>
-PT. Rena Haniem Mulia has officially launched the new warehouse in Pergudangan Bizhub, Bogor. The facility will enable PT. Rena Haniem Mulia to manage client’s needs and demand. The warehouse is also use to store additional items.<br>
-                                </pre>
+                                    <?= $row['upd_sub'] ?><br>
                             </div>
                         </div>
                         <div class="content-image">
-                            <img src="../src/updates/warehouse.jpeg" alt="">
+                            <img src="../<?= $row['upd_pict'] ?>" alt="">
                         </div>
                     </div>
-
-                    <!-- Content 2 -->
-                    <div class="content-panel" onclick="window.location.href='./templates/single/update.html'">
-                        <div class="content-description">
-                            <h1 class="content-title heading">FIGHT COVID-19 TOGETHER</h1>
-                            <p class="date">July 06, 2020</p>
-                            <div class="content-paragraph paragraph">
-                                <pre>
-Since the outbreak of COVID-19,&nbsp;<a href="https://news.sky.com/story/coronavirus-rise-in-demand-for-hand-sanitisers-and-hygiene-products-11948021">sales of hand sanitizers have soared</a>. It’s become such a sought-after product that pharmacies and supermarkets have started&nbsp;<a href="https://www.bbc.co.uk/news/uk-51729012">limiting the number</a>&nbsp;that people can buy at one time. Though hand sanitizers can help reduce our risk of catching certain infections, not all hand sanitizers are equally effective against coronavirus.Washing with warm water and soap remains the&nbsp;<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3249958/">gold standard for hand hygiene</a>&nbsp;and preventing the spread of infectious diseases. Washing with warm water (not cold water) and soap removes oils from our hands that can harbour microbes.Hand sanitizers can also protect against disease-causing microbes, especially in situations when&nbsp;<a href="https://www.fda.gov/consumers/if-soap-and-water-are-not-available-hand-sanitizers-may-be-good-alternative">soap and water aren’t available</a>.&nbsp;<br>
-                                </pre>
-                            </div>
-                        </div>
-                        <div class="content-image">
-                            <img src="../src/updates/covid.jpeg" alt="">
-                        </div>
-                    </div>
-
-                    <!-- Content 3 -->
-                    <div class="content-panel" onclick="window.location.href='./templates/single/update.html'">
-                        <div class="content-description">
-                            <h1 class="content-title heading">IDUL FITRI 1443H Holiday</h1>
-                            <p class="date">April 27. 2022</p>
-                            <div class="content-paragraph paragraph">
-                                <pre>
-Dear Valued Customer, in anticipating of the forthcoming Idul Fitri 1443H, PT. Rena Haniem Mulia will not be operating during 26 Apr 2022&nbsp; - 08 May 2022 and at 11 May 2022 we will Start delivery process&nbsp;We are requesting all our valued customers for assistance in providing us with an early schedule of your supply needs prior to and after the holidays. This is to ensure all your needs are taken care of during the above mention period and avoid any delays in supplies. We take this opportunity to thank you, our valued customer for your valued patronage and cooperation. Stay safe, do take care of your health and protect others. Hopefully this covid-19 situation will end soon.&nbsp;<br>
-                                </pre>
-                            </div>
-                        </div>
-                        <div class="content-image">
-                            <img src="../src/updates/holiday.jpeg" alt="">
-                        </div>
-                    </div>
-
-                    <!-- Content 4 -->
-                    <div class="content-panel" onclick="window.location.href='./templates/single/update.html'">
-                        <div class="content-description">
-                            <h1 class="content-title heading">STAY SAFE, WEAR YOUR MASK!</h1>
-                            <p class="date">July 02, 2020</p>
-                            <div class="content-paragraph paragraph">
-                                <pre>
-To help flatten the COVID-19 curve, the government is now urging people to wear face masks whenever they are out in public. The new recommendation is an update from the previous guidelines and is in line with the World Health Organization’s (WHO) latest recommendation. Previously, Indonesia complied with the WHO’s recommendations that face masks only be worn by medical professionals and sick people in order to prevent a supply shortage.&nbsp;The public can wear cloth masks, or masks made from other materials, as long as they can prevent the spread of saliva droplets when speaking.&nbsp;<br>
-                                </pre>
-                            </div>
-                        </div>
-                        <div class="content-image">
-                            <img src="../src/updates/mask.jpeg" alt="">
-                        </div>
-                    </div>
-                </div>
-
+                    <?php endwhile; ?>
                 <div class="read-more" onClick="window.location.href='./update.php'">
                     See All Our Updates
                     <i class="fa-solid fa-arrow-right"></i>
@@ -926,114 +891,6 @@ To help flatten the COVID-19 curve, the government is now urging people to wear 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary editTesti" data-bs-dismiss="modal" target="">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FAQ Section -->
-    <section class="faq-section section-extra">
-        <div class="container-fluid">
-            <h2 class="heading underline">FREQUENTLY ASKED QUESTIONS</h2>
-            <div class="accordion" id="accordionExample">
-                <?php
-                    $stmt=$conn->prepare('SELECT * FROM faq');
-                    $stmt->execute();
-                    while($faq = $stmt->fetch()):
-                ?>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading-<?=$faq['faq_id']?>">
-
-
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse-<?= $faq['faq_id'] ?>" aria-expanded="false" aria-controls="collapse-<?= $faq['faq_id'] ?>">
-                            <?= $faq['faq_thumbnail'] ?>
-                        </button>
-
-                        <div class="faq-button-admin-container">
-                            
-                            <!-- delete button faq -->
-                            <button class="btn btn-dark delFaq" target="<?= $faq['faq_id'] ?>">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-
-                            <!-- edit faq button  -->
-                            <button class="btn btn-danger editFaqButton"data-bs-toggle="modal" data-bs-target="#editFaqModal" target="<?= $faq['faq_id'] ?>">
-                                <i class="fa-solid fa-pencil"></i>
-                            </button>
-
-                        </div>
-
-                    </h2>
-                    <div id="collapse-<?= $faq['faq_id'] ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?=$faq['faq_id']?>" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <?= $faq['faq_desc'] ?>
-                        </div>
-                    </div>
-                </div>
-                <?php endwhile ?>
-            </div>
-
-            <!-- ADD FAQ -->
-            <div class="row justify-content-center align-items-center" style="margin-top:10px;">
-                <button class="btn btn-danger addFaq" data-bs-toggle="modal" data-bs-target="#addFaqModal">
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ADD FAQ MODAL -->
-    <div class="modal fade" id="addFaqModal" tabindex="-1" aria-labelledby="faqModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="faqModalLabel">Add Faq</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                <form id="formAddFaq">
-                    <div class="mb-3">
-                        <label for="faqTitle" class="form-label">Title :</label>
-                        <input type="text" class="form-control" name="faq_title" required id="faqTitle" aria-describedby="faqTitle">
-                    </div>
-                    <div class="mb-3">
-                        <label for="faq_desc" class="form-label">Content : </label>
-                        <textarea type="text" name="faq_desc" class="form-control" id="faq_desc" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add <i class="fa-solid fa-plus"></i></button>
-                </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL EDIT FAQ -->
-    <div class="modal fade" id="editFaqModal" tabindex="-1" aria-labelledby="editFaqLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editFaqLabel">Edit Faq</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                <form id="formEditFaq">
-                    <div class="mb-3">
-                        <label for="faqTitle" class="form-label">Title :</label>
-                        <input type="text" class="form-control" name="faq_title" required id="faqTitle" aria-describedby="faqTitle">
-                    </div>
-                    <div class="mb-3">
-                        <label for="faq_desc" class="form-label">Content : </label>
-                        <textarea type="text" name="faq_desc" class="form-control" id="faq_desc" required></textarea>
-                    </div> 
-                </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary saveEditFaq">Save changes</button>
                 </div>
             </div>
         </div>
