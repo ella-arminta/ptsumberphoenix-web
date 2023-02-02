@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" href="../style/product/nav.css">
     <link rel="stylesheet" href="../style/product/features.css">
+    <link rel="stylesheet" href="../style/product/new_featured.css">
     <link rel="stylesheet" href="../style/product/best.css">
 
     <!-- Library -->
@@ -62,36 +63,72 @@
     <!-- Featured Section -->
     <?php
         include 'api/connect.php';
-        $stmt = $conn->prepare("SELECT * FROM products where featured = 1");
+        $stmt = $conn->prepare("SELECT * FROM products where featured = 1 and status = 1");
         $stmt->execute();
         $count = $stmt->rowCount();
+        $genap;
+        if($count%2 == 0){
+            $genap = true;
+        }else{
+            $genap =false;
+        }
+        $pros = $stmt->fetchAll();
     ?>
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
-        <div class="carousel-indicators">
+    
+    <section class="featured-section section-extra">
+        <div class="container-fluid">
             <?php
-                for ($i=0; $i < $count; $i++):
-            ?>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?= $i ?>" class="<?php if($i == 0){ echo 'active'; }?>" aria-current="true" aria-label="Slide <?= $i; ?>"></button>
-            <?php endfor ?>
-        </div>
-        <div class="carousel-inner">
-            
-            <?php
-                $i = 0;
-                while($pro = $stmt->fetch()):
-            ?>
-            <div class="carousel-item <?php if($i++ == 0){ echo 'active';}  ?> opacity-overlay" style="background-image: url('../<?= $pro['product_img'] ?>')">
-                <div class="carousel-caption">
-                    <h5 class="heading"><?= $pro['product_name'] ?></h5>
-                    <p class="sub-heading"><?= substr($pro['product_desc'],0,200) ?></p>
-                    <div class="button-container">
-                        <button class="custom-button btn" onclick="window.location.href='./single/product.php?product_code=<?= $pro['product_code'] ?>'" type="button">LEARN MORE</button>
+            $str = '';
+            for ($i=1; $i <= count($pros); $i++) {
+                // kalau ganjil ada 1 row yg sendiri
+                if(!$genap && $i == count($pros)){
+                    echo '
+                    <div class="lower-featured">
+                        <div class="featured-container" style="background: url(\'../'.$pros[$i-1]['product_img'].'\'); background-repeat: no-repeat; background-size: cover">
+                            <div class="heading">'.$pros[$i-1]['product_name'].'</div>
+                            <div class="paragraph">'.substr($pros[$i-1]['product_desc'],0,200).'</div>
+                            <button class="custom-button btn" type="button" onclick="window.location.href=`./single/product.php?product_code='.$pros[$i-1]['product_code'].'`">
+                                <i class="fa-solid fa-angle-right"></i>
+                                Show More
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <?php endwhile ?>
+                    ';
+                    break;
+                }
+                if($i%2 != 0){
+                    $str.= '<div class="upper-featured">';
+                    $str.= '
+                    <div class="featured-container" style="background: url(\'../'.$pros[$i-1]['product_img'].'\'); background-repeat: no-repeat; background-size: cover">
+                        <div class="heading">'.$pros[$i-1]['product_name'].'</div>
+                        <div class="paragraph">'.substr($pros[$i-1]['product_desc'],0,200).'</div>
+                        <button class="custom-button btn" type="button" onclick="window.location.href=`./single/product.php?product_code='.$pros[$i-1]['product_code'].'`">
+                            <i class="fa-solid fa-angle-right"></i>
+                            Show More
+                        </button>
+                    </div>
+                    ';
+                }else{
+                    $str.= '
+                    <div class="featured-container" style="background: url(\'../'.$pros[$i-1]['product_img'].'\'); background-repeat: no-repeat; background-size: cover">
+                        <div class="heading">'.$pros[$i-1]['product_name'].'</div>
+                        <div class="paragraph">'.substr($pros[$i-1]['product_desc'],0,200).'</div>
+                        <button class="custom-button btn" type="button" onclick="window.location.href=`./single/product.php?product_code='.$pros[$i-1]['product_code'].'`">
+                            <i class="fa-solid fa-angle-right"></i>
+                            Show More
+                        </button>
+                    </div>
+                    ';
+                    $str.= '</div>';
+                }
+                if($i%2 == 0){
+                    echo $str;
+                    $str = '';
+                }
+            }
+            ?>
         </div>
-    </div>
+    </section>
 
     <!-- Best Seller Section -->
     <section class="best-seller-section section-extra">
