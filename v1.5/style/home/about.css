@@ -61,6 +61,14 @@
     color: rgba(255, 255, 255, 0.5)
 }
 
+.about-section .custom-button {
+    border-radius: 30px;
+}
+
+.about-section .custom-button:hover i {
+    color: var(--yellow);
+}
+
 @media (max-width: 768px) {
     .about-section {
         text-align: center;

@@ -80,9 +80,40 @@ function getData($fiturNama,$conn){
         </div>
     </section>
 
+    <!-- Business Fields -->
+    <section class="business-fields-section section-extra" id="fields">
+        <div class="container-fluid">
+            <div class="business-fields-information">
+                <h1 class="heading underline" ><?=getData('fields_title',$conn)?></h1>
+                <p class="paragraph"><?=getData('fields_desc',$conn)?></p>
+            </div>
+
+            <div class="business-fields-content grid">
+                <?php
+                    $stmt = $conn->prepare("SELECT c.cat_code as cat_code,c.cat_name as cat_name,c.cat_id as cat_id,c.cat_img as cat_img, count(s.sub_id) 
+                    FROM categories c 
+                    join subcategories s on c.cat_id = s.cat_id 
+                    join product_subcategory ps  on s.sub_id = ps.subcategory_id
+                    join products p on ps.product_id = p.product_id
+                    where c.status = 1 and s.status = 1 and p.status = 1 GROUP BY c.cat_id HAVING COUNT(ps.product_id) > 0 order by c.order_by ASC");
+                    $stmt->execute();
+                    while($row = $stmt->fetch()):
+                ?>
+
+                <a href="./shop.php?cateCode=<?= $row['cat_code'] ?>" class="field">
+                    <div class="field-items" style="background: url('<?= $row['cat_img'] ?>')">
+                        <div class="sub-heading"><?= $row['cat_name'] ?></div>
+                    </div>
+                </a>
+                
+                <?php endwhile ?>
+            </div>
+        </div>
+    </section>
+
     <!-- About Us -->
-    <section class="about-section diagonal" id="about">
-        <div class="container-fluid diagonal-content grid">
+    <section class="about-section diagonal" id="about" style="background: black;">
+        <div class="container-fluid grid diagonal-content">
             <div class="about-information">
                 <div class="about-information-wrapper">
                     <h2 class="heading" ><?= getData('who_title',$conn) ?></h2>
@@ -122,39 +153,6 @@ function getData($fiturNama,$conn){
                         <p class="paragraph"><?=getData('purpose',$conn)?></p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Business Fields -->
-    <section class="business-fields-section section-extra" id="fields">
-        <div class="container-fluid">
-            <div class="business-fields-information">
-                <h1 class="heading underline" ><?=getData('fields_title',$conn)?></h1>
-                <p class="paragraph"><?=getData('fields_desc',$conn)?></p>
-            </div>
-
-            <div class="business-fields-content grid">
-                <?php
-                    $stmt = $conn->prepare("SELECT c.cat_code as cat_code,c.cat_name as cat_name,c.cat_id as cat_id,c.cat_img as cat_img, count(s.sub_id) 
-                    FROM categories c 
-                    join subcategories s on c.cat_id = s.cat_id 
-                    join product_subcategory ps  on s.sub_id = ps.subcategory_id
-                    join products p on ps.product_id = p.product_id
-                    where c.status = 1 and s.status = 1 and p.status = 1 GROUP BY c.cat_id HAVING COUNT(ps.product_id) > 0 order by c.order_by ASC");
-                    $stmt->execute();
-                    while($row = $stmt->fetch()):
-                ?>
-
-                <a href="./shop.php?cateCode=<?= $row['cat_code'] ?>" class="field">
-                    <div class="field-items">
-                        <img src="<?= $row['cat_img'] ?>" class="field-icon">
-                        <div class="sub-heading"><?= $row['cat_name'] ?></div>
-                        <div class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam totam et ipsum porro dolorem placeat sint debitis odio dignissimos quo nesciunt obcaecati</div>
-                    </div>
-                </a>
-                
-                <?php endwhile ?>
             </div>
         </div>
     </section>
