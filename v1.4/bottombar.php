@@ -73,12 +73,12 @@ function getData1($fiturNama,$conn){
                 </div>
             </div>
         </div>
-    </section>
-    <footer class="copyright-footer">
-        <div class="container-fluid">
-            <div class="copyright paragraph">
-                <i class="fa-solid fa-copyright"></i>
-                Copyright <strong>PT Sumber Phoenix Makmur</strong>. All Rights Reserved
-            </div>
+</section>
+<footer class="copyright-footer">
+    <div class="container-fluid">
+        <div class="copyright paragraph">
+            <i class="fa-solid fa-copyright"></i>
+            Copyright <strong>PT Sumber Phoenix Makmur</strong>. All Rights Reserved
         </div>
-    </footer>
+    </div>
+</footer>
