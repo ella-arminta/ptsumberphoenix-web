@@ -1,0 +1,128 @@
+
+.contact-section {
+    min-height: 100vh;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-section .heading.underline {
+    text-align: center;
+}
+
+.contact-section .paragraph {
+    text-align: center;
+}
+
+.contact-section .paragraph.description {
+    margin-bottom: 27px;
+}
+
+.contact-section .contact-container {
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    padding: 40px;
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.contact-section .contact-container.information {
+    text-align: center;
+}
+
+.contact-section .contact-container.information .icon-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-section .contact-container.information .icon-container {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    width: 30px;
+    height: 30px;
+    color: var(--yellow);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.contact-section .contact-container.information .icon-container:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.company-contacts.grid {
+    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.contact-section .contact-container .sub-heading {
+    /* font-weight: normal; */
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.contact-section .contact-container .paragraph {
+    font-size: 10px;
+}
+
+.contact-section .input-fields {
+    width: 100%;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 35px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.contact-container form {
+    width: 100%;
+}
+
+.input-fields-container {
+    display: flex;
+    justify-content: flex-start; 
+    /* align-items: top; */
+}
+
+.contact-container .user-info.grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    margin-bottom: 20px;
+}
+
+.contact-container textarea {
+    font-size: 12px;
+    padding: 10px;
+
+    margin-top: 20px;
+
+    width: 100%;
+    min-height: 90px;
+
+    border-color: rgba(0, 0, 0, 0.3)
+}
+
+.contact-container .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-container .custom-button {
+    font-size: 12px;
+    width: 120px;
+    height: 30px;
+    margin-top: 20px;
+}
