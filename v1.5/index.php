@@ -101,11 +101,23 @@ function getData($fiturNama,$conn){
                 ?>
 
                 <a href="./shop.php?cateCode=<?= $row['cat_code'] ?>" class="field">
-                    <div class="field-items" style="background: url('<?= $row['cat_img'] ?>')">
-                        <div class="sub-heading"><?= $row['cat_name'] ?></div>
+                    <div class="field-items" style="background: url('<?= $row['cat_img'] ?>');">
+                        <div class="field-items-container">
+                            <div class="sub-heading-container">
+                                <div class="sub-heading"><?= $row['cat_name'] ?></div>
+                            </div>
+                            
+                            <div class="button-container">
+                                <button class="custom-button btn show-more" type="button" onclick="window.location='./shop.php?cateCode=<?= $row['cat_code'] ?>'">
+                                    <i class="fa-solid fa-angle-right" style="margin-right: 10px;"></i>
+                                    Show More
+                                </button>
+                            </div>
+                        </div>
+                    
                     </div>
                 </a>
-                
+
                 <?php endwhile ?>
             </div>
         </div>
