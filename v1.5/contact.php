@@ -97,7 +97,7 @@ function getData($fiturNama,$conn){
                             <input type="email" name="email" placeholder="Your Email" class="input-fields" required>
                         </div>
                         <input type="text" placeholder="Subject" name="subject" class="input-fields" required>
-                        <textarea placeholder="Message" id="msgTextarea" name="msg" required></textarea>
+                        <textarea placeholder="Message" id="msgTextarea" name="msg" required><?php if(isset($_GET['proid'])){$stmt=$conn->prepare("SELECT product_name from products where product_id = ?");$stmt->execute([$_GET['proid']]);if($stmt->rowCount() > 0){$proName =  $stmt->fetch();$proName = $proName['product_name'];echo 'Please help to send quotation for '.$proName.', thank you!';}}?></textarea>
                         <div class="button-container">
                             <input type="submit" class="custom-button btn navbar-btn submit" value="Send Message">
                         </div>

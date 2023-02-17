@@ -699,7 +699,14 @@ if(!isset($_SESSION['admin_id'])){
                                 }).then(function() {
                                     location.reload();
                                 });
-                            }else{
+                            }else if (response == 'kelebihan'){
+                                Swal.fire({
+                                    icon: "warning",
+                                    title: "Post Can't Be Featured!",
+                                    text: "Only can feature maksimum of 4 posts."
+                                })
+                            }
+                            else{
                                 Swal.fire({
                                     icon: "error",
                                     title: "Error!",

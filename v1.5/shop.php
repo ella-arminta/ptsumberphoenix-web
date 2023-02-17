@@ -381,17 +381,6 @@ include 'api/connect.php';
                             for (let index = 0; index < response[1].length; index++) {
                                 
                                 product = response[1][index];
-                                icon = ''
-                                if(product.featured == 1){
-                                    icon+= `<i class="fa-solid fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(0,'`+product.product_code+`')"></i>`;
-                                }else{
-                                    icon+=`<i class="fa-regular fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(1,'`+product.product_code+`')"></i>`
-                                }
-                                if(product.best_seller == 1){
-                                    icon+=`<i class="fa-solid fa-heart fa-xl" style="color:red" onclick="bestSeller(0,'`+product.product_code+`')"></i>`
-                                }else{
-                                    icon+=`<i class="fa-regular fa-heart fa-xl" style="color:red" onclick="bestSeller(1,'`+product.product_code+`')"></i>`
-                                }
                                 cards += `
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="card">
@@ -401,13 +390,6 @@ include 'api/connect.php';
                                         
                                         <div class="card-body">
                                             <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">`+product.product_name+`</div>
-                                            <!-- star : feautured, love :best seller -->
-                                            <div>
-                                                <div style="float:left">
-                                                    `+icon+`
-                                                </div>
-                                                <button style="float:right" class="btn btn-danger delProductBut" onclick="delProduct('`+product.product_code+`')" proCode="`+product.product_code+`">Delete</button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

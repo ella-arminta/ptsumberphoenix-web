@@ -101,7 +101,7 @@ function getData($fiturNama,$conn){
                 ?>
 
                 <a href="./shop.php?cateCode=<?= $row['cat_code'] ?>" class="field">
-                    <div class="field-items" style="background: url('<?= $row['cat_img'] ?>');">
+                    <div class="field-items" style="background-image: url('<?= $row['cat_img'] ?>');">
                         <div class="field-items-container">
                             <div class="sub-heading-container">
                                 <div class="sub-heading"><?= $row['cat_name'] ?></div>
