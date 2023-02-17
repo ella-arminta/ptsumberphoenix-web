@@ -219,9 +219,59 @@ function getData($fiturNama,$conn){
         </div>
     </div>
 
+    <!-- Business Fields -->
+    <section class="business-fields-section section-extra" id="fields">
+        <div class="container-fluid">
+            <div class="business-fields-information">
+                <h1 class="heading underline" col="fields_title"><?=getData('fields_title',$conn)?>
+                    <button type="button"class="btn btn-danger edit">
+                        <i class="fa-solid fa-pencil"></i>
+                    </button>
+                </h1>
+                <p class="paragraph" col="fields_desc"><?=getData('fields_desc',$conn)?>
+                    <button type="button" class="btn btn-danger edit">
+                        <i class="fa-solid fa-pencil"></i>
+                    </button>
+                </p>
+            </div>
+
+            <div class="business-fields-content grid">
+                <?php
+                    $stmt = $conn->prepare("SELECT c.cat_code as cat_code,c.cat_name as cat_name,c.cat_id as cat_id,c.cat_img as cat_img, count(s.sub_id) 
+                    FROM categories c 
+                    join subcategories s on c.cat_id = s.cat_id 
+                    join product_subcategory ps  on s.sub_id = ps.subcategory_id
+                    join products p on ps.product_id = p.product_id
+                    where c.status = 1 and s.status = 1 and p.status = 1 GROUP BY c.cat_id HAVING COUNT(ps.product_id) > 0 order by c.order_by ASC");
+                    $stmt->execute();
+                    while($row = $stmt->fetch()):
+                ?>
+
+                <a href="./shop.php?cateCode=<?= $row['cat_code'] ?>" class="field">
+                    <div class="field-items" style="background: url('../<?= $row['cat_img'] ?>');">
+                            <div class="field-items-container">
+                            <div class="sub-heading-container">
+                                <div class="sub-heading"><?= $row['cat_name'] ?></div>
+                            </div>
+                            
+                            <div class="button-container">
+                                <button class="custom-button btn show-more" type="button" onclick="window.location='./shop.php?cateCode=<?= $row['cat_code'] ?>'">
+                                    <i class="fa-solid fa-angle-right" style="margin-right: 10px;"></i>
+                                    Show More
+                                </button>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </a>
+                
+                <?php endwhile ?>
+            </div>
+        </div>
+    </section>
 
     <!-- About Us -->
-    <section class="about-section diagonal" id="about">
+    <section class="about-section diagonal" id="about" style="background: black;">
         <div class="container-fluid diagonal-content grid">
             <div class="about-information">
                 <div class="about-information-wrapper">
@@ -286,47 +336,6 @@ function getData($fiturNama,$conn){
                         </p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Business Fields -->
-    <section class="business-fields-section section-extra" id="fields">
-        <div class="container-fluid">
-            <div class="business-fields-information">
-                <h1 class="heading underline" col="fields_title"><?=getData('fields_title',$conn)?>
-                    <button type="button"class="btn btn-danger edit">
-                        <i class="fa-solid fa-pencil"></i>
-                    </button>
-                </h1>
-                <p class="paragraph" col="fields_desc"><?=getData('fields_desc',$conn)?>
-                    <button type="button" class="btn btn-danger edit">
-                        <i class="fa-solid fa-pencil"></i>
-                    </button>
-                </p>
-            </div>
-
-            <div class="business-fields-content grid">
-                <?php
-                    $stmt = $conn->prepare("SELECT c.cat_code as cat_code,c.cat_name as cat_name,c.cat_id as cat_id,c.cat_img as cat_img, count(s.sub_id) 
-                    FROM categories c 
-                    join subcategories s on c.cat_id = s.cat_id 
-                    join product_subcategory ps  on s.sub_id = ps.subcategory_id
-                    join products p on ps.product_id = p.product_id
-                    where c.status = 1 and s.status = 1 and p.status = 1 GROUP BY c.cat_id HAVING COUNT(ps.product_id) > 0 order by c.order_by ASC");
-                    $stmt->execute();
-                    while($row = $stmt->fetch()):
-                ?>
-
-                <a href="./shop.php?cateCode=<?= $row['cat_code'] ?>" class="field">
-                    <div class="field-items">
-                        <img src="../<?= $row['cat_img'] ?>" class="field-icon">
-                        <div class="sub-heading"><?= $row['cat_name'] ?></div>
-                        <div class="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam totam et ipsum porro dolorem placeat sint debitis odio dignissimos quo nesciunt obcaecati</div>
-                    </div>
-                </a>
-                
-                <?php endwhile ?>
             </div>
         </div>
     </section>

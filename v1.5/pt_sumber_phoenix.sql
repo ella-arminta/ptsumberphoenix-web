@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2023 at 04:51 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Generation Time: Feb 17, 2023 at 04:32 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`adm_id`, `adm_name`, `adm_email`, `adm_join_date`, `adm_password`, `master`) VALUES
-(1, 'Ella Arminta', 'admin@gmail.com', '2022-11-18 07:12:30', '$2y$10$i5usiBxAtRVugFL6G4RbP.cmdRXTsmhF5SGACFq8Gm9v83N0EIUn6', 1),
+(1, 'admin', 'admin@gmail.com', '2022-11-18 07:12:30', '$2y$10$i5usiBxAtRVugFL6G4RbP.cmdRXTsmhF5SGACFq8Gm9v83N0EIUn6', 1),
 (6, 'matthew', 'matthew@gmail.com', '2022-11-18 08:16:52', '$2y$10$sx7AUzxv0eh3WTUucIR8WeYPBHHQse1HL6g1mIkj0f2yfliOZefY.', 1);
 
 -- --------------------------------------------------------
@@ -58,93 +58,6 @@ CREATE TABLE `admin_log` (
   `admin_id` int(11) NOT NULL,
   `prev_data` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `admin_log`
---
-
-INSERT INTO `admin_log` (`log_id`, `action`, `log_desc`, `time`, `admin_id`, `prev_data`) VALUES
-(1, 'update', 'Ella Arminta updated home_title', '2022-10-26 19:56:34', 1, 'Are You Looking For A Great Product And Solution?'),
-(2, 'update', 'Ella Arminta updated home_desc', '2022-10-26 19:56:44', 1, 'We provide products to suit your needs to support your business. To find out more, click the button below'),
-(3, 'Add Faq', 'Ella Arminta added faq with the title : Lorem Ipsum dolor sit ? to client list.', '2022-10-26 19:58:54', 1, 'none'),
-(4, 'Add Faq', 'Ella Arminta added faq with the title : Lorem Ipsum Dolor Sit ? to client list.', '2022-10-26 19:59:07', 1, 'none'),
-(5, 'Add Faq', 'Ella Arminta added faq with the title : Lorem Ipsum Dolor Sit ? to client list.', '2022-10-26 19:59:20', 1, 'none'),
-(6, 'Add Faq', 'Ella Arminta added faq with the title : Lorem Ipsum Dolor Sit? to client list.', '2022-10-26 19:59:34', 1, 'none'),
-(7, 'Add Faq', 'Ella Arminta added faq with the title : Lorem Ipsum Dolor Sit? to client list.', '2022-10-26 19:59:47', 1, 'none'),
-(8, 'add category', 'Ella Arminta has added a category named Rubber Industries', '2022-10-26 20:02:22', 1, 'Rubber Industries'),
-(9, 'add category', 'Ella Arminta has added a category named Plastic Industries', '2022-10-26 20:02:44', 1, 'Plastic Industries'),
-(10, 'add category', 'Ella Arminta has added a category named Die Casting', '2022-10-26 20:03:01', 1, 'Die Casting'),
-(11, 'add category', 'Ella Arminta has added a category named Coating and Ink Industries', '2022-10-26 20:03:26', 1, 'Coating and Ink Industries'),
-(12, 'add category', 'Ella Arminta has added a category named Acrylic Sheet', '2022-10-26 20:03:40', 1, 'Acrylic Sheet'),
-(13, 'add subcategory', 'Ella Arminta has added a subcategori named Agent', '2022-10-26 20:14:10', 1, 'Agent'),
-(14, 'add subcategory', 'Ella Arminta has added a subcategori named Fillers', '2022-10-26 20:14:17', 1, 'Fillers'),
-(15, 'add subcategory', 'Ella Arminta has added a subcategori named Rubbers', '2022-10-26 20:14:32', 1, 'Rubbers'),
-(16, 'add subcategory', 'Ella Arminta has added a subcategori named Acid', '2022-10-26 20:14:42', 1, 'Acid'),
-(17, 'add subcategory', 'Ella Arminta has added a subcategori named Dispersion', '2022-10-26 20:15:01', 1, 'Dispersion'),
-(18, 'add subcategory', 'Ella Arminta has added a subcategori named Agent', '2022-10-26 20:15:09', 1, 'Agent'),
-(19, 'add subcategory', 'Ella Arminta has added a subcategori named Acid', '2022-10-26 20:15:23', 1, 'Acid'),
-(20, 'add subcategory', 'Ella Arminta has added a subcategori named Others', '2022-10-26 20:15:31', 1, 'Others'),
-(21, 'add subcategory', 'Ella Arminta has added a subcategori named Lubricant', '2022-10-26 20:15:47', 1, 'Lubricant'),
-(22, 'delete subcategory', 'Ella Arminta has delete a subcategory named LB', '2022-10-26 20:15:59', 1, 'LB'),
-(23, 'add subcategory', 'Ella Arminta has added a subcategori named Lubricant', '2022-10-26 20:16:09', 1, 'Lubricant'),
-(24, 'add subcategory', 'Ella Arminta has added a subcategori named Fluid', '2022-10-26 20:16:21', 1, 'Fluid'),
-(25, 'add subcategory', 'Ella Arminta has added a subcategori named Coating', '2022-10-26 20:16:30', 1, 'Coating'),
-(26, 'add subcategory', 'Ella Arminta has added a subcategori named Resins', '2022-10-26 20:17:09', 1, 'Resins'),
-(27, 'add subcategory', 'Ella Arminta has added a subcategori named Agents', '2022-10-26 20:17:24', 1, 'Agents'),
-(28, 'add subcategory', 'Ella Arminta has added a subcategori named Fillers', '2022-10-26 20:17:35', 1, 'Fillers'),
-(29, 'add subcategory', 'Ella Arminta has added a subcategori named Bio Chemicals', '2022-10-26 20:17:47', 1, 'Bio Chemicals'),
-(30, 'add subcategory', 'Ella Arminta has added a subcategori named Glazings', '2022-10-26 20:18:19', 1, 'Glazings'),
-(31, 'add subcategory', 'Ella Arminta has added a subcategori named Safety', '2022-10-26 20:18:28', 1, 'Safety'),
-(32, 'add subcategory', 'Ella Arminta has added a subcategori named Other', '2022-10-26 20:18:37', 1, 'Other'),
-(33, 'add subcategory', 'Ella Arminta has added a subcategori named Textile Chemicals', '2022-10-26 20:19:34', 1, 'Textile Chemicals'),
-(34, 'add subcategory', 'Ella Arminta has added a subcategori named Abrasive Industry', '2022-10-26 20:19:55', 1, 'Abrasive Industry'),
-(35, 'add subcategory', 'Ella Arminta has added a subcategori named Glass Industry', '2022-10-26 20:20:07', 1, 'Glass Industry'),
-(36, 'add subcategory', 'Ella Arminta has added a subcategori named Building Materials Formulation', '2022-10-26 20:20:27', 1, 'Building Materials Formulation'),
-(37, 'add subcategory', 'Ella Arminta has added a subcategori named Oil and Gas Industries', '2022-10-26 20:20:45', 1, 'Oil and Gas Industries'),
-(38, 'delete product', 'Ella Arminta has delete a product with the code PPL', '2022-10-26 21:00:36', 1, 'PPL'),
-(39, 'delete category', 'Ella Arminta has delete a category named H', '2022-10-28 08:48:56', 1, 'H'),
-(40, 'add category', 'Ella Arminta has added a category named HAI', '2022-10-28 08:49:21', 1, 'HAI'),
-(41, 'add category', 'Ella Arminta has added a category named Test', '2022-10-28 08:50:50', 1, 'Test'),
-(42, 'delete category', 'Ella Arminta has delete a category named TEST', '2022-10-28 08:50:57', 1, 'TEST'),
-(43, 'delete category', 'Ella Arminta has delete a category named TC', '2022-10-28 09:05:03', 1, 'TC'),
-(44, 'delete category', 'Ella Arminta has delete a category named H', '2022-10-28 09:15:42', 1, 'H'),
-(45, 'add category', 'Ella Arminta has added a category named TEST', '2022-10-28 09:23:43', 1, 'TEST'),
-(46, 'add subcategory', 'Ella Arminta has added a subcategori named test', '2022-10-28 09:24:08', 1, 'test'),
-(47, 'add category', 'Ella Arminta has added a category named New Category', '2022-11-11 18:09:42', 1, 'New Category'),
-(48, 'delete category', 'Ella Arminta has delete a category named NC', '2022-11-11 18:11:28', 1, 'NC'),
-(49, 'add category', 'Ella Arminta has added a category named New Category', '2022-11-11 18:12:43', 1, 'New Category'),
-(50, 'delete product', 'Ella Arminta has delete a product with the code HL', '2022-11-12 06:25:09', 1, 'HL'),
-(51, 'delete product', 'Ella Arminta has delete a product with the code HL', '2022-11-12 06:47:37', 1, 'HL'),
-(52, 'delete product', 'Ella Arminta has delete a product with the code HL', '2022-11-12 06:49:17', 1, 'HL'),
-(53, 'delete product', 'Ella Arminta has delete a product with the code HL', '2022-11-12 06:50:25', 1, 'HL'),
-(54, 'add category', 'Ella Arminta has added a category named cat baru', '2022-11-14 11:33:54', 1, 'cat baru'),
-(55, 'delete testi', 'Ella Arminta has deleted testimony from Lorem Ipsum', '2022-11-18 13:09:30', 1, '7'),
-(56, 'delete faq', 'Ella Arminta has deleted faq with the title Lorem Ipsum Dolor Sit? from faq list.', '2022-11-18 13:12:06', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus laboriosam quasi magni mollitia illum sint harum deleniti atque tenetur sapiente, quam sunt, molestiae unde ratione nemo velit! Molestiae, repellendus totam.'),
-(57, 'Reorder Category', 'Ella Arminta has reordered the category.', '2022-11-18 13:20:44', 1, ''),
-(58, 'set bestseller', 'Ella Arminta has set best seller for product named Slipping Agents', '2022-11-18 13:29:05', 1, 'SAS'),
-(59, 'remove bestseller', 'Ella Arminta has remove best seller for product named Slipping Agents', '2022-11-18 13:29:20', 1, 'SAS'),
-(60, 'set featured', 'Ella Arminta has set feature for product named Slipping Agents', '2022-11-18 13:30:43', 1, 'SAS'),
-(61, 'remove featured', 'Ella Arminta has remove feature for product named Slipping Agents', '2022-11-18 13:30:53', 1, 'SAS'),
-(62, 'delete admin', 'Ella Arminta deleted Admin Kedua from admin', '2022-11-18 15:11:18', 1, 'Admin Kedua'),
-(63, 'delete admin', 'Ella Arminta deleted ella Arminta from admin', '2022-11-18 15:12:10', 1, 'ella Arminta'),
-(64, 'addAdmin', 'Ella Arminta added Admin one as an admin', '2022-11-18 15:15:24', 1, 'none'),
-(65, 'delete admin', 'Ella Arminta deleted Admin one from admin', '2022-11-18 15:15:51', 1, 'Admin one'),
-(66, 'addAdmin', 'Ella Arminta added Admin one as an admin', '2022-11-18 15:16:16', 1, 'none'),
-(67, 'delete admin', 'Ella Arminta deleted Admin one from admin', '2022-11-18 15:16:24', 1, 'Admin one'),
-(68, 'read message', 'Ella Arminta has read the message with subject of hai', '2022-11-18 17:05:51', 1, '2'),
-(69, 'read message', 'Ella Arminta has read the message with subject of hai', '2022-11-18 17:10:05', 1, '2'),
-(70, 'add product', 'Ella Arminta has added a product with the code PD11', '2022-11-19 17:28:50', 1, 'PD11'),
-(71, 'reorder category', 'Ella Arminta has reordered the category.', '2022-11-22 21:14:54', 1, ''),
-(72, 'add product', 'Ella Arminta has added a product with the code BJ', '2023-01-15 21:50:16', 1, 'BJ'),
-(73, 'add product', 'Ella Arminta has added a product with the code BJ', '2023-01-15 21:50:16', 1, 'BJ'),
-(74, 'delete product', 'Ella Arminta has delete a product with the code BJ', '2023-01-15 21:51:32', 1, 'BJ'),
-(75, 'update', 'Ella Arminta updated address', '2023-01-15 22:00:30', 1, 'Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 10000'),
-(76, 'update', 'Ella Arminta updated phone', '2023-01-15 22:00:45', 1, '+62 21 5398 318 '),
-(77, 'update', 'Ella Arminta updated phone', '2023-01-15 22:00:54', 1, 'Phone: +62 21 5398 318  3'),
-(78, 'update', 'Ella Arminta updated email', '2023-01-15 22:01:03', 1, 'phoenix-spm@sumberphoenix.co.id  '),
-(79, 'update', 'Ella Arminta updated email', '2023-01-15 22:01:11', 1, 'Email: phoenix-spm@sumberphoenix.co.id a'),
-(80, 'update', 'Ella Arminta updated phone', '2023-01-15 22:01:18', 1, 'Phone: +62 21 5398 318 '),
-(81, 'update', 'Ella Arminta updated address', '2023-01-15 22:01:26', 1, 'Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 1120 ');
 
 -- --------------------------------------------------------
 
@@ -169,8 +82,8 @@ INSERT INTO `categories` (`cat_id`, `cat_code`, `cat_name`, `cat_img`, `status`,
 (1, 'RI', 'Rubber Industries', 'data/category/rubber.jpg', 1, 8),
 (2, 'PI', 'Plastic Industries', 'data/category/plastic.jpg', 1, 7),
 (3, 'DC', 'Die Casting', 'data/category/casting.jpg', 1, 4),
-(4, 'CII', 'Coating and Ink Industries', 'data/category/ink.jpg', 1, 2),
-(5, 'AS', 'Acrylic Sheet', 'data/category/acrylic.jpg', 1, 3),
+(4, 'CII', 'Coating and Ink Industries', 'data/category/ink.jpg', 1, 1),
+(5, 'AS', 'Acrylic Sheet', 'data/category/acrylic.jpg', 1, 2),
 (6, 'OI', 'Other Industries', '', 1, 6),
 (7, 'TC', 'Testing Category', '', 0, 0),
 (8, 'H', 'Hai', 'data/category/PETA depan x25 (1).png', 0, 0),
@@ -179,7 +92,7 @@ INSERT INTO `categories` (`cat_id`, `cat_code`, `cat_name`, `cat_img`, `status`,
 (11, 'TEST', 'TEST', 'data/category/download (2).jpeg', 1, 9),
 (12, 'NC', 'New Category', 'data/category/Background.png', 0, 0),
 (13, 'NC', 'New Category', 'data/category/images.png', 1, 5),
-(14, 'CB', 'cat baru', 'data/category/3.jpg', 1, 1);
+(14, 'CB', 'cat baru', 'data/category/3.jpg', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -241,9 +154,9 @@ INSERT INTO `company_profile` (`id_fitur`, `fitur_name`, `fitur_data`) VALUES
 (15, 'fields_title', 'Business Fields'),
 (16, 'fields_desc', 'We Provide so much product to distributed'),
 (17, 'newsletter_desc', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. '),
-(18, 'address', 'Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 100000'),
-(19, 'phone', 'Phone: +62 21 5398 318'),
-(20, 'email', 'Email: phoenix-spm@sumberphoenix.co.id'),
+(18, 'address', 'Jl. Raya Serpong Km. 7 - Pakulonan Serpong Utara - Tanggerang Selatan Indonesia - 10000'),
+(19, 'phone', '+62 21 5398 318 '),
+(20, 'email', 'phoenix-spm@sumberphoenix.co.id  '),
 (21, 'why_us_title1', 'Well Trained Marketing'),
 (22, 'why_us_desc1', 'We have professional experts to recommend which products are suitable for developing your business'),
 (23, 'why_us_title2', 'Trusted\n'),
@@ -253,22 +166,18 @@ INSERT INTO `company_profile` (`id_fitur`, `fitur_name`, `fitur_data`) VALUES
 (27, 'why_us_title4', 'Spacious Warehouse Facility'),
 (28, 'why_us_desc4', 'We have a warehouse that can contains a lot of goods and with supporting facilities'),
 (29, 'statistics_total1', '234'),
-(30, 'statistics_title1', 'Happy Clients 1'),
-(31, 'statistics_desc1', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt! 1'),
+(30, 'statistics_title1', 'Happy Clients'),
+(31, 'statistics_desc1', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt!'),
 (32, 'statistics_total2', '521'),
-(33, 'statistics_title2', 'Projects 2'),
-(34, 'statistics_desc2', '2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt! 2'),
+(33, 'statistics_title2', 'Projects'),
+(34, 'statistics_desc2', '2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt!'),
 (35, 'statistics_total3', '19'),
-(36, 'statistics_title3', 'Years Of Support 3'),
-(37, 'statistics_desc3', '3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt! 3'),
+(36, 'statistics_title3', 'Years Of Support'),
+(37, 'statistics_desc3', '3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt!'),
 (38, 'statistics_total4', '50'),
 (39, 'statistics_title4', 'Workers'),
 (40, 'statistics_desc4', '4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur nisi cupiditate totam, aliquam, eligendi quaerat labore adipisci eos nostrum debitis unde iure quia eveniet, incidunt beatae! Velit unde distinctio sunt!'),
-(42, 'logo', 'logo.png'),
-(44, 'instagram', 'https://www.instagram.com/sumberphoenixmakmur.id/'),
-(45, 'linkedin', 'linklinkedin'),
-(46, 'facebook', 'linkfacebook'),
-(47, 'twitter', 'linktwitter');
+(42, 'logo', 'logo.png');
 
 -- --------------------------------------------------------
 
@@ -292,10 +201,10 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`emp_id`, `emp_name`, `emp_img`, `emp_position`, `emp_insta`, `emp_linkedin`, `emp_facebook`, `emp_twitter`) VALUES
-(1, 'Agus Handoko', 'data/team/cb260c790c1708d0404462d00a1f2a63.png', 'Director', 'https://www.instagram.com/ellaarminta/', 'https://www.linkedin.com/in/ella-arminta-601863222/', 'https://web.facebook.com/login.php?next=https%3A%2F%2Fweb.facebook.com%2Fsettings', 'https://twitter.com/genta_petra?lang=en'),
-(2, 'Mark Robert', 'data/team/8c3718db2ab00a5bfa5c54131b0514fb.jpg', 'CFO', 'https://www.instagram.com/ellaarminta/', 'https://www.linkedin.com/in/ella-arminta-601863222/', 'https://web.facebook.com/login.php?next=https%3A%2F%2Fweb.facebook.com%2Fsettings', 'https://twitter.com/genta_petra?lang=en'),
-(3, 'Daniel Davidson', 'data/team/133ea652aca37c001130ff89da8fd9ae.jpg', 'CMO', 'https://www.instagram.com/ellaarminta/', 'https://www.linkedin.com/in/ella-arminta-601863222/', 'https://web.facebook.com/login.php?next=https%3A%2F%2Fweb.facebook.com%2Fsettings', 'https://twitter.com/genta_petra?lang=en'),
-(4, 'Roger Hartono', 'data/team/d83b1e8bba94cb86f4f109ee2ab3b6bd.jpg', 'CTO', 'https://www.instagram.com/ellaarminta/', 'https://www.linkedin.com/in/ella-arminta-601863222/', 'https://web.facebook.com/login.php?next=https%3A%2F%2Fweb.facebook.com%2Fsettings', 'https://twitter.com/genta_petra?lang=en');
+(1, 'Agus Handoko', 'data/team/cb260c790c1708d0404462d00a1f2a63.png', 'Director', '#', '#', '#', '#'),
+(2, 'Mark Robert', 'data/team/8c3718db2ab00a5bfa5c54131b0514fb.jpg', 'CFO', '#', '#', '#', '#'),
+(3, 'Daniel Davidson', 'data/team/133ea652aca37c001130ff89da8fd9ae.jpg', 'CMO', '#', '#', '#', '#'),
+(4, 'Roger Hartono', 'data/team/d83b1e8bba94cb86f4f109ee2ab3b6bd.jpg', 'CTO', '#', '#', '#', '#');
 
 -- --------------------------------------------------------
 
@@ -335,14 +244,6 @@ CREATE TABLE `messages` (
   `status` varchar(100) NOT NULL DEFAULT 'read'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `messages`
---
-
-INSERT INTO `messages` (`id_msg`, `name`, `email`, `subject`, `msg`, `timesent`, `status`) VALUES
-(1, 'ella', 'brigittaella15@gmail.com', 'hai', 'hai\r\nhai', '2022-11-18 09:08:04', 'seen'),
-(2, 'leon', 'leonbenediktus@gmail.com', 'hai', 'hai ini leon terima kaish telah memberikan yang terbaik', '2022-11-18 10:02:08', 'seen');
-
 -- --------------------------------------------------------
 
 --
@@ -355,6 +256,8 @@ CREATE TABLE `products` (
   `product_code` varchar(100) NOT NULL,
   `product_img` text NOT NULL,
   `product_desc` text NOT NULL,
+  `product_delivery` varchar(100) NOT NULL,
+  `customer_service` varchar(100) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `featured` tinyint(1) NOT NULL DEFAULT 0,
   `best_seller` int(11) NOT NULL DEFAULT 0
@@ -364,27 +267,26 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_name`, `product_code`, `product_img`, `product_desc`, `status`, `featured`, `best_seller`) VALUES
-(1, 'Silane Coupling Agent', 'SILANE', 'data/product/download.jpeg', 'Adhesion promoters, or coupling agents, are chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion ...', 1, 0, 1),
-(2, 'Synthetic Rubbers', 'SR', 'data/product/download (1).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum                                                      \n                                                        ', 1, 0, 1),
-(3, ' Natural Rubbers', 'NR', 'data/product/download (2).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
-(4, 'Pigment Dispersion', 'PD', 'data/product/download (3).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
-(5, 'Anti Scratch', 'AS', 'data/product/images.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
-(6, 'Slip Agent', 'SA', 'data/product/download (4).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 1, 0),
-(7, 'Plastic Additives', 'PLA', 'data/product/download (5).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 1),
-(8, 'Mould Release Agent', 'MRA', 'data/product/download (6).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
-(9, 'Resins', 'RS1', 'data/product/download (7).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 1, 1),
-(10, 'Plunger Pellet Lubricant', 'PPL', 'data/product/download (8).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 0, 0, 0),
-(11, 'Dosing Machine for Plunger Lubricant', 'DMPL', 'data/product/download (9).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
-(12, 'Mold Release', 'MR', 'data/product/images.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 0, 0),
-(13, ' Adhesion Promotors', 'AP', 'data/product/download (10).jpeg', '<p>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</p><p>&nbsp;</p><ol><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li></ol>', 1, 0, 1),
-(14, 'Slipping Agents', 'SAS', 'data/product/download (11).jpeg', '<p>Additives, which enhance and reduce handling problems, are used extensively in the manufacture of polyolefin films. In their natural state, most polyolefins exhibit a degree of ‘tackiness,’ and therefore cannot be readily processed into packaging films without the presence of additives to ease their ability to “separate and slide.”</p><p>“Slip” additives are used to reduce a film’s resistance to sliding over itself or parts of converting equipment. Commercially important slips can be found in the chemical family known as amides, and are typically referred to as “fast bloom” (oleamide) and “slow bloom” (erucamide) additives. Other amides are used specifically for special processes (e.g. higher heat extrusion coating applications or customized mixtures where balancing slip and antiblock properties are critical.)</p><p>The effectiveness of slip additives are normally determined by the<strong> coefficient of friction (COF)</strong> it allows, which is measured using ASTM D-1894, “Standard Method of Test for Coefficient of Friction of Plastic Film.” COF is a ratio of the force required to slide one layer of film across another relative to the gravimetric force exerted on it. Loosely defined, films can be&nbsp;characterized as “low, medium, or high slip” as follows:</p>', 1, 0, 0),
-(15, 'Hello', 'HL', 'data/product/DSC_0238.JPG', '<p>hai</p><p>hai</p><p>hai</p><p>hai</p><p>huahah</p>', 0, 0, 0),
-(16, 'hello', 'HL', 'data/product/1668209558-DSC_0238.JPG', '<p>hai</p><p>hi</p>', 0, 0, 0),
-(17, 'hello', 'HL', 'data/product/1668210483-DSC_0238.JPG', '<p>hola</p><p>hola</p><p>hola</p>', 0, 0, 0),
-(18, 'hello', 'HL', 'data/product/1668210592-DSC_0238.JPG', '<p>hola</p><p>hola</p><p>hola</p>', 0, 0, 0),
-(19, 'product 11', 'PD11', 'data/product/1668853730-homepage.png', '<p>hai</p><p>hai</p><p>hai</p><p>&nbsp;</p><p>hai</p><p>hai</p><p>ahi</p>', 1, 0, 0),
-(20, 'Baju', 'BJ', 'data/product/1673794216-seribu.jpg', '<p>ini baju yang keren banget</p>', 0, 0, 0);
+INSERT INTO `products` (`product_id`, `product_name`, `product_code`, `product_img`, `product_desc`, `product_delivery`, `customer_service`, `status`, `featured`, `best_seller`) VALUES
+(1, 'Silane Coupling Agent', 'SILANE', 'data/product/download.jpeg', 'Adhesion promoters, or coupling agents, are chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion ...', 'Any TIme', '5 Star', 1, 0, 1),
+(2, 'Synthetic Rubbers', 'SR', 'data/product/download (1).jpeg', '      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum                                                      \n                                                        ', 'Free', '24 Hours a day', 1, 0, 1),
+(3, ' Natural Rubbers', 'NR', 'data/product/download (2).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'From Somewhere', '24 Hours', 1, 0, 0),
+(4, 'Pigment Dispersion', 'PD', 'data/product/download (3).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
+(5, 'Anti Scratch', 'AS', 'data/product/images.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
+(6, 'Slip Agent', 'SA', 'data/product/download (4).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 1, 0),
+(7, 'Plastic Additives', 'PLA', 'data/product/download (5).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 1),
+(8, 'Mould Release Agent', 'MRA', 'data/product/download (6).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
+(9, 'Resins', 'RS1', 'data/product/download (7).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 1, 1),
+(10, 'Plunger Pellet Lubricant', 'PPL', 'data/product/download (8).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 0, 0, 0),
+(11, 'Dosing Machine for Plunger Lubricant', 'DMPL', 'data/product/download (9).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
+(12, 'Mold Release', 'MR', 'data/product/images.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
+(13, ' Adhesion Promotors', 'AP', 'data/product/download (10).jpeg', '<p>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</p><p>&nbsp;</p><ol><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li></ol>', 'The Fastest Delivery', '24 Hours', 1, 0, 1),
+(14, 'Slipping Agents', 'SAS', 'data/product/download (11).jpeg', '<p>Additives, which enhance and reduce handling problems, are used extensively in the manufacture of polyolefin films. In their natural state, most polyolefins exhibit a degree of ‘tackiness,’ and therefore cannot be readily processed into packaging films without the presence of additives to ease their ability to “separate and slide.”</p><p>“Slip” additives are used to reduce a film’s resistance to sliding over itself or parts of converting equipment. Commercially important slips can be found in the chemical family known as amides, and are typically referred to as “fast bloom” (oleamide) and “slow bloom” (erucamide) additives. Other amides are used specifically for special processes (e.g. higher heat extrusion coating applications or customized mixtures where balancing slip and antiblock properties are critical.)</p><p>The effectiveness of slip additives are normally determined by the<strong> coefficient of friction (COF)</strong> it allows, which is measured using ASTM D-1894, “Standard Method of Test for Coefficient of Friction of Plastic Film.” COF is a ratio of the force required to slide one layer of film across another relative to the gravimetric force exerted on it. Loosely defined, films can be&nbsp;characterized as “low, medium, or high slip” as follows:</p>', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
+(15, 'Hello', 'HL', 'data/product/DSC_0238.JPG', '<p>hai</p><p>hai</p><p>hai</p><p>hai</p><p>huahah</p>', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
+(16, 'hello', 'HL', 'data/product/1668209558-DSC_0238.JPG', '<p>hai</p><p>hi</p>', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
+(17, 'hello', 'HL', 'data/product/1668210483-DSC_0238.JPG', '<p>hola</p><p>hola</p><p>hola</p>', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
+(18, 'hello', 'HL', 'data/product/1668210592-DSC_0238.JPG', '<p>hola</p><p>hola</p><p>hola</p>', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
+(19, 'product 11', 'PD11', 'data/product/1668853730-homepage.png', '<p>hai</p><p>hai</p><p>hai</p><p>&nbsp;</p><p>hai</p><p>hai</p><p>ahi</p>', 'The Fastest Delivery', 'Provide a 24 hour customer service', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -429,9 +331,7 @@ INSERT INTO `product_subcategory` (`product_id`, `subcategory_id`) VALUES
 (15, 24),
 (18, 10),
 (18, 22),
-(19, 1),
-(20, 1),
-(20, 8);
+(19, 1);
 
 -- --------------------------------------------------------
 
@@ -505,8 +405,7 @@ INSERT INTO `testimonials` (`testi_id`, `testi_name`, `testi_intro`, `testi_pp`,
 (4, 'Lorem Ipsum', 'Lorem Ipsum', 'data/testimonials/Lorem IpsumLorem Ipsum799bad5a3b514f096e69bbc4a7896cd9.jpg', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '2022-10-26 14:22:41', 2),
 (5, 'Lorem Ipsum', 'Lorem Ipsum', 'data/testimonials/Lorem IpsumLorem Ipsum156005c5baf40ff51a327f1c34f2975b.jpg', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '2022-10-26 14:22:54', 2),
 (6, 'Lorem Ipsum', 'Lorem Ipsum', 'data/testimonials/Lorem IpsumLorem Ipsumd0096ec6c83575373e3a21d129ff8fef.jpg', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '2022-10-26 14:23:06', 2),
-(7, 'Lorem Ipsum', 'Lorem Ipsum', 'data/testimonials/Lorem IpsumLorem Ipsumcb260c790c1708d0404462d00a1f2a63.png', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '2022-10-26 14:23:24', 0),
-(8, 'Ella', 'hai', 'data/testimonials/Ellahaimain-bg3.jpg', 'd d d d d d d d d d d d d d d d d d d d d dd d d d d d d d dd d d d d dd d d d d dd d d d d d d dd d d d d d d d d d d  d  d d d d d d d d d d d d d d d d d d d d d dd d d d d d d d dd d d d d dd d d d d dd d d d d d ', '2023-01-15 15:28:26', 1);
+(7, 'Lorem Ipsum', 'Lorem Ipsum', 'data/testimonials/Lorem IpsumLorem Ipsumcb260c790c1708d0404462d00a1f2a63.png', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '2022-10-26 14:23:24', 0);
 
 -- --------------------------------------------------------
 
@@ -532,7 +431,7 @@ CREATE TABLE `updates` (
 INSERT INTO `updates` (`upd_id`, `upd_title`, `upd_sub`, `adm_name`, `timestamp`, `upd_pict`, `upd_body`, `status`) VALUES
 (2, 'Lorem, Ipsum Dolor Sit Amet Consectetur Adipisicing Elit. Ab, Expedita Est', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae impedit porro voluptatum!', 'Ella Arminta', '2022-11-19 10:48:08', 'data/update/1668854888-warehouse.jpeg', '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><p>&nbsp;</p><p>Why do we use it?\n</p><p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p><p>&nbsp;</p><p>Where does it come from?\n</p><p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</p><p>&nbsp;</p><p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 'featured'),
 (3, 'hai 2', 'hai 2', 'Ella Arminta', '2022-11-19 10:53:00', 'data/update/1668867227-homepage.png', '<p>hai</p><p>2</p><p>hia</p><p>2</p><p>hai</p><p>2</p><p>hai</p>', 'deleted'),
-(4, 'hai', 'hai', 'Ella Arminta', '2022-11-19 15:25:07', 'data/update/1668871507-warehouse.jpeg', '<p>hai</p>', 'published'),
+(4, 'hai', 'hai', 'Ella Arminta', '2022-11-19 15:25:07', 'data/update/1668871507-warehouse.jpeg', '<p>hai</p>', 'featured'),
 (5, 'FIGHT COVID TOGERHER', 'go away covid', 'Ella Arminta', '2022-11-19 15:49:55', 'data/update/1668872995-covid.jpeg', '<p>Since the outbreak of COVID-19,&nbsp;<a href=\"https://news.sky.com/story/coronavirus-rise-in-demand-for-hand-sanitisers-and-hygiene-products-11948021\">sales of hand sanitizers have soared</a>. It’s become such a sought-after product that pharmacies and supermarkets have started&nbsp;<a href=\"https://www.bbc.co.uk/news/uk-51729012\">limiting the number</a>&nbsp;that people can buy at one time. Though hand sanitizers can help reduce our risk of catching certain infections, not all hand sanitizers are equally effective against coronavirus.Washing with warm water and soap remains the&nbsp;<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3249958/\">gold standard for hand hygiene</a>&nbsp;and preventing the spread of infectious diseases. Washing with warm water (not cold water) and soap removes oils from our hands that can harbour microbes.Hand sanitizers can also protect against disease-causing microbes, especially in situations when&nbsp;<a href=\"https://www.fda.gov/consumers/if-soap-and-water-are-not-available-hand-sanitizers-may-be-good-alternative\">soap and water aren’t available</a>.&nbsp;</p>', 'featured'),
 (6, 'IDUL FITRI 1443H HOLIDAY', 'idul fitri', 'Ella Arminta', '2022-11-19 15:50:38', 'data/update/1668873038-holiday.jpeg', '<p>Dear Valued Customer, in anticipating of the forthcoming Idul Fitri 1443H, PT. Rena Haniem Mulia will not be operating during 26 Apr 2022&nbsp; - 08 May 2022 and at 11 May 2022 we will Start delivery process&nbsp;We are requesting all our valued customers for assistance in providing us with an early schedule of your supply needs prior to and after the holidays. This is to ensure all your needs are taken care of during the above mention period and avoid any delays in supplies. We take this opportunity to thank you, our valued customer for your valued patronage and cooperation. Stay safe, do take care of your health and protect others. Hopefully this covid-19 situation will end soon.&nbsp;</p>', 'featured'),
 (7, 'STAY SAFE, WEAR YOUR MASK!', 'gws', 'Ella Arminta', '2022-11-19 15:51:11', 'data/update/1668873071-mask.jpeg', '<p>To help flatten the COVID-19 curve, the government is now urging people to wear face masks whenever they are out in public. The new recommendation is an update from the previous guidelines and is in line with the World Health Organization’s (WHO) latest recommendation. Previously, Indonesia complied with the WHO’s recommendations that face masks only be worn by medical professionals and sick people in order to prevent a supply shortage.&nbsp;The public can wear cloth masks, or masks made from other materials, as long as they can prevent the spread of saliva droplets when speaking.&nbsp;</p>', 'featured'),
@@ -647,7 +546,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `admin_log`
 --
 ALTER TABLE `admin_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -665,7 +564,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `company_profile`
 --
 ALTER TABLE `company_profile`
-  MODIFY `id_fitur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_fitur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `employees`
@@ -689,7 +588,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
@@ -701,7 +600,7 @@ ALTER TABLE `subcategories`
 -- AUTO_INCREMENT for table `testimonials`
 --
 ALTER TABLE `testimonials`
-  MODIFY `testi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `testi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `updates`
