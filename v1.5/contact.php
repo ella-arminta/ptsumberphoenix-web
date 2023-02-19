@@ -92,12 +92,20 @@ function getData($fiturNama,$conn){
                 <!-- Input FIelds -->
                 <div class="input-fields-container contact-container">
                     <form action="api/sendMsg.php" method="POST">
+                    <?php if(isset($_GET['proid'])){
+                        $stmt=$conn->prepare("SELECT product_name from products where product_id = ?");
+                        $stmt->execute([$_GET['proid']]);
+                        if($stmt->rowCount() > 0){
+                            $proName =  $stmt->fetch();
+                            $proName = $proName['product_name'];
+                        }
+                        }?>
                         <div class="user-info grid">
                             <input type="text" name="name" placeholder="Your Name" class="input-fields" required>
                             <input type="email" name="email" placeholder="Your Email" class="input-fields" required>
                         </div>
-                        <input type="text" placeholder="Subject" name="subject" class="input-fields" required>
-                        <textarea placeholder="Message" id="msgTextarea" name="msg" required><?php if(isset($_GET['proid'])){$stmt=$conn->prepare("SELECT product_name from products where product_id = ?");$stmt->execute([$_GET['proid']]);if($stmt->rowCount() > 0){$proName =  $stmt->fetch();$proName = $proName['product_name'];echo 'Please help to send quotation for '.$proName.', thank you!';}}?></textarea>
+                        <input type="text" placeholder="Subject" name="subject" class="input-fields" value="<?php if(isset($proName)){ echo $proName;}?>" required>
+                        <textarea placeholder="Message" id="msgTextarea" name="msg" required><?php if(isset($proName)){echo  'Please help to send quotation for '.$proName.', thank you!';} ?></textarea>
                         <div class="button-container">
                             <input type="submit" class="custom-button btn navbar-btn submit" value="Send Message">
                         </div>
