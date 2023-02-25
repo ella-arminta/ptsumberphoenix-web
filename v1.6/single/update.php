@@ -54,13 +54,8 @@ $row = $stmt->fetch();
     <section class="update-section section-extra">
         <div class="container-fluid">
             <!-- update information -->
-            <div class="update-category sub-heading">Announcement</div>
             <div class="heading"><?= $row['upd_title'] ?></div>
             <div class="sub-heading update-description"><?= $row['upd_sub'] ?></div>
-            <div class="writter">
-                <!-- <img src="../src/updates/user.jpg" alt="" class="profile-picture"> -->
-                <div class="sub-heading">By <?= $row['adm_name'] ?></div>
-            </div>
             <div class="date sub-heading"><?php 
                 $timeStamp = $row['timestamp'];
                 $timeStamp = date( "M d, Y", strtotime($timeStamp));

@@ -50,7 +50,7 @@ include 'api/connect.php';
                     <div class="highlight-information">
                         <div class="highlight-tag">Important! </div>
                         <div class="highlight-title heading"><?= $upd['upd_title'] ?></div>
-                        <p class="paragraph"><?= $upd['adm_name'] ?> | <?php 
+                        <p class="paragraph"><?php 
                         $timeStamp = $upd['timestamp'];
                         $timeStamp = date( "M d, Y", strtotime($timeStamp));
                         echo $timeStamp; ?></p>
@@ -73,7 +73,7 @@ include 'api/connect.php';
                     <div class="latest-update update-item" onclick="window.location.href='single/update.php?id=<?= $row['upd_id'] ?>'">
                         <div class="update-information">
                             <div class="update-title"><?= $row['upd_title'] ?></div>
-                            <p class="paragraph"><?= $row['adm_name']?> | <?php 
+                            <p class="paragraph"><?php 
                         $timeStamp = $row['timestamp'];
                         $timeStamp = date( "M d, Y", strtotime($timeStamp));
                         echo $timeStamp; ?></p>
@@ -192,7 +192,7 @@ include 'api/connect.php';
                             <div class="card opacity-overlay" style="background-image: url(`+post['upd_pict']+`)">
                                 <div class="card-information">
                                     <div class="sub-heading">`+post['upd_title']+`</div>
-                                    <p class="paragraph">`+post['adm_name']+` | `+date+`</p>
+                                    <p class="paragraph">`+date+`</p>
                                 </div>
                             </div>
                         </div>

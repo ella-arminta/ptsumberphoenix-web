@@ -344,13 +344,12 @@ function getData($fiturNama,$conn){
     <section class="why-us-section diagonal" id="why">
         <div class="container-fluid diagonal-content">
             <div class="text-center info">
-                <h2 style="color: white;">Why<span style="color: #a6060a;"><strong>&nbsp;Us ?</strong></span></h2>
-                <p class="" col="why_desc" style="width: 100%; color: white; justify-content: center; align-items: center">
+                <h2 class="" col="why_desc" style="width: 100%; color: white; justify-content: center; align-items: center; text-transform: uppercase">
                     <strong><?= getData('why_desc',$conn)?></strong><br> 
                     <button type="button" class="btn btn-danger edit">
                         <i class="fa-solid fa-pencil"></i>
                     </button>
-                </p>
+                </h2>
             </div>
             <div class="row">
                 <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">

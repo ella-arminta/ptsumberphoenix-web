@@ -29,7 +29,7 @@ function getData1($fiturNama,$conn){
             </div>
             <div class="useful-links">
                 <h2 class="sub-heading underline">Useful Links</h2>
-                <a class="footer-item" href="#">
+                <a class="footer-item" href="#home">
                     <i class="fa-solid fa-angle-right"></i>
                     Home
                 </a>
@@ -63,14 +63,6 @@ function getData1($fiturNama,$conn){
                     <?= $cat['cat_name'] ?>
                 </a>
                 <?php endwhile; ?>
-            </div>
-            <div class="newsletter">
-                <h2 class="sub-heading underline">Join Our Newsletter</h2>
-                <p class="paragraph" col="newsletter_desc"><?= getData1('newsletter_desc',$conn)?></p>
-                <div class="email-input">
-                    <input type="email" placeholder="example@gmail.com">
-                    <button class="custom-button btn" type="button">Subscribe</button>
-                </div>
             </div>
         </div>
     </section>

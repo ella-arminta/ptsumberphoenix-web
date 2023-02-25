@@ -19,7 +19,7 @@
                         <a class="nav-link paragraph" href="#fields">Products</a>
                     </li>
                     <li class="nav-item" id='about-nav'>
-                        <a class="nav-link paragraph" href="#about">About Us</a>
+                        <a class="nav-link paragraph" href="#about">Company</a>
                     </li>
                     <li class="nav-item" id='update-nav'>
                         <a class="nav-link paragraph" href="#update">News</a>

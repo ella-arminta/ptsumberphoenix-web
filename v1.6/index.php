@@ -54,7 +54,7 @@ function getData($fiturNama,$conn){
     <?php include 'includes/navbar.php' ?>
 
     <!-- Home Section Page -->
-    <section class="home-section homeImageChange"
+    <section class="home-section homeImageChange" id="home"
         style="background-image: url('<?php echo getData('home_image',$conn) ?>')">
         <div class="container-fluid">
             <div class="home-wrapper">
@@ -173,10 +173,10 @@ function getData($fiturNama,$conn){
     <section class="why-us-section diagonal" id="why">
         <div class="container-fluid diagonal-content">
             <div class="text-center info">
-                <h2 style="color: white;">Why<span style="color: #a6060a;"><strong>&nbsp;Us ?</strong></span></h2>
-                <p class="d-inline-block" style="width: 50%; color: white;">
+                <!-- <h2 style="color: white;">Why<span style="color: #a6060a;"><strong>&nbsp;Us ?</strong></span></h2> -->
+                <h2 class="d-inline-block" style="width: 70%; color: white; text-transform: uppercase;">
                     <strong><?= getData('why_desc',$conn)?></strong><br>
-                </p>
+                </h2>
             </div>
             <div class="row">
                 <div class="col-12 text-center col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
