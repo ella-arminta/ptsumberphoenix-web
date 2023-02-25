@@ -3,9 +3,21 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< Updated upstream
 -- Generation Time: Feb 19, 2023 at 12:01 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
+=======
+<<<<<<< HEAD
+-- Generation Time: Feb 22, 2023 at 10:31 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.9
+=======
+-- Generation Time: Feb 19, 2023 at 12:01 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.11
+>>>>>>> fec1c5c7162b8cfd7652af690d4ccbb834d2f713
+>>>>>>> Stashed changes
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
