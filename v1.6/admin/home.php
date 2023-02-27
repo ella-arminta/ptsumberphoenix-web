@@ -904,15 +904,6 @@ function getData($fiturNama,$conn){
                 </a>
                 <?php endwhile; ?>
             </div>
-            <div class="newsletter">
-                <h2 class="sub-heading underline">Join Our Newsletter</h2>
-                <p class="paragraph" col="newsletter_desc"><?= getData('newsletter_desc',$conn)?> <button type="button"
-                        class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
-                <div class="email-input">
-                    <input type="email" placeholder="example@gmail.com">
-                    <button class="custom-button btn" type="button">Subscribe</button>
-                </div>
-            </div>
         </div>
     </section>
     <footer class="copyright-footer">

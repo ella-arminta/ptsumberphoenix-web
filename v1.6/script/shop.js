@@ -116,6 +116,13 @@ $(document).ready(function(){
     $('.search-icon').click(function(){
         getProducts('byName','')
     })
+    $(document).on('keypress',function(e) {
+        if(e.which == 13) {
+            if($('#searchbar').val() != ''){
+                getProducts('byName','')
+            }
+        }
+    });
 
 })
 
