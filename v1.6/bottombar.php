@@ -15,8 +15,6 @@ function getData1($fiturNama,$conn){
                     
                 </div>
 
-                
-
                 <div class="company-address">
                     <p class="paragraph" col="address"><?= getData1('address',$conn)?> </p>
                 </div>
