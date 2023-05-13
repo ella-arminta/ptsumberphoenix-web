@@ -532,7 +532,10 @@ if(!isset($_SESSION['admin_id'])){
                                             <div style="float:left">
                                                 `+icon+`
                                             </div>
-                                            <button style="float:right" class="btn btn-danger delProductBut" onclick="delProduct('`+product.product_code+`')" proCode="`+product.product_code+`">Delete</button>
+                                            <div style="float:right">
+                                                <button  class="btn btn-danger delProductBut" onclick="delProduct('`+product.product_code+`')" proCode="`+product.product_code+`">Delete</button>
+                                                <button style="margin-right:10px;"  class="btn btn-warning editProduct" onclick="editProduct('`+product.product_code+`')" proCode="`+product.product_code+`">Edit</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -661,7 +664,10 @@ if(!isset($_SESSION['admin_id'])){
                                                 <div style="float:left">
                                                     `+icon+`
                                                 </div>
-                                                <button style="float:right" class="btn btn-danger delProductBut" onclick="delProduct('`+product.product_code+`')" proCode="`+product.product_code+`">Delete</button>
+                                                <div style="float:right">
+                                                    <button  class="btn btn-danger delProductBut" onclick="delProduct('`+product.product_code+`')" proCode="`+product.product_code+`">Delete</button>
+                                                    <button style="margin-right:10px;"  class="btn btn-warning editProduct" onclick="editProduct('`+product.product_code+`')" proCode="`+product.product_code+`">Edit</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

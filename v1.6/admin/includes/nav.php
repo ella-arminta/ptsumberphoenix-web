@@ -19,7 +19,7 @@
                         <a class="nav-link" aria-current="page" href="home.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="product.php">Product</a>
+                        <a class="nav-link" aria-current="page" href="shop.php">Product</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="update.php">Update</a>

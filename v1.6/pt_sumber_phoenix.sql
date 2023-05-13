@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2023 at 07:56 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Generation Time: May 13, 2023 at 04:40 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
   `adm_join_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `adm_password` text NOT NULL,
   `master` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
@@ -57,7 +57,74 @@ CREATE TABLE `admin_log` (
   `time` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `admin_id` int(11) NOT NULL,
   `prev_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin_log`
+--
+
+INSERT INTO `admin_log` (`log_id`, `action`, `log_desc`, `time`, `admin_id`, `prev_data`) VALUES
+(71, 'add product', 'admin has added a product with the code PC9', '2023-05-12 14:25:05', 1, 'PC9'),
+(72, 'add product', 'admin has added a product with the code PC9', '2023-05-12 14:25:05', 1, 'PC9'),
+(73, 'add product', 'admin has added a product with the code PC9', '2023-05-12 14:25:05', 1, 'PC9'),
+(74, 'add product', 'admin has added a product with the code PC9', '2023-05-12 14:25:05', 1, 'PC9'),
+(75, 'delete product', 'admin has delete a product with the code AP', '2023-05-13 18:40:28', 1, 'AP'),
+(76, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:05:46', 1, '20'),
+(77, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:05:46', 1, '20'),
+(78, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:05:46', 1, '20'),
+(79, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:05:46', 1, '20'),
+(80, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:05:46', 1, '20'),
+(81, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:05:46', 1, '20'),
+(82, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:07:41', 1, '20'),
+(83, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:07:41', 1, '20'),
+(84, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:07:41', 1, '20'),
+(85, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:07:41', 1, '20'),
+(86, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:07:41', 1, '20'),
+(87, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:07:41', 1, '20'),
+(88, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:11:01', 1, '20'),
+(89, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:11:01', 1, '20'),
+(90, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:11:01', 1, '20'),
+(91, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:11:01', 1, '20'),
+(92, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:11:01', 1, '20'),
+(93, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:11:01', 1, '20'),
+(94, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:17:37', 1, '20'),
+(95, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:17:37', 1, '20'),
+(96, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:17:37', 1, '20'),
+(97, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:17:37', 1, '20'),
+(98, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:17:37', 1, '20'),
+(99, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:17:37', 1, '20'),
+(100, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:19:18', 1, '20'),
+(101, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:19:18', 1, '20'),
+(102, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:19:18', 1, '20'),
+(103, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:19:18', 1, '20'),
+(104, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:19:18', 1, '20'),
+(105, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:19:18', 1, '20'),
+(106, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:20:37', 1, '20'),
+(107, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:20:37', 1, '20'),
+(108, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:20:37', 1, '20'),
+(109, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:20:37', 1, '20'),
+(110, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:20:37', 1, '20'),
+(111, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:20:37', 1, '20'),
+(112, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:22:50', 1, '20'),
+(113, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:22:50', 1, '20'),
+(114, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:22:50', 1, '20'),
+(115, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:22:50', 1, '20'),
+(116, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:22:50', 1, '20'),
+(117, 'edit product', 'admin has edited a product with the code 20', '2023-05-13 21:22:50', 1, '20'),
+(118, 'edit product', 'admin has edited a product with the code 9', '2023-05-13 21:23:29', 1, '9'),
+(119, 'edit product', 'admin has edited a product with the code 9', '2023-05-13 21:23:29', 1, '9'),
+(120, 'edit product', 'admin has edited a product with the code 9', '2023-05-13 21:23:29', 1, '9'),
+(121, 'edit product', 'admin has edited a product with the code 5', '2023-05-13 21:31:42', 1, '5'),
+(122, 'add product', 'admin has added a product with the code PS11', '2023-05-13 21:34:12', 1, 'PS11'),
+(123, 'add product', 'admin has added a product with the code PS11', '2023-05-13 21:34:12', 1, 'PS11'),
+(124, 'add product', 'admin has added a product with the code PS11', '2023-05-13 21:34:12', 1, 'PS11'),
+(125, 'add product', 'admin has added a product with the code PS11', '2023-05-13 21:34:12', 1, 'PS11'),
+(126, 'edit product', 'admin has edited a product with the code 21', '2023-05-13 21:34:59', 1, '21'),
+(127, 'edit product', 'admin has edited a product with the code 21', '2023-05-13 21:38:14', 1, '21'),
+(128, 'edit product', 'admin has edited a product with the code 21', '2023-05-13 21:38:14', 1, '21'),
+(129, 'edit product', 'admin has edited a product with the code 21', '2023-05-13 21:38:46', 1, '21'),
+(130, 'edit product', 'admin has edited a product with the code 21', '2023-05-13 21:38:46', 1, '21'),
+(131, 'edit product', 'admin has edited a product with the code 21', '2023-05-13 21:38:46', 1, '21');
 
 -- --------------------------------------------------------
 
@@ -72,7 +139,7 @@ CREATE TABLE `categories` (
   `cat_img` text NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `order_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categories`
@@ -104,7 +171,7 @@ CREATE TABLE `clients` (
   `client_id` int(11) NOT NULL,
   `client_logo` text NOT NULL,
   `client_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `clients`
@@ -130,7 +197,7 @@ CREATE TABLE `company_profile` (
   `id_fitur` int(11) NOT NULL,
   `fitur_name` text NOT NULL,
   `fitur_data` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `company_profile`
@@ -194,7 +261,7 @@ CREATE TABLE `employees` (
   `emp_linkedin` text NOT NULL,
   `emp_facebook` text NOT NULL,
   `emp_twitter` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employees`
@@ -216,7 +283,7 @@ CREATE TABLE `faq` (
   `faq_id` int(11) NOT NULL,
   `faq_thumbnail` text NOT NULL,
   `faq_desc` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `faq`
@@ -242,7 +309,7 @@ CREATE TABLE `messages` (
   `msg` text NOT NULL,
   `timesent` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` varchar(100) NOT NULL DEFAULT 'read'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -261,7 +328,7 @@ CREATE TABLE `products` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `featured` tinyint(1) NOT NULL DEFAULT 0,
   `best_seller` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
@@ -272,21 +339,23 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_code`, `product_i
 (2, 'Synthetic Rubbers', 'SR', 'data/product/download (1).jpeg', '      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum                                                      \n                                                        ', 'Free', '24 Hours a day', 1, 0, 1),
 (3, ' Natural Rubbers', 'NR', 'data/product/download (2).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'From Somewhere', '24 Hours', 1, 0, 0),
 (4, 'Pigment Dispersion', 'PD', 'data/product/download (3).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
-(5, 'Anti Scratch', 'AS', 'data/product/images.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
+(5, 'Anti Scratch', 'AS', 'data/product/images.png', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
 (6, 'Slip Agent', 'SA', 'data/product/download (4).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 1, 0),
 (7, 'Plastic Additives', 'PLA', 'data/product/download (5).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 1),
 (8, 'Mould Release Agent', 'MRA', 'data/product/download (6).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
-(9, 'Resins', 'RS1', 'data/product/download (7).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 1, 1),
+(9, 'Resins S1', 'RS1', 'data/product/1683987809-download (8).jpeg', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum 200</p>', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 1, 1),
 (10, 'Plunger Pellet Lubricant', 'PPL', 'data/product/download (8).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 0, 0, 0),
 (11, 'Dosing Machine for Plunger Lubricant', 'DMPL', 'data/product/download (9).jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
 (12, 'Mold Release', 'MR', 'data/product/images.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
-(13, ' Adhesion Promotors', 'AP', 'data/product/download (10).jpeg', '<p>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</p><p>&nbsp;</p><ol><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li></ol>', 'The Fastest Delivery', '24 Hours', 1, 0, 1),
+(13, ' Adhesion Promotors', 'AP', 'data/product/download (10).jpeg', '<p>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</p><p>&nbsp;</p><ol><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li><li>Adhesion promoters, or coupling agents, are <strong>chemicals that act at the interface between an organic polymer and an inorganic substrate to enhance adhesion between the two materials</strong>.</li></ol>', 'The Fastest Delivery', '24 Hours', 0, 0, 1),
 (14, 'Slipping Agents', 'SAS', 'data/product/download (11).jpeg', '<p>Additives, which enhance and reduce handling problems, are used extensively in the manufacture of polyolefin films. In their natural state, most polyolefins exhibit a degree of ‘tackiness,’ and therefore cannot be readily processed into packaging films without the presence of additives to ease their ability to “separate and slide.”</p><p>“Slip” additives are used to reduce a film’s resistance to sliding over itself or parts of converting equipment. Commercially important slips can be found in the chemical family known as amides, and are typically referred to as “fast bloom” (oleamide) and “slow bloom” (erucamide) additives. Other amides are used specifically for special processes (e.g. higher heat extrusion coating applications or customized mixtures where balancing slip and antiblock properties are critical.)</p><p>The effectiveness of slip additives are normally determined by the<strong> coefficient of friction (COF)</strong> it allows, which is measured using ASTM D-1894, “Standard Method of Test for Coefficient of Friction of Plastic Film.” COF is a ratio of the force required to slide one layer of film across another relative to the gravimetric force exerted on it. Loosely defined, films can be&nbsp;characterized as “low, medium, or high slip” as follows:</p>', 'The fastest delivery', 'Provide a 24 hour customer service', 1, 0, 0),
 (15, 'Hello', 'HL', 'data/product/DSC_0238.JPG', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
 (16, 'hello', 'HL', 'data/product/1668209558-DSC_0238.JPG', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
 (17, 'hello', 'HL', 'data/product/1668210483-DSC_0238.JPG', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
 (18, 'hello', 'HL', 'data/product/1668210592-DSC_0238.JPG', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The Fastest Delivery', 'Provide a 24 hour customer service', 0, 0, 0),
-(19, 'product 11', 'PD11', 'data/product/1668853730-homepage.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The Fastest Delivery', 'Provide a 24 hour customer service', 1, 0, 0);
+(19, 'product 11', 'PD11', 'data/product/1668853730-homepage.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'The Fastest Delivery', 'Provide a 24 hour customer service', 1, 0, 0),
+(20, 'Product 9 jadi 100', 'PC9', 'data/product/1683987770-CLOSING-WGG_VANESSA-2-1024x683.jpg', '<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus, natus. Nostrum dolorum, qui praesentium natus nam sint dicta illum eos necessitatibus ipsam? Quo doloremque quam earum vero provident rerum voluptatibus qui vel. Sapiente tempora ratione, quae voluptatum recusandae facere laborum repellat totam nihil explicabo fuga at pariatur nobis ex rerum, maiores earum perferendis!&nbsp;</p><p>Adipisci veritatis vel consequuntur, accusantium nulla animi doloremque nesciunt, a aspernatur quam in. Quibusdam atque ad quidem debitis, quae ea cupiditate minus doloremque facilis dolore error voluptate labore illum, odio earum ipsam aliquam recusandae doloribus magni porro dolorum laboriosam possimus explicabo? Exercitationem, velit? Quisquam hic maiores distinctio? 100</p>', '', '', 1, 0, 0),
+(21, 'product 11', 'PS11', 'data/product/1683988499-download.jpeg', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non consectetur necessitatibus eos molestias adipisci impedit cupiditate ad pariatur iste. Culpa nemo illum dolor blanditiis laudantium amet officiis, tenetur voluptas accusamus magni, nisi ipsum? Necessitatibus, consectetur illo debitis fuga aut soluta tempore, natus ducimus amet corporis molestiae repellat iure quos nesciunt.</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non consectetur necessitatibus eos molestias adipisci impedit cupiditate ad pariatur iste. Culpa nemo illum dolor blanditiis laudantium amet officiis, tenetur voluptas accusamus magni, nisi ipsum? Necessitatibus, consectetur illo debitis fuga aut soluta tempore, natus ducimus amet corporis molestiae repellat iure quos nesciunt.</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non consectetur necessitatibus eos molestias adipisci impedit cupiditate ad pariatur iste. Culpa nemo illum dolor blanditiis laudantium amet officiis, tenetur voluptas accusamus magni, nisi ipsum? Necessitatibus, consectetur illo debitis fuga aut soluta tempore, natus ducimus amet corporis molestiae repellat iure quos nesciunt.</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non consectetur necessitatibus eos molestias adipisci impedit cupiditate ad pariatur iste. Culpa nemo illum dolor blanditiis laudantium amet officiis, tenetur voluptas accusamus magni, nisi ipsum? Necessitatibus, consectetur illo debitis fuga aut soluta tempore, natus ducimus amet corporis molestiae repellat iure quos nesciunt.</p>', '', '', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -295,71 +364,54 @@ INSERT INTO `products` (`product_id`, `product_name`, `product_code`, `product_i
 --
 
 CREATE TABLE `product_subcategory` (
+  `ps_id` int(11) NOT NULL,
   `product_id` int(11) DEFAULT NULL,
   `subcategory_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product_subcategory`
 --
 
-INSERT INTO `product_subcategory` (`product_id`, `subcategory_id`) VALUES
-(1, 1),
-(1, 4),
-(2, 1),
-(2, 2),
-(2, 3),
-(3, 3),
-(3, 4),
-(4, 5),
-(5, 12),
-(6, 5),
-(6, 6),
-(7, 8),
-(8, 6),
-(8, 7),
-(8, 8),
-(9, 7),
-(9, 8),
-(10, 10),
-(11, 10),
-(12, 12),
-(13, 15),
-(13, 16),
-(14, 14),
-(15, 17),
-(15, 24),
-(18, 10),
-(18, 22),
-(19, 1),
-(1, 1),
-(1, 4),
-(2, 1),
-(2, 2),
-(2, 3),
-(3, 3),
-(3, 4),
-(4, 5),
-(5, 12),
-(6, 5),
-(6, 6),
-(7, 8),
-(8, 6),
-(8, 7),
-(8, 8),
-(9, 7),
-(9, 8),
-(10, 10),
-(11, 10),
-(12, 12),
-(13, 15),
-(13, 16),
-(14, 14),
-(15, 17),
-(15, 24),
-(18, 10),
-(18, 22),
-(19, 1);
+INSERT INTO `product_subcategory` (`ps_id`, `product_id`, `subcategory_id`) VALUES
+(1, 1, 1),
+(2, 1, 4),
+(6, 3, 3),
+(8, 4, 5),
+(11, 6, 6),
+(13, 8, 6),
+(16, 10, 10),
+(17, 11, 10),
+(19, 13, 15),
+(20, 13, 16),
+(24, 18, 10),
+(29, 2, 1),
+(30, 2, 2),
+(31, 2, 3),
+(33, 3, 4),
+(36, 6, 5),
+(38, 7, 8),
+(40, 8, 7),
+(41, 8, 8),
+(44, 12, 12),
+(47, 14, 14),
+(48, 15, 17),
+(49, 15, 24),
+(51, 18, 22),
+(52, 19, 1),
+(53, 20, 3),
+(54, 20, 8),
+(55, 20, 12),
+(56, 20, 15),
+(57, 20, 18),
+(58, 20, 23),
+(59, 9, 7),
+(60, 9, 8),
+(61, 9, 11),
+(62, 5, 12),
+(70, 21, 2),
+(71, 21, 6),
+(72, 21, 22);
 
 -- --------------------------------------------------------
 
@@ -373,7 +425,7 @@ CREATE TABLE `subcategories` (
   `sub_code` varchar(100) NOT NULL,
   `sub_name` varchar(255) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `subcategories`
@@ -420,7 +472,7 @@ CREATE TABLE `testimonials` (
   `testi_isi` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` int(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `testimonials`
@@ -450,7 +502,7 @@ CREATE TABLE `updates` (
   `upd_pict` text NOT NULL,
   `upd_body` text NOT NULL,
   `status` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `updates`
@@ -538,6 +590,7 @@ ALTER TABLE `products`
 -- Indexes for table `product_subcategory`
 --
 ALTER TABLE `product_subcategory`
+  ADD PRIMARY KEY (`ps_id`),
   ADD KEY `product_id_fk` (`product_id`),
   ADD KEY `subcat_id_fk` (`subcategory_id`);
 
@@ -574,7 +627,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `admin_log`
 --
 ALTER TABLE `admin_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -616,7 +669,13 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `product_subcategory`
+--
+ALTER TABLE `product_subcategory`
+  MODIFY `ps_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
