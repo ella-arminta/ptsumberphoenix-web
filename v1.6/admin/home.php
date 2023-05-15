@@ -851,9 +851,7 @@ function getData($fiturNama,$conn){
                     <img src="../src/<?= getData('logo',$conn) ?>" id="company-logo" alt="">
                     <button class="btn btn-danger updateLogo" data-bs-toggle="modal" data-bs-target="#logo"><i class="fa-solid fa-pencil"></i></button>
                 </div>
-
                 
-
                 <div class="company-address">
                     <p class="paragraph" col="address"><?= getData('address',$conn)?> <button type="button"
                             class="btn btn-danger edit"><i class="fa-solid fa-pencil"></i></button></p>
@@ -912,20 +910,6 @@ function getData($fiturNama,$conn){
                 <i class="fa-solid fa-copyright"></i>
                 Copyright <strong>PT Sumber Phoenix Makmur</strong>. All Rights Reserved
             </div>
-            <div class="copyright-social-media">
-                <div class="icon-container-box">
-                    <a href="<?= getData('instagram',$conn) ?>" class="fa-brands fa-instagram"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="<?= getData('linkedin',$conn) ?>" class="fa-brands fa-linkedin"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="<?= getData('facebook',$conn) ?>" class="fa-brands fa-facebook"></a>
-                </div>
-                <div class="icon-container-box">
-                    <a href="<?= getData('twitter',$conn) ?>" class="fa-brands fa-twitter"></a>
-                </div>
-            </div>
         </div>
     </footer>
 
@@ -967,7 +951,7 @@ function getData($fiturNama,$conn){
     <script src="../script/number.js"></script>
     <script src="../script/modal.js"></script>
 
-    <script src="../script/homepage/contact.js"></script>
+    <!-- <script src="../script/homepage/contact.js"></script> -->
     <script src="../script/homepage/product.js"></script>
     <script src="../script/homepage/client.js"></script>
     <script src="../script/homepage/update.js"></script>
