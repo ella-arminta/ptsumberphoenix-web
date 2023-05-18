@@ -313,11 +313,16 @@ include 'api/connect.php';
                     }
                     
                 }else{
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: 'Something went Wrong please come back later'
-                    })
+                    if(response[0] == 'fail' || response[1] == 'Subcategory not found'){
+                        // window.location.href = 'shop.php';
+                        getProducts("random","")
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Something went Wrong please come back later'
+                        })
+                    }
                 }
             },
             error: function(){
