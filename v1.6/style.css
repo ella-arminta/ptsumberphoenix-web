@@ -134,9 +134,11 @@ a {
     -ms-transform: rotate(-3deg) skew(-3deg);
 
     position: relative;
-    background: url('./src/diagonal-section.jpg');
+    background: url('./src/diagonal-section.png');
     background-repeat: no-repeat;
     background-size: cover;
+
+    
 
     padding-top: 90px;
     padding-bottom: 90px;
