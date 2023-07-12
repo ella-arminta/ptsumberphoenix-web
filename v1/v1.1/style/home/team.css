@@ -1,0 +1,100 @@
+
+.team-section {
+    height: auto;
+}
+
+.team-section .heading {
+    text-align: center;
+    color: white;
+}
+
+.team-section .paragraph.description {
+    color: white;
+    text-align: center
+}
+
+.team-section .grid {
+    margin-top: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.team-section .team-content {
+    position: relative;
+    cursor: help;
+}
+
+.team-section .team-content:hover .team-content-social-media {
+    opacity: 1;
+}
+
+.team-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    border-radius: 5px;
+}
+
+.team-section .team-content-social-media {
+    position: absolute;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    transition: all 0.5s linear;
+}
+
+.team-section .team-content-social-media .icon-container {
+    background-color: var(--yellow);
+
+    width: 25px;
+    height: 25px;
+    margin-left: 3px;
+    margin-right: 3px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team-section .team-content-social-media a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.team-section .team-content-information {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 73px;
+    background-color: white;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-left: 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.team-section .team-content-information .team-name {
+    font-weight: bold;
+    font-size: 14px;
+
+    text-transform: capitalize;
+}
+
+.team-section .team-content-information .team-title {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 11px;
+
+    text-transform: capitalize;
+}

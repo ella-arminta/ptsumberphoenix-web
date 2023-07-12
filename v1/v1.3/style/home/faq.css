@@ -1,0 +1,10 @@
+
+.faq-section {
+    height: auto;
+}
+
+.faq-section .heading {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}

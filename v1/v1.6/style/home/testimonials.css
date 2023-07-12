@@ -1,0 +1,112 @@
+
+.testimonial-section {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonial-section .slide-container {
+    width: 100%;
+}
+
+.testimonial-section .slide-content-1 {
+    overflow: hidden;
+}
+
+.testimonial-section .intro.heading {
+    color: black;
+    text-align: center;
+}
+
+.testimonial-section .intro.paragraph {
+    color: black;
+    text-align: center;
+}
+
+.testimonial-section .custom-card {
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 30px;
+    min-height: 250px;
+    height: auto;
+    padding-bottom: 40px;
+
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+}
+
+.testimonial-section .custom-card .testimonial-writter {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    color: black;
+}
+
+.testimonial-section .custom-card .testimonial-writter img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 3px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.writter-information .sub-headings {
+    font-size: 20px;
+}
+
+.writter-information .paragraph {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.testimonial-section .custom-card .testimonial-quote .paragraph {
+    color: black !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 127px;
+}
+
+.testimonial-section .custom-card .testimonial-quote .paragraph .quote {
+    width: 25px;
+    font-size: 17px;
+}
+
+.testimonial-section .quote1 {
+    font-size: 17px;
+    margin-left: 3px;
+}
+
+.slide-container-horizontal>.swiper-pagination-1-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+    bottom: 0px !important;
+}
+
+.testimonial-section .feedbacks {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    width: 100%;
+    color: black;
+    margin-top: 20px;
+
+    cursor: pointer;
+}
+
+.testimonial-section .feedbacks:hover .paragraph{
+    color: var(--yellow);
+    margin-left: 15px;
+}
+
+.testimonial-section .feedbacks .paragraph {
+    margin-left: 10px;
+    margin-bottom: 0;
+    transition: all 0.3s ease;
+}
+
+/* .testimonial-section .feedbacks i {
+    font-size: 12px;
+} */

@@ -1,0 +1,9 @@
+
+.modal#homeImage .homeImageChange {
+    margin-bottom: 15px;
+    border-radius: 3px;
+}
+
+#statsModal label {
+    color: rgba(0, 0, 0, 0.4);
+}

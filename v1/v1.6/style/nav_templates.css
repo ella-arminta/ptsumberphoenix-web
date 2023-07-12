@@ -1,0 +1,47 @@
+
+.navbar {
+    background-color: var(--black);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    min-height: 80px;
+
+    color: white;
+}
+
+.navbar .container-fluid {
+    display: block;
+}
+
+.navbar .paragraph {
+    color: rgba(255, 255, 255 , 0.5);
+    font-size: 12px;
+}
+
+.navbar .paragraph a {
+    color: rgba(255, 255, 255 , 0.5);
+    font-size: 12px;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: all 0.4s ease;
+    margin-right: 5px;
+}
+
+.navbar .paragraph a:hover {
+    color: white;
+    margin-right: 10px;
+}
+
+.navbar .paragraph span {
+    color: var(--yellow);
+    margin-right: 5px;
+}
+
+.navbar .paragraph .contact {
+    color: white;
+}
+
+.navbar  .sub-heading {
+    margin-bottom: 0;
+    margin-top: 7px;
+}
