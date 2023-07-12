@@ -94,11 +94,11 @@ include 'api/connect.php';
             <span>/</span> 
             <a href="./product.php">Features </a>
             <span>/</span>
-            <strong class="product">Shop</strong>
+            <strong class="product">Products</strong>
         </div>
         <div class="container-fluid">
             <div class="navbar-brand">
-                <div class="sub-heading">Shop</div>
+                <div class="sub-heading">Products</div>
             </div>
 
             <div class="navbar-wrapper">
@@ -114,7 +114,7 @@ include 'api/connect.php';
                         <a class="nav-link paragraph" href="./product.php">Features</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link paragraph" href="#">Shop</a>
+                        <a class="nav-link paragraph" href="#">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link paragraph">

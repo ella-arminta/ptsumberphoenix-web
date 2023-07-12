@@ -57,6 +57,20 @@
     margin-top: 22px;
 }
 
+.product-container .products-inner .card img 
+{
+    height: 200px !important;
+    object-fit: cover;
+}
+
+.product-container .products-inner .card .card-body .product-title
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
 @media (max-width: 960px) {
     .product-section .container-fluid {
         display: block;

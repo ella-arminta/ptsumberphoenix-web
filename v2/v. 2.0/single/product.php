@@ -60,7 +60,7 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and
                     echo  '?subCode='.$_GET['subCode'];
                 }
              ?>
-             ">Shop </a>
+             ">Products </a>
             <span>/</span>
             <strong class="product">Product</strong>
         </div>
@@ -88,7 +88,7 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and
                            echo  '?subCode='.$_GET['subCode'];
                         }
                        ?>
-                        ">Shop</a>
+                        ">Products</a>
                     </li>
                     <a href="../contact.php"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a>
                 </ul>

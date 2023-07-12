@@ -51,7 +51,7 @@
                         <a class="nav-link paragraph" href="#">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link paragraph" href="./shop.php">Shop</a>
+                        <a class="nav-link paragraph" href="./shop.php">Products</a>
                     </li>
                     <a href="./contact.php"><button class="custom-button btn navbar-btn contact" type="button">Contact Us</button></a>
                 </ul>
