@@ -48,7 +48,7 @@ include 'api/connect.php';
                 ?>
                 <div class="highlight paragraph opacity-overlay update-item" style="background-image: url(<?= $upd['upd_pict'] ?>);" onclick="window.location.href='single/update.php?id=<?= $upd['upd_id'] ?>'">
                     <div class="highlight-information">
-                        <div class="highlight-tag">Important! </div>
+                        <div class="highlight-tag">Newest! </div>
                         <div class="highlight-title heading"><?= $upd['upd_title'] ?></div>
                         <p class="paragraph"><?php 
                         $timeStamp = $upd['timestamp'];
@@ -73,17 +73,24 @@ include 'api/connect.php';
                     <div class="latest-update update-item" onclick="window.location.href='single/update.php?id=<?= $row['upd_id'] ?>'">
                         <div class="update-information">
                             <div class="update-title"><?= $row['upd_title'] ?></div>
-                            <p class="paragraph"><?php 
-                        $timeStamp = $row['timestamp'];
-                        $timeStamp = date( "M d, Y", strtotime($timeStamp));
-                        echo $timeStamp; ?></p>
+                            <p class="paragraph">
+                                <?php 
+                                    $timeStamp = $row['timestamp'];
+                                    $timeStamp = date( "M d, Y", strtotime($timeStamp));
+                                    echo $timeStamp; 
+                                ?>
+                            </p>
                         </div>
                         <img src="<?= $row['upd_pict'] ?>" alt="">
                     </div>
                     <?php
                         endif;
                         if($count <= 3 && $count > 0){
-                            echo '<hr>';
+                            if($count == 3) {
+                                echo '<hr style="margin-bottom: 0">';
+                            } else {
+                                echo '<hr>';
+                            }
                         }
                     ?>
                     <?php $count++; endwhile;} ?>
@@ -94,7 +101,8 @@ include 'api/connect.php';
                 <div class="heading underline">Our Updates</div>
                 <div class="updates-items row">
 
-                    <div class="col-sm-3 update-item">
+                    <!-- Update items here -->
+                    <!-- <div class="col-sm-3 update-item">
                         <div class="card opacity-overlay" style="background-image: url(src/updates/covid.jpeg)">
                             <div class="card-information">
                                 <div class="sub-heading">Lorem ipsum dolor sit amet consectetur</div>
@@ -102,39 +110,9 @@ include 'api/connect.php';
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-sm-3 update-item">
-                        <div class="card opacity-overlay" style="background-image: url(src/updates/holiday.jpeg)">
-                            <div class="card-information">
-                                <div class="sub-heading">Lorem ipsum dolor sit amet consectetur</div>
-                                <p class="paragraph">John Maxwell | Jan 1, 2022</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3 update-item">
-                        <div class="card opacity-overlay" style="background-image: url(src/updates/mask.jpeg)">
-                            <div class="card-information">
-                                <div class="sub-heading">Lorem ipsum dolor sit amet consectetur</div>
-                                <p class="paragraph">John Maxwell | Jan 1, 2022</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3 update-item">
-                        <div class="card opacity-overlay" style="background-image: url(src/updates/warehouse.jpeg)">
-                            <div class="card-information">
-                                <div class="sub-heading">Lorem ipsum dolor sit amet consectetur</div>
-                                <p class="paragraph">John Maxwell | Jan 1, 2022</p>
-                            </div>
-                        </div>
-                    </div>
+                    -->
 
                 </div>
-                <!-- gak perlu karena otomatis deteksi kalo scroll sampe sekian baru ngeload -->
-                <!-- <div class="button-container">
-                    <button class="custom-button" onclick="loadMore()" type="button">Load More</button>
-                </div> -->
             </div>
         </div>
     </section>
@@ -157,7 +135,6 @@ include 'api/connect.php';
                     response = JSON.parse(response)
                     for (let index = 0; index < response.length; index++) {
                         four.push(response[index])
-                        
                     }
                     getPosts(posts,four)
                 }

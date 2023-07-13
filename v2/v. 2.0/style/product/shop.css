@@ -32,6 +32,17 @@
     cursor: pointer;
     transition: 0.3s ease;
     border-radius: 3px;
+    width: 100%;
+}
+
+.product-section .category-item.last
+{
+    padding-left: 0px;
+}
+
+.category.accordion-item.All.last
+{
+    border-radius: 0px;
 }
 
 .product-section .category-item:hover {
@@ -57,10 +68,19 @@
     margin-top: 22px;
 }
 
+.product-container .card
+{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border: none;
+    outline: none;
+}
+
 .product-container .products-inner .card img 
 {
     height: 200px !important;
     object-fit: cover;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 .product-container .products-inner .card .card-body .product-title

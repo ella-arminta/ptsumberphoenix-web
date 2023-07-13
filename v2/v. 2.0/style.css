@@ -138,8 +138,6 @@ a {
     background-repeat: no-repeat;
     background-size: cover;
 
-    
-
     padding-top: 90px;
     padding-bottom: 90px;
     width: 100vw;
@@ -218,6 +216,8 @@ pre {
     white-space: -moz-pre-wrap;
     white-space: -pre-wrap;
     white-space: -o-pre-wrap;
+
+    font-family: inherit;
 }
 
 /* Accordion */

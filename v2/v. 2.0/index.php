@@ -298,7 +298,7 @@ function getData($fiturNama,$conn){
                                 } 
                             ?>
                     ">
-                        <i class="fa-solid fa-briefcase-medical"></i>
+                        <i class="fa-solid fa-circle-info"></i>
                         <h2 class="sub-heading"><?= $row['upd_title'] ?></h2>
                     </div>
                     <?php $i++;endwhile; ?>
@@ -323,7 +323,7 @@ function getData($fiturNama,$conn){
                                 ?>
                             </p>
                             <div class="content-paragraph paragraph">
-                                    <?= $row['upd_sub'] ?><br>
+                                <?= $row['upd_sub'] ?><br>
                             </div>
                         </div>
                         <div class="content-image">
@@ -331,10 +331,7 @@ function getData($fiturNama,$conn){
                         </div>
                     </div>
                     <?php endwhile; ?>
-                <div class="read-more" onClick="window.location.href='./update.php'">
-                    See All Our Updates
-                    <i class="fa-solid fa-arrow-right"></i>
-                </div>
+                <div class="read-more" onClick="window.location.href='./update.php'">See All Our Updates<i class="fa-solid fa-arrow-right"></i></div>
             </div>
         </div>
     </section>
@@ -365,91 +362,6 @@ function getData($fiturNama,$conn){
             </div>
         </div>
     </section>
-
-    <!-- Blog Section -->
-    <!-- <section class="blog-section section-extra">
-        <div class="slide-container swiper container-fluid">
-            <div class="slide-content">
-                <div class="custom-card-wrapper swiper-wrapper">
-
-                    <div class="custom-card swiper-slide">
-                        <div class="blog-image-content">
-                            <img src="./src/blog/1.jpg" alt="">
-                        </div>
-                        <div class="blog-title-content-container">
-                            <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. </h1>
-                            <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
-                        </div>
-                    </div>
-
-                    <div class="custom-card swiper-slide">
-                        <div class="blog-image-content">
-                            <img src="./src/blog/2.jpg" alt="">
-                        </div>
-                        <div class="blog-title-content-container">
-                            <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. </h1>
-                            <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
-                        </div>
-                    </div>
-
-                    <div class="custom-card swiper-slide">
-                        <div class="blog-image-content">
-                            <img src="./src/blog/3.jpg" alt="">
-                        </div>
-                        <div class="blog-title-content-container">
-                            <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. </h1>
-                            <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
-                        </div>
-                    </div>
-
-                    <div class="custom-card swiper-slide">
-                        <div class="blog-image-content">
-                            <img src="./src/blog/4.jpg" alt="">
-                        </div>
-                        <div class="blog-title-content-container">
-                            <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. </h1>
-                            <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
-                        </div>
-                    </div>
-
-                    <div class="custom-card swiper-slide">
-                        <div class="blog-image-content">
-                            <img src="./src/blog/5.jpg" alt="">
-                        </div>
-                        <div class="blog-title-content-container">
-                            <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. </h1>
-                            <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
-                        </div>
-                    </div>
-
-                    <div class="custom-card swiper-slide">
-                        <div class="blog-image-content">
-                            <img src="./src/blog/6.jpg" alt="">
-                        </div>
-                        <div class="blog-title-content-container">
-                            <div class="blog-content-category">Lorem Ipsum</div>
-                            <h1 class="blog-title-content heading">Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. </h1>
-                            <a href="./templates/single/update.html" class="paragraph">Learn more...</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="swiper-pagination"></div>
-        </div>
-    </section> -->
 
     <!-- Testimonial Section -->
     <section class="testimonial-section section-extra">

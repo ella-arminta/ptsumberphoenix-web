@@ -140,6 +140,15 @@
     border-radius: 5px;
 }
 
+.company-updates-navigation .sub-heading
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 .content-panel .content-paragraph {
     height: 200px;
 }
@@ -161,8 +170,9 @@
 }
 
 .content-panel.active .paragraph {
-    font-size: 17px;
-    margin-right: 50px;
+    font-size: 14px;
+    /* margin-right: 50px; */
+    text-align: justify;
 }
 
 .update-section .read-more {

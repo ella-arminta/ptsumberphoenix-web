@@ -64,7 +64,7 @@ $row = $stmt->fetch();
 
             <!-- update content -->
             <img src="../<?= $row['upd_pict'] ?>" alt="" class="update-image">
-            <pre class="content">
+            <pre class="content" style="text-align: justify">
                 <?= $row['upd_body'] ?>
             </pre>
         </div>

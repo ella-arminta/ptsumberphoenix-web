@@ -84,7 +84,7 @@
                 if(!$genap && $i == count($pros)){
                     echo '
                     <div class="lower-featured">
-                        <div class="featured-container" style="background: url(\''.$pros[$i-1]['product_img'].'\'); background-repeat: no-repeat; background-size: cover">
+                        <div class="featured-container opacity-overlay" style="background: url(\''.$pros[$i-1]['product_img'].'\'); background-repeat: no-repeat; background-size: cover">
                             <div class="heading">'.$pros[$i-1]['product_name'].'</div>
                             <div class="paragraph">'.substr($pros[$i-1]['product_desc'],0,200).'</div>
                             <button class="custom-button btn" type="button" onclick="window.location.href=`./single/product.php?product_code='.$pros[$i-1]['product_code'].'`">
@@ -99,7 +99,7 @@
                 if($i%2 != 0){
                     $str.= '<div class="upper-featured">';
                     $str.= '
-                    <div class="featured-container" style="background: url(\''.$pros[$i-1]['product_img'].'\'); background-repeat: no-repeat; background-size: cover">
+                    <div class="featured-container opacity-overlay" style="background: url(\''.$pros[$i-1]['product_img'].'\'); background-repeat: no-repeat; background-size: cover">
                         <div class="heading">'.$pros[$i-1]['product_name'].'</div>
                         <div class="paragraph">'.substr($pros[$i-1]['product_desc'],0,200).'</div>
                         <button class="custom-button btn" type="button" onclick="window.location.href=`./single/product.php?product_code='.$pros[$i-1]['product_code'].'`">
@@ -110,7 +110,7 @@
                     ';
                 }else{
                     $str.= '
-                    <div class="featured-container" style="background: url(\''.$pros[$i-1]['product_img'].'\'); background-repeat: no-repeat; background-size: cover">
+                    <div class="featured-container opacity-overlay" style="background: url(\''.$pros[$i-1]['product_img'].'\'); background-repeat: no-repeat; background-size: cover">
                         <div class="heading">'.$pros[$i-1]['product_name'].'</div>
                         <div class="paragraph">'.substr($pros[$i-1]['product_desc'],0,200).'</div>
                         <button class="custom-button btn" type="button" onclick="window.location.href=`./single/product.php?product_code='.$pros[$i-1]['product_code'].'`">

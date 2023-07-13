@@ -183,12 +183,12 @@ include 'api/connect.php';
                         </div>
                     </div>
                     <?php endwhile; ?>
-                    <div class="category accordion-item All ?>">
-                        <p class="accordion-header" id="heading-All ?>">
-                            <div class="category-item" id="random">
-                                <?= 'All' ?>
+                    <div class="category accordion-item All last">
+                        <div class="accordion-header" id="heading-All">
+                            <div class="category-item last" id="random">
+                                All
                             </div>
-                                    </p>
+                        </div>
                     </div>
                 </div>
             </div>

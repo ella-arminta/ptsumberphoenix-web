@@ -28,6 +28,11 @@
 
 .update-section .highlight .highlight-title {
     transition: 0.3s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .update-section .highlight .highlight-information {
@@ -77,6 +82,11 @@
 
 .update-section .latest-update .update-title {
     transition: 0.3s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .update-section .update-information {
@@ -144,6 +154,15 @@
     padding-bottom: 10px;
 
     transition: 0.5s ease;
+}
+
+.update-section .card-information .sub-heading
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .update-section .button-container {
