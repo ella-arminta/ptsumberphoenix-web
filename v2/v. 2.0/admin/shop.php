@@ -149,14 +149,16 @@ if(!isset($_SESSION['admin_id'])){
                 <div class="categories filters accordion" id="accordionExample">
                     <div class="filter-title sub-heading">
                         BROWSE CATEGORIES
-                        <!-- Button add Category/Subcategory -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatModal">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                        <!-- Button Reordering Category -->
-                        <button type="button" class="btn btn-primary" style="width:100%;margin-top:10px;height:60px;" data-bs-toggle="modal" data-bs-target="#reorderModal">
-                           Reorder Categories
-                        </button>
+                        <div class="browse-categories-button-container" style="display: flex; justify-content: space-between; align-items: center; height: 41px; margin-top: 10px;">
+                             <!-- Button add Category/Subcategory -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatModal">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <!-- Button Reordering Category -->
+                            <button type="button" class="btn btn-primary" style="width:70%;height:100%;font-size: 14px;" data-bs-toggle="modal" data-bs-target="#reorderModal">
+                                Reorder
+                            </button>
+                        </div>
                     </div>
                     <!-- page CODE CATEGORY NYA -->
                     <!-- Category -->
@@ -169,6 +171,7 @@ if(!isset($_SESSION['admin_id'])){
                     <div class="category accordion-item <?= $cat['cat_code'] ?>">
                         <h2 class="accordion-header" id="heading-<?= $cat['cat_code'] ?>">
                             <button class="btn btn-danger delCatBut" code="<?= $cat['cat_code'] ?>"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="btn btn-warning editCatBut" code="<?= $cat['cat_code'] ?>" onclick="editCategory('<?= $cat['cat_code'] ?>')"><i class="fa-solid fa-pen-to-square"></i></button>
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<?= $cat['cat_code'] ?>" aria-expanded="false" aria-controls="collapse-<?= $cat['cat_code'] ?>">
                                 <?= $cat['cat_name'] ?>
                             </button>

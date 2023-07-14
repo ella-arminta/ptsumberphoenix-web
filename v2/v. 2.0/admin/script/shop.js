@@ -37,6 +37,10 @@ $(document).ready(function(){
                     <input type="text" class="form-control" name="catCode" placeholder="example : RI" id="catCode" required>
                     <div id="catCodeInfo" class="form-text">Example : Rubber Industries -> RI</div>
                 </div>
+                <div class="mb-3">
+                    <label for="catImg" class="form-label">Category Image</label>
+                    <input type="file" accept="image/*" class="form-control" name="catImg" id="catImg" required>
+                </div>
                 <div style="display:flex;justify-content:center;flex-direction:column;width:100%;align-items:center">
                     <button type="submit" class="btn btn-success" style="width:100px">Add</button>
                 </div>
@@ -747,4 +751,9 @@ function bestSeller(thebool,product_code){
 }
 function editProduct(procode){
     window.location.href = 'editProduct.php?product_code='+procode;
+}
+
+const editCategory = (procode) => 
+{
+    window.location.href = `editCategory.php?category_code=${procode}`
 }

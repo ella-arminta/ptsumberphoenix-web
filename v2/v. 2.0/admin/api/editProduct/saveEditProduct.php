@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 exit;
             } else {
                     if (move_uploaded_file($_FILES["proImg"]["tmp_name"], $target_file)) {
-                        $stmt = $conn->prepare("UPDATE products set product_img =? where product_id=?");
+                        $stmt = $conn->prepare("UPDATE products set product_img =? where product_id=? and status=1");
                         $stmt->execute([$img_name,$proId]);
 
                     }else{

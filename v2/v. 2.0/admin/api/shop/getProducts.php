@@ -121,7 +121,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $stmt2->execute();
         $totCard = $stmt2->rowCount();
         $jumCard = intval($totCard)  - count($shown);
-        //                     product terambil, jumlah sisa product
+        // product terambil, jumlah sisa product
         $response = ['success',$shown,$jumCard];
         echo json_encode($response);    
     } else if($catCode == 'byName'){
@@ -219,7 +219,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 // json_encode($card);
                 array_push($shown,$card); 
             }
-            $stmt = $conn->prepare("SELECT s.sub_name as subName FROM products p join product_subcategory ps on (p.product_id = ps.product_id) join subcategories s on (s.sub_id = ps.subcategory_id) where s.sub_code  = ? ");
+            $stmt = $conn->prepare("SELECT s.sub_name as subName FROM products p join product_subcategory ps on (p.product_id = ps.product_id) join subcategories s on (s.sub_id = ps.subcategory_id) where s.sub_code  = ? and s.status = 1");
             $stmt->execute([$catCode]);
             $subName =  $stmt->fetch();
             if($stmt->rowCount() > 0){

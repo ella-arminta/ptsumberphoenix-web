@@ -140,7 +140,7 @@
 
                 <div class="custom-card-wrapper swiper-wrapper">
                     <?php
-                        $stmt=$conn->prepare("SELECT * FROM products where best_seller = 1");
+                        $stmt=$conn->prepare("SELECT * FROM products where best_seller = 1 and status = 1");
                         $stmt->execute();
                         while($pro = $stmt->fetch()):
                     ?>

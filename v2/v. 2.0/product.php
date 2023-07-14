@@ -135,12 +135,12 @@
         <div class="slide-container swiper container-fluid">
             
             <div class="intro heading underline">Best Sellers</div>
-            <p class="intro paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta, deserunt dolore. Placeat corporis eos in veritatis modi nesciunt nihil earum minima a itaque commodi eligendi maxime, consequatur culpa cum nulla.</p>
+            <p class="intro paragraph">Welcome to our Best Sellers section, where you'll discover our handpicked collection of top-rated products that our customers can't get enough of. These coveted items have consistently proven to be favorites, satisfying our customers' needs with their exceptional quality and unmatched performance.</p>
             <div class="slide-content">
 
                 <div class="custom-card-wrapper swiper-wrapper">
                     <?php
-                        $stmt=$conn->prepare("SELECT * FROM products where best_seller = 1");
+                        $stmt=$conn->prepare("SELECT * FROM products where best_seller = 1 and status = 1");
                         $stmt->execute();
                         while($pro = $stmt->fetch()):
                     ?>
