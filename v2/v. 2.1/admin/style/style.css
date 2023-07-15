@@ -1,0 +1,92 @@
+
+button.edit, button.editImage, button.editClients, button.addClient,
+button.stats, button.team, button.delEmp, button.butTestiModal,
+button.editFaqButton, button.addFaq, button.delClient, button#editKontak {
+    width: 30px;
+    height: 30px;
+    background-color: var(--yellow) !important;
+    border: none;
+    text-align: center;
+
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    display: inline-block;
+    margin-left: 10px;
+    /* margin-top: 5px; */
+}
+
+button.viewPPTesti, button.close{
+    height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+    /* width: 40px; */
+}
+
+.button.close {
+    font-size: 13px;
+}
+
+button.delTesti, button.delFaq, .btn.yes, .btn.cancel {
+    width: 30px;
+    height: 30px;
+    /* background-color: var(--yellow) !important; */
+    border: none;
+    text-align: center;
+
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    display: inline-block;
+    /* margin-left: 15px; */
+    /* margin-top: 5px; */
+}
+
+.btn.cancel {
+    background-color: var(--yellow) !important;
+}
+
+button.edit i, button.editImage i, button.editClients i, 
+button.team i, button.delEmp i, button.delTesti i, 
+button.butTestiModal i, button.editFaqButton i, button.delFaq i,
+button.addFaq i, .btn.yes i, .btn.cancel i, button.delClient i,
+button.addClient i {
+    color: white !important;
+    font-size: 13px !important;
+    margin: 0;
+}
+
+button.pubButtonTesti {
+    height: 32px;
+    font-size: 14px;
+    padding-top: 5px;
+    margin-left: 10px;
+}
+
+button.addFaq {
+    margin: 0;
+    margin-top: 20px;
+}
+
+textarea.inputEdit,
+textarea.inputEdit:focus,
+textarea.inputEdit:active {
+    padding: 7px;
+    padding-left: 15px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    /* background-color: rgba(100, 100, 111, 0.2); */
+    /* background-color: rgba(255, 255, 255, 0.7); */
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.inputEdit{
+    width: 100%;
+}

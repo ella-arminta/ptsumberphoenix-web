@@ -1,0 +1,67 @@
+
+.why-us-section {
+    height: auto;
+}
+
+.why-us-section .info {
+    margin-bottom: 30px;
+}
+
+.why-us-section .icon-box {
+    padding: 60px 30px;
+    position: relative;
+    overflow: hidden;
+    background: var(--light-black);
+    box-shadow: 2px 0 35px 0 rgba(68, 88, 144, 0.12);
+    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+    z-index: 1;
+    text-align: center;
+    cursor: pointer;
+
+    border: 2px solid rgba(0, 0, 0, 0);
+}
+
+.why-us-section .icon-box:hover {
+    background-color: var(--black);
+    border-color: var(--yellow)
+}
+
+.why-us-section .icon-box:hover .icon i {
+    color: #fff;
+}
+
+.why-us-section .icon-box:hover .title {
+    color: #fff;
+}
+
+.why-us-section .icon-box:hover .description {
+    color: #fff;
+}
+
+.why-us-section .icon {
+    margin-bottom: 15px;
+}
+
+.why-us-section .icon i {
+    font-size: 48px;
+    line-height: 1;
+    color: var(--yellow);
+    transition: all 0.3s ease-in-out;
+}
+
+.why-us-section .title {
+    font-size: 18px;
+    color: white;
+}
+
+.why-us-section .title a {
+    color: #111;
+}
+
+.why-us-section .description {
+    font-size: 15px;
+    line-height: 28px;
+    margin-bottom: 0;
+    color: white;
+}

@@ -1,0 +1,118 @@
+
+.navbar {
+    background-color: white;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1);
+    padding-top: 13px;
+    padding-bottom: 13px;
+}
+
+.navbar-nav {
+    align-items: center;
+}
+
+.navbar-brand {
+    margin-right: 0;
+}
+
+.navbar .navbar-toggler:focus,
+.navbar .navbar-toggler:active,
+.navbar .navbar-toggler .icon:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: var(--yellow);
+}
+
+.navbar-toggler {
+    border-color: var(--yellow);
+    color: var(--yellow);
+    margin-left: 10px;
+
+    transition: 0.3s ease;
+}
+
+.navbar-toggler:hover {
+    background-color: var(--yellow);
+    color: white;
+}
+
+.navbar-btn {
+    width: 120px;
+    height: 30px;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.nav-link {
+    transition: 0.3s ease;
+    border-radius: 5px;
+    margin-left: 15px;
+
+    color: black;
+}
+
+.nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding-left: 10px;
+    padding-right: 10px;
+    color: black;
+}
+
+.navbar-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar-wrapper .navbar-btn {
+    display: none;
+}
+
+.navbar .nav-item {
+    transition: 0.3s ease;
+}
+
+.navbar .nav-item.active a {
+    color: var(--yellow);
+}
+
+.navbar .nav-link.paragraph {
+    font-size: 13px;
+}
+
+@media (max-width: 960px) {
+    .nav-link {
+        margin-left: 0;
+    }
+
+    .navbar-nav {
+        align-items: flex-start;
+    }
+
+    .navbar-btn {
+        margin-left: 0;
+    }
+
+    .navbar-nav button {
+        display: none;
+    }
+
+    .navbar-wrapper .navbar-btn {
+        display: block;
+    }
+
+    .navbar-toggler {
+        margin-top: 4px;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .navbar-brand {
+        width: 100px !important;
+        height: auto;
+    }
+
+    .navbar-btn {
+        width: 100px;
+    }
+}
