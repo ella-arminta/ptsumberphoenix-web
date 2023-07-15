@@ -432,16 +432,6 @@ include 'api/connect.php';
         }
     </script>
 
-    <!-- on scroll product load -->
-    <script>
-        window.addEventListener('scroll', () => 
-        {
-            topNow = window.scrollY + window.innerHeight-50
-            divTop = document.querySelector('.footer-section').offsetTop
-            if(topNow >= divTop) console.log('get post')
-        })
-    </script>
-
     <?php 
     if(isset($_GET['cateCode'])){
         echo '<script>getProByCat("'.$_GET['cateCode'].'");</script>';
