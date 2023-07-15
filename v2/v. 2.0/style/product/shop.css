@@ -91,6 +91,22 @@
     width: 100%;
 }
 
+.product-container .button-container
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-container .button-container .custom-button
+{
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+}
+
 @media (max-width: 960px) {
     .product-section .container-fluid {
         display: block;

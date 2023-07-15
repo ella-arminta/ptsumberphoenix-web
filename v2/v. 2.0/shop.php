@@ -38,7 +38,7 @@ include 'api/connect.php';
 </head>
 <!-- auto complete css -->
 <style>
-    .autocomplete {
+.autocomplete {
   /*the container must be positioned relative:*/
   position: relative;
   display: inline-block;
@@ -217,7 +217,7 @@ include 'api/connect.php';
                 </div>
                 <!-- Load More Products Button -->
                 <div class="button-container">
-                    <button class="btn loadMore" get="" cat="" style="display:none;">Load More</button>
+                    <button class="btn loadMore custom-button" get="" cat="" style="display:none;">Load More</button>
                 </div>
             </div>
         </div>
@@ -233,108 +233,110 @@ include 'api/connect.php';
     <script>    var products_id = [];</script>
     <script src="script/shop.js"></script>
     <script>
-        function getProducts(catCode,mCatId){
-        $('.loader').css('display','flex');
-        proName = '';
-        if(catCode == 'byName'){
-            proName = $('#searchbar').val();
-        }
-        $.ajax({
-            type: "GET",
-            url: "api/shop/getProducts.php",
-            data:  {
-                catCode : catCode,
-                shown : JSON.stringify(products_id),
-                proName : proName,
-                masterCatId :mCatId
-            },
-            success: function (response) {
-                response = JSON.parse(response)
-                if(response[0] == 'success'){
-                    // card ini isi nya product_code,product_img,product_name,product_id
-                    //   getData Random
-                    if(response[1].length <= 0){
-                        if(catCode == 'byName'){
-                            $('.products-inner').html("<h1>No Product Found</h1>")
+        function getProducts(catCode,mCatId)
+        {
+            $('.loader').css('display','flex');
+            proName = '';
+            if(catCode == 'byName') proName = $('#searchbar').val();
+            $.ajax({
+                type: "GET",
+                url: "api/shop/getProducts.php",
+                data: {
+                    catCode : catCode,
+                    shown : JSON.stringify(products_id),
+                    proName : proName,
+                    masterCatId :mCatId
+                },
+                success: function (response) {
+                    response = JSON.parse(response)
+                    if(response[0] == 'success'){
+                        // card ini isi nya product_code,product_img,product_name,product_id
+                        //   getData Random
+                        if(response[1].length <= 0){
+                            if(catCode == 'byName'){
+                                $('.products-inner').html("<h1>No Product Found</h1>")
+                            }else{
+                                $('.products-inner').html("<h1>No Product Found in this category</h1>")
+                            }
+                            $('.loadMore').css('display','none');
+                            $('.loader').css('display','none');
                         }else{
-                            $('.products-inner').html("<h1>No Product Found in this category</h1>")
-                        }
-                        $('.loadMore').css('display','none');
-                        $('.loader').css('display','none');
-                    }else{
-                        var cards ='';           
-                        if(catCode != 'random' || catCode == 'byName'){
-                            products_id = []
-                        }     
-                        for (let index = 0; index < response[1].length; index++) {
-                            
-                            product = response[1][index];
-                            icon = ''
-                            if(product.featured == 1){
-                                icon+= `<i class="fa-solid fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(0,'`+product.product_code+`')"></i>`;
-                            }else{
-                                icon+=`<i class="fa-regular fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(1,'`+product.product_code+`')"></i>`
-                            }
-                            if(product.best_seller == 1){
-                                icon+=`<i class="fa-solid fa-heart fa-xl" style="color:red" onclick="bestSeller(0,'`+product.product_code+`')"></i>`
-                            }else{
-                                icon+=`<i class="fa-regular fa-heart fa-xl" style="color:red" onclick="bestSeller(1,'`+product.product_code+`')"></i>`
-                            }
-                            cards += `
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="card">
-                                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">
-                                        <img src="`+product.product_img+`" class="w-100" />
-                                    </div>
-                                    
-                                    <div class="card-body">
-                                        <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`">`+product.product_name+`</div>
+                            var cards ='';           
+                            if(catCode != 'random' || catCode == 'byName'){
+                                products_id = []
+                            }     
+                            for (let index = 0; index < response[1].length; index++) {
+                                
+                                product = response[1][index];
+                                icon = ''
+                                if(product.featured == 1){
+                                    icon+= `<i class="fa-solid fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(0,'`+product.product_code+`')"></i>`;
+                                }else{
+                                    icon+=`<i class="fa-regular fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(1,'`+product.product_code+`')"></i>`
+                                }
+                                if(product.best_seller == 1){
+                                    icon+=`<i class="fa-solid fa-heart fa-xl" style="color:red" onclick="bestSeller(0,'`+product.product_code+`')"></i>`
+                                }else{
+                                    icon+=`<i class="fa-regular fa-heart fa-xl" style="color:red" onclick="bestSeller(1,'`+product.product_code+`')"></i>`
+                                }
+                                cards += `
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">
+                                            <img src="`+product.product_img+`" class="w-100" />
+                                        </div>
+                                        
+                                        <div class="card-body">
+                                            <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`">`+product.product_name+`</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            `   
-                            products_id.push(product);
+                                `   
+                                products_id.push(product);
+                                
                             
-                           
+                            }
+                            $('.products-inner').html(cards)
+                            
+                            // set product title
+                            var proTitle = response[4] +' - '+response[3];
+                            $('.product-category-title').text(proTitle);
+                            
+                            if (response[3] == undefined){
+                                $('.product-category-title').text('Our Products');
+                            }
+
+                            if(response[2] > 0){
+                                $('.loadMore').css('display','block');
+                            }else{
+                                $('.loadMore').css('display','none');
+                            }
+                            
+                            $('.loader').css('display','none');
                         }
-                        $('.products-inner').html(cards)
-                        console.log(response)
-                        var proTitle = response[4] +' - '+response[3];
-                        $('.product-category-title').text(proTitle);
-                        if (response[3] == undefined){
-                            $('.product-category-title').text('Our Products');
-                        }
-                        if(response[2] > 0){
-                            $('.loadMore').css('display','block');
-                        }else{
-                            $('.loadMore').css('display','none');
-                        }
-                        $('.loader').css('display','none');
-                    }
-                    
-                }else{
-                    if(response[0] == 'fail' || response[1] == 'Subcategory not found'){
-                        // window.location.href = 'shop.php';
-                        getProducts("random","")
+                        
                     }else{
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error!',
-                            text: 'Something went Wrong please come back later'
-                        })
+                        if(response[0] == 'fail' || response[1] == 'Subcategory not found'){
+                            // window.location.href = 'shop.php';
+                            getProducts("random","")
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: 'Something went Wrong please come back later'
+                            })
+                        }
                     }
+                },
+                error: function(){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan, silahkan coba lagi.'
+                    })
                 }
-            },
-            error: function(){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'Terjadi kesalahan, silahkan coba lagi.'
-                })
-            }
-        });
-        // console.log(JSON.stringify(products_id))
-    }
+            });
+        }
     </script>
     <script>
         function searchProduct(){
@@ -356,7 +358,6 @@ include 'api/connect.php';
             autocomplete(document.getElementById("searchbar"), similarProducts);
         }
         var similarProducts = [];
-
     </script>
     <script>
         function getProByCat(catCode){
@@ -430,16 +431,22 @@ include 'api/connect.php';
             });
         }
     </script>
+
+    <!-- on scroll product load -->
+    <script>
+        window.addEventListener('scroll', () => 
+        {
+            topNow = window.scrollY + window.innerHeight-50
+            divTop = document.querySelector('.footer-section').offsetTop
+            if(topNow >= divTop) console.log('get post')
+        })
+    </script>
+
     <?php 
     if(isset($_GET['cateCode'])){
         echo '<script>getProByCat("'.$_GET['cateCode'].'");</script>';
     }else
-    // else if (isset($_GET['subCode'])){
-    //     echo '<script>getProducts("'.$_GET['subCode'].'")</script>';
-    // }
-    // else{
-    //     echo '<script>   getProducts("random");</script>';
-    // } 
+
     if (isset($_SESSION['cat'])){
         if ($_SESSION['cat'] == 'random'){
             echo '<script>getProducts("random","")</script>';
@@ -451,7 +458,6 @@ include 'api/connect.php';
         $_SESSION['cat'] = 'random';
         echo '<script>getProducts("random","")</script>';
     }
-    // unset($_SESSION['cat']);
     ?>
 </body>
 </html>

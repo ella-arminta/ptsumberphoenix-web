@@ -121,7 +121,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $stmt2->execute();
         $totCard = $stmt2->rowCount();
         $jumCard = intval($totCard)  - count($shown);
-        //                     product terambil, jumlah sisa product
+        // product terambil, jumlah sisa product
         $response = ['success',$shown,$jumCard];
         echo json_encode($response);    
     } else if($catCode == 'byName'){
@@ -136,7 +136,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $stmt2->execute();
         $totCard = $stmt2->rowCount();
         $jumCard = intval($totCard)  - count($shown);
-        //                     product terambil, jumlah sisa product
+        // product terambil, jumlah sisa product
         $response = ['success',$shown,$jumCard];
         echo json_encode($response);
     } else if($catCode == 'featured'){
@@ -203,7 +203,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             }else{
                 $stmt = $conn->prepare("SELECT p.product_code,p.product_img,p.product_name,p.product_id,p.featured,p.best_seller FROM `product_subcategory` ps join products p on (ps.product_id = p.product_id) join subcategories s on (ps.subcategory_id = s.sub_id) where s.sub_code = ? and p.status = 1 and s.status = 1  ORDER BY p.product_id DESC LIMIT 9");
                 $stmt->execute([$catCode]);
-                
             }
         
             $jumCard = 0;

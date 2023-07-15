@@ -175,7 +175,6 @@ include 'api/connect.php';
                         </div>
                         `
                     }
-                    console.log(strposts)
                     $('.updates-items.row').html(strposts)
                 }
             });
@@ -187,8 +186,6 @@ include 'api/connect.php';
             if(topNow >= divTop){
                 getPosts(posts,four)
             }
-            console.log(divTop)
-            console.log(topNow)
         })
     </script>
 </body>
