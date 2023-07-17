@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     // it together with commas, so it can be used in the query string
     $placeHolders = implode(', ', array_fill(0, count($ids), '?'));
     if(count($ids) > 0){
-        $stmt = $conn->prepare("SELECT * FROM updates where status ='published' and upd_id NOT IN ($placeHolders) order by timestamp desc LIMIT ?");
+        $stmt = $conn->prepare("SELECT * FROM updates where status <> 'deleted' and upd_id NOT IN ($placeHolders) order by timestamp desc LIMIT ?");
         // Iterate the IDs and bind them
         // Remember ? placeholders are 1-indexed!
         foreach ($ids as $index => $value) {
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $stmt->bindValue(count($ids)+1,$jum);
         $stmt->execute();
     }else{
-        $stmt = $conn->prepare("SELECT * FROM updates where status ='published' order by timestamp desc LIMIT ?");
+        $stmt = $conn->prepare("SELECT * FROM updates where status <> 'deleted' order by timestamp desc LIMIT ?");
         $stmt->execute([$jum]);
     }
     while($row = $stmt->fetch()){

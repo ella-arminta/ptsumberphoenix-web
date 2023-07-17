@@ -56,7 +56,7 @@ if(!isset($_SESSION['admin_id'])){
                         </div>
                         <div class="mb-3">
                             <label for="capt" class="form-label">Caption</label>
-                            <input type="text" name="capt" class="form-control" id="capt" onkeyup="cekPanjangKata()" aria-describedby="capt" required>
+                            <input type="text" name="capt" class="form-control" id="capt" aria-describedby="capt" required>
                             <p class="text-danger dangerCaptPanjang" style="display:none;margin:0">Word count max : 20</p>
                         </div>
                         <div class="mb-3">
@@ -718,14 +718,6 @@ if(!isset($_SESSION['admin_id'])){
                     });
                 }
             })
-        }
-        function cekPanjangKata(){
-            var words = $('#capt').val().split(' ');
-            if(words.length > 20){
-                $('.dangerCaptPanjang').css('display','block')
-            }else{
-                $('.dangerCaptPanjang').css('display','none')
-            }
         }
     </script>
 </body>

@@ -37,7 +37,6 @@ function getData($fiturNama,$conn){
     <link rel="stylesheet" href="./style/home/blog.css">
     <link rel="stylesheet" href="./style/home/testimonials.css">
     <link rel="stylesheet" href="./style/home/faq.css">
-    <link rel="stylesheet" href="./style/home/modal.css">
 
     <!-- Library -->
     <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>

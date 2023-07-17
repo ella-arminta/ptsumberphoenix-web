@@ -27,19 +27,19 @@ function getData1($fiturNama,$conn){
             </div>
             <div class="useful-links">
                 <h2 class="sub-heading underline">Useful Links</h2>
-                <a class="footer-item" href="#home">
+                <a class="footer-item home" href="#home">
                     <i class="fa-solid fa-angle-right"></i>
                     Home
                 </a>
-                <a class="footer-item" href="#about">
+                <a class="footer-item about" href="#about">
                     <i class="fa-solid fa-angle-right"></i>
                     About
                 </a>
-                <a class="footer-item" href="./product.php">
+                <a class="footer-item products" href="./product.php">
                     <i class="fa-solid fa-angle-right"></i>
                     Products
                 </a>
-                <a class="footer-item" href="./contact.php">
+                <a class="footer-item contact" href="./contact.php">
                     <i class="fa-solid fa-angle-right"></i>
                     Contact
                 </a>

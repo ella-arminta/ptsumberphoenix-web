@@ -150,7 +150,8 @@
 }
 
 .content-panel .content-paragraph {
-    height: 200px;
+    height: auto;
+    margin-bottom: 20px;
 }
 
 .content-panel.active .heading {
@@ -194,6 +195,15 @@
 .update-section .read-more:hover i {
     margin-left: 20px;
     color: var(--yellow)
+}
+
+.update-section .content-panel .content-paragraph
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 9;
+    -webkit-box-orient: vertical;
 }
 
 @media (max-width: 960px) {

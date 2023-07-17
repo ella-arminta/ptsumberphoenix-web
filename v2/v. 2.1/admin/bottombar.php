@@ -7,6 +7,7 @@ function getData1($fiturNama,$conn){
     return $data;
 }
 ?>
+
 <section class="footer-section">
         <div class="container-fluid grid">
             <div class="company-information">

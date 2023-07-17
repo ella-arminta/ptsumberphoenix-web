@@ -140,19 +140,19 @@ $stmt = $conn->prepare("SELECT * FROM products where LOWER(product_code) = ? and
 
     <!-- Footer -->
     <?php
-function getData1($fiturNama,$conn){
-    $stmt = $conn->prepare('SELECT * FROM company_profile where fitur_name =? ');
-    $stmt->execute([$fiturNama]);
-    $temp = $stmt->fetch();
-    $data = $temp['fitur_data'];
-    return $data;
-}
-?>
-<section class="footer-section">
+    function getData1($fiturNama,$conn){
+        $stmt = $conn->prepare('SELECT * FROM company_profile where fitur_name =? ');
+        $stmt->execute([$fiturNama]);
+        $temp = $stmt->fetch();
+        $data = $temp['fitur_data'];
+        return $data;
+    }
+    ?>
+    <section class="footer-section">
         <div class="container-fluid grid">
             <div class="company-information">
                 <div class="company-logo">
-                    <img src="src/<?= getData1('logo',$conn) ?>" id="company-logo" alt="">
+                    <img src="../src/<?= getData1('logo',$conn) ?>" id="company-logo" alt="">
                     
                 </div>
                 <div class="company-address">
@@ -167,19 +167,19 @@ function getData1($fiturNama,$conn){
             </div>
             <div class="useful-links">
                 <h2 class="sub-heading underline">Useful Links</h2>
-                <a class="footer-item" href="#">
+                <a class="footer-item" href="../index.php#home">
                     <i class="fa-solid fa-angle-right"></i>
                     Home
                 </a>
-                <a class="footer-item" href="#about">
+                <a class="footer-item" href="../index.php#about">
                     <i class="fa-solid fa-angle-right"></i>
                     About
                 </a>
-                <a class="footer-item" href="./product.php">
+                <a class="footer-item" href="../product.php">
                     <i class="fa-solid fa-angle-right"></i>
                     Products
                 </a>
-                <a class="footer-item" href="./contact.php">
+                <a class="footer-item" href="../contact.php">
                     <i class="fa-solid fa-angle-right"></i>
                     Contact
                 </a>
@@ -196,22 +196,15 @@ function getData1($fiturNama,$conn){
                     $stmt->execute();
                     while($cat = $stmt->fetch()):
                 ?>
-                <a class="footer-item" href="./shop.php?cateCode=<?= $cat['cat_code'] ?>">
+                <a class="footer-item" href="../shop.php?cateCode=<?= $cat['cat_code'] ?>">
                     <i class="fa-solid fa-angle-right"></i>
                     <?= $cat['cat_name'] ?>
                 </a>
                 <?php endwhile; ?>
             </div>
-            <div class="newsletter">
-                <h2 class="sub-heading underline">Join Our Newsletter</h2>
-                <p class="paragraph" col="newsletter_desc"><?= getData1('newsletter_desc',$conn)?></p>
-                <div class="email-input">
-                    <input type="email" placeholder="example@gmail.com">
-                    <button class="custom-button btn" type="button">Subscribe</button>
-                </div>
-            </div>
         </div>
     </section>
+
     <footer class="copyright-footer">
         <div class="container-fluid">
             <div class="copyright paragraph">
@@ -223,6 +216,5 @@ function getData1($fiturNama,$conn){
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="../script/nav.js"></script>
-    <script src="../script/product/more.js"></script>
 </body>
 </html>

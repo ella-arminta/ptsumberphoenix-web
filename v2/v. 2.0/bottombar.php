@@ -6,13 +6,13 @@ function getData1($fiturNama,$conn){
     $data = $temp['fitur_data'];
     return $data;
 }
+
 ?>
 <section class="footer-section">
         <div class="container-fluid grid">
             <div class="company-information">
                 <div class="company-logo">
                     <img src="src/<?= getData1('logo',$conn) ?>" id="company-logo" alt="">
-                    
                 </div>
 
                 <div class="company-address">

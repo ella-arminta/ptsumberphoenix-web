@@ -39,54 +39,46 @@ include 'api/connect.php';
 <!-- auto complete css -->
 <style>
 .autocomplete {
-  /*the container must be positioned relative:*/
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 .autocomplete input {
-  /* border: 1px solid transparent; */
-  /* background-color: #f1f1f1; */
-  padding: 10px;
-  font-size: 16px;
-}
-.autocomplete input[type=text] {
-  /* background-color: #f1f1f1;
-  width: 100%; */
+    padding: 10px;
+    font-size: 16px;
 }
 .autocomplete input[type=submit] {
-  background-color: DodgerBlue;
-  color: #fff;
+    background-color: DodgerBlue;
+    color: #fff;
 }
 .autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0;
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
 }
 .autocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
 }
 .autocomplete-items div:hover {
-  /*when hovering an item:*/
-  background-color: #e9e9e9;
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
 }
 .autocomplete-active {
-  /*when navigating through the items using the arrow keys:*/
-  background-color: DodgerBlue !important;
-  color: #ffffff;
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
 }
 
 </style>
 <body>
-    
     <!-- Navbar -->
     <nav class="navbar active fixed-top navbar-expand-lg">
         <div class="paragraph">
@@ -139,10 +131,11 @@ include 'api/connect.php';
         <div class="container-fluid">
             <div class="filter-container">
                 <div class="categories filters accordion" id="accordionExample">
+                    
                     <div class="filter-title sub-heading">
                         BROWSE CATEGORIES
                     </div>
-                    <!-- page CODE CATEGORY NYA -->
+
                     <!-- Category -->
                     <?php
                         $stmt =$conn->prepare("SELECT c.cat_code as cat_code,c.cat_name as cat_name,c.cat_id as cat_id,c.cat_img as cat_img, count(s.sub_id) 
@@ -154,6 +147,7 @@ include 'api/connect.php';
                         $stmt->execute();
                         while($cat = $stmt->fetch()):
                     ?>
+
                     <!-- Category ke cat_code -->
                     <div class="category accordion-item <?= $cat['cat_code'] ?>">
                         <h2 class="accordion-header" id="heading-<?= $cat['cat_code'] ?>">
@@ -162,7 +156,7 @@ include 'api/connect.php';
                             </button>
                         </h2>
                         <div id="collapse-<?= $cat['cat_code'] ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?= $cat['cat_code'] ?>" data-bs-parent="#accordionExample">
-                            <div class="accordion-body <?= $cat['cat_code'] ?>">
+                            <div class="accordion-body <?= $cat['cat_code'] ?> <?= str_replace(' ', '-', $cat['cat_name'])?>">
                                 <?php
                                     $stmt2 = $conn->prepare("SELECT *,s.sub_id as sub_id, s.sub_code as sub_code, s.sub_name as sub_name, count(ps.product_id), c.cat_id  as cat_id
                                     from subcategories s 
@@ -175,7 +169,7 @@ include 'api/connect.php';
                                     $stmt2->execute([$cat['cat_id']]);
                                     while($subcat = $stmt2->fetch()):
                                 ?>
-                                <div class="category-item" id="<?= $subcat['sub_code'] ?>">
+                                <div class="category-item" id="<?= $subcat['sub_code'] ?>" onclick="getProducts('<?= $subcat['sub_code'] ?>', this)">
                                     <?= $subcat['sub_name'] ?>
                                 </div>
                                 <?php endwhile; ?>
@@ -183,13 +177,15 @@ include 'api/connect.php';
                         </div>
                     </div>
                     <?php endwhile; ?>
+
                     <div class="category accordion-item All last">
                         <div class="accordion-header" id="heading-All">
-                            <div class="category-item last" id="random">
+                            <div class="category-item last" id="random" onclick="getProducts('all')">
                                 All
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -215,10 +211,6 @@ include 'api/connect.php';
                     <span class="loader__element"></span>
                     <span class="loader__element"></span>
                 </div>
-                <!-- Load More Products Button -->
-                <div class="button-container">
-                    <button class="btn loadMore custom-button" get="" cat="" style="display:none;">Load More</button>
-                </div>
             </div>
         </div>
     </section>
@@ -226,121 +218,24 @@ include 'api/connect.php';
     <!-- Footer -->
     <?php include 'bottombar.php'  ?>
 
+    <!-- Handle href -->
+    <script>
+        $(document).ready(() => 
+        {
+            $('.footer-item.home').attr('href', './index.php#home')
+            $('.footer-item.about').attr('href', './index.php#about')
+        })
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="script/nav.js"></script>
-
-    <!-- jquery admin shop -->
-    <script>    var products_id = [];</script>
     <script src="script/shop.js"></script>
-    <script>
-        function getProducts(catCode,mCatId)
-        {
-            $('.loader').css('display','flex');
-            proName = '';
-            if(catCode == 'byName') proName = $('#searchbar').val();
-            $.ajax({
-                type: "GET",
-                url: "api/shop/getProducts.php",
-                data: {
-                    catCode : catCode,
-                    shown : JSON.stringify(products_id),
-                    proName : proName,
-                    masterCatId :mCatId
-                },
-                success: function (response) {
-                    response = JSON.parse(response)
-                    if(response[0] == 'success'){
-                        // card ini isi nya product_code,product_img,product_name,product_id
-                        //   getData Random
-                        if(response[1].length <= 0){
-                            if(catCode == 'byName'){
-                                $('.products-inner').html("<h1>No Product Found</h1>")
-                            }else{
-                                $('.products-inner').html("<h1>No Product Found in this category</h1>")
-                            }
-                            $('.loadMore').css('display','none');
-                            $('.loader').css('display','none');
-                        }else{
-                            var cards ='';           
-                            if(catCode != 'random' || catCode == 'byName'){
-                                products_id = []
-                            }     
-                            for (let index = 0; index < response[1].length; index++) {
-                                
-                                product = response[1][index];
-                                icon = ''
-                                if(product.featured == 1){
-                                    icon+= `<i class="fa-solid fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(0,'`+product.product_code+`')"></i>`;
-                                }else{
-                                    icon+=`<i class="fa-regular fa-star fa-xl" style="margin-right:10px;color:orange" onclick="featured(1,'`+product.product_code+`')"></i>`
-                                }
-                                if(product.best_seller == 1){
-                                    icon+=`<i class="fa-solid fa-heart fa-xl" style="color:red" onclick="bestSeller(0,'`+product.product_code+`')"></i>`
-                                }else{
-                                    icon+=`<i class="fa-regular fa-heart fa-xl" style="color:red" onclick="bestSeller(1,'`+product.product_code+`')"></i>`
-                                }
-                                cards += `
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="card">
-                                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">
-                                            <img src="`+product.product_img+`" class="w-100" />
-                                        </div>
-                                        
-                                        <div class="card-body">
-                                            <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`">`+product.product_name+`</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                `   
-                                products_id.push(product);
-                                
-                            
-                            }
-                            $('.products-inner').html(cards)
-                            
-                            // set product title
-                            var proTitle = response[4] +' - '+response[3];
-                            $('.product-category-title').text(proTitle);
-                            
-                            if (response[3] == undefined){
-                                $('.product-category-title').text('Our Products');
-                            }
 
-                            if(response[2] > 0){
-                                $('.loadMore').css('display','block');
-                            }else{
-                                $('.loadMore').css('display','none');
-                            }
-                            
-                            $('.loader').css('display','none');
-                        }
-                        
-                    }else{
-                        if(response[0] == 'fail' || response[1] == 'Subcategory not found'){
-                            // window.location.href = 'shop.php';
-                            getProducts("random","")
-                        }else{
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error!',
-                                text: 'Something went Wrong please come back later'
-                            })
-                        }
-                    }
-                },
-                error: function(){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: 'Terjadi kesalahan, silahkan coba lagi.'
-                    })
-                }
-            });
-        }
-    </script>
+    <!-- search algorithm -->
     <script>
-        function searchProduct(){
+        function searchProduct(e){
             thisValue = $('#searchbar').val();
+            
             $.ajax({
                 type: "POST",
                 url: "api/shop/searchProduct.php",
@@ -359,95 +254,20 @@ include 'api/connect.php';
         }
         var similarProducts = [];
     </script>
-    <script>
-        function getProByCat(catCode){
-            $('.loader').css('display','flex');
-            $.ajax({
-                type: "GET",
-                url: "api/shop/getProByCat.php",
-                data:  {
-                    catCode : catCode,
-                    shown : JSON.stringify(products_id),
-                },
-                success: function (response) {
-                    response = JSON.parse(response)
-                    if(response[0] == 'success'){
-                        // card ini isi nya product_code,product_img,product_name,product_id
-                        //   getData Random
-                        if(response[1].length <= 0){
-                            if(catCode == 'byName'){
-                                $('.products-inner').html("<h1>No Product Found</h1>")
-                            }else{
-                                $('.products-inner').html("<h1>No Product Found in this category</h1>")
-                            }
-                            $('.loadMore').css('display','none');
-                            $('.loader').css('display','none');
-                        }else{
-                            var cards ='';           
-                            for (let index = 0; index < response[1].length; index++) {
-                                
-                                product = response[1][index];
-                                cards += `
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="card">
-                                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">
-                                            <img src="`+product.product_img+`" class="w-100" />
-                                        </div>
-                                        
-                                        <div class="card-body">
-                                            <div class="product-title" onclick="window.location.href='./single/product.php?product_code=`+product.product_code+`&subCode=`+catCode+`'">`+product.product_name+`</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                `   
-                                products_id.push(product);
-                            
-                            }
-                            $('.products-inner').html(cards)
-                            $('.product-category-title').text(response[3]);
-                            if(response[2] > 0){
-                                $('.loadMore').css('display','block');
-                            }else{
-                                $('.loadMore').css('display','none');
-                            }
-                            $('.loader').css('display','none');
-                            $('.loadMore').attr('get','cat '+ catCode);
-                        }
-                    }else{
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error!',
-                            text: 'Something went Wrong please come back later'
-                        })
-                    }
-                },
-                error: function(){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: 'Terjadi kesalahan, silahkan coba lagi.'
-                    })
-                }
-            });
-        }
-    </script>
 
-    <?php 
-    if(isset($_GET['cateCode'])){
-        echo '<script>getProByCat("'.$_GET['cateCode'].'");</script>';
-    }else
-
-    if (isset($_SESSION['cat'])){
-        if ($_SESSION['cat'] == 'random'){
-            echo '<script>getProducts("random","")</script>';
-        }else{
-            echo '<script>getProducts("'.$_SESSION['cat'][1].'","'.$_SESSION['cat'][0].'")</script>';
-        }
-        echo '<script>console.log("'.$_SESSION['cat'][0].$_SESSION['cat'][1].'")</script>';
-    }else{
-        $_SESSION['cat'] = 'random';
-        echo '<script>getProducts("random","")</script>';
-    }
+    <!-- Accessing specific requests -->
+    <?php
+    if(isset($_GET['cateCode'])) 
+        echo '<script>getProducts("cat'.$_GET['cateCode'].'", "")</script>';
+    else if (isset($_GET['subCode']))
+    {
+        if (substr($_GET['subCode'], 0, 4) == 'name')
+            echo '<script>getProductsbyName("'.substr($_GET['subCode'], 4).'")</script>';
+        else
+            echo '<script>getProducts("'.$_GET['subCode'].'", "custom-element")</script>';                
+    }             
+    else
+        echo '<script>getProducts("all", "")</script>';
     ?>
 </body>
 </html>

@@ -73,6 +73,35 @@ $row = $stmt->fetch();
     <!-- Footer -->
     <?php include '../bottombar.php' ?>
 
+    <!-- Handle href -->
+    <script>
+        $(document).ready(() => 
+        {
+            $('.footer-item.home').attr('href', '../index.php#home')
+            $('.footer-item.about').attr('href', '../index.php#about')
+            $('.footer-item.products').attr('href', '../product.php')
+            $('.footer-item.contact').attr('href', '../contact.php')
+
+            // update business fields
+            let businessFieldsLinks = $('.footer-section .business-fields.useful-links .footer-item');
+
+            businessFieldsLinks.each(function() 
+            {
+                // Access the href attribute and add a dot in front
+                let hrefValue = $(this).attr('href');
+                let newHrefValue = "." + hrefValue;
+
+                // Update the href attribute with the new value
+                $(this).attr('href', newHrefValue);
+            });
+
+            // update logo src
+            let logoSrc = $('.footer-section .company-logo img').attr('src')
+            logoSrc = "../" + logoSrc
+            $('.footer-section .company-logo img').attr('src', logoSrc)
+        })
+    </script>
+
     <footer class="copyright-footer">
         <div class="container-fluid">
             <div class="copyright paragraph">
@@ -98,7 +127,6 @@ $row = $stmt->fetch();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="../script/nav.js"></script>
-    <script src="../script/update/updates.js"></script>
     <!-- <script src="../script/contact/contact.js"></script> -->
 </body>
 </html>

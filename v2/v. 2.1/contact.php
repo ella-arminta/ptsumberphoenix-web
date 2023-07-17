@@ -118,6 +118,15 @@ function getData($fiturNama,$conn){
     <!-- bottom section -->
     <?php include 'bottombar.php' ?>
 
+    <!-- Handle href -->
+    <script>
+        $(document).ready(() => 
+        {
+            $('.footer-item.home').attr('href', './index.php#home')
+            $('.footer-item.about').attr('href', './index.php#about')
+        })
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="script/nav.js"></script>
     <script src="script/contact/contact.js"></script>
